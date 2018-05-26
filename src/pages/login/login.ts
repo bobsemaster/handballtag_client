@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
 import {VereinViewPage} from "../verein-view/verein-view";
 import {UserDetails} from "../../models/UserDetails";
+import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 
 /**
  * Generated class for the LoginPage page.
@@ -19,7 +20,7 @@ export class LoginPage {
 
   public loginCredentials = {username: '', password: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthenticationServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthenticationServiceProvider, private applicationData: ApplicationDataServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -27,29 +28,27 @@ export class LoginPage {
     this.isAlreadyAuthenticated()
   }
 
-  private isAlreadyAuthenticated(){
-    this.auth.getAuthenticatedUser().subscribe(value => {
-      const authenticatedUser:UserDetails = UserDetails.fromJson(value);
-      console.log(authenticatedUser);
-      this.navigateToUserStartPage(authenticatedUser)
-    });
+  private isAlreadyAuthenticated() {
+    this.applicationData.ladeAuthentifiziertenBenutzer().add(()=>this.navigateToUserStartPage());
+    // Lade alle vereine
   }
 
   public login(event: any): void {
     this.auth.authenticateUser(this.loginCredentials.username, this.loginCredentials.password).subscribe(success => {
       //Wenn null zurückkommt ist die authentifizierung erfolgreich sonst kommt ein error Zurück
-      if(success == null){
+      if (success == null) {
         this.isAlreadyAuthenticated();
       }
     });
   }
 
-  private navigateToUserStartPage(authenticatedUser:UserDetails){
-    if(authenticatedUser.hasRecht('ROLE_SPIELLEITER')){
-      this.navCtrl.setRoot(VereinViewPage);
-    } else if(authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')){
+  private navigateToUserStartPage() {
+    const authenticatedUser = this.applicationData.authenticatedUser;
+    if (authenticatedUser.hasRecht('ROLE_SPIELLEITER')) {
+      this.applicationData.ladeVereine().add(() => this.navCtrl.setRoot(VereinViewPage));
+
+    } else if (authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')) {
 
     }
   }
-
 }

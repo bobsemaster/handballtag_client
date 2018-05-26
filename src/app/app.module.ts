@@ -11,6 +11,7 @@ import {AuthenticationServiceProvider} from '../providers/authentication-service
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
 import { VereinServiceProvider } from '../providers/verein-service/verein-service';
+import { ApplicationDataServiceProvider } from '../providers/application-data-service/application-data-service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { VereinServiceProvider } from '../providers/verein-service/verein-servic
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpClient,
     AuthenticationServiceProvider,
-    VereinServiceProvider
+    VereinServiceProvider,
+    ApplicationDataServiceProvider,
   ]
 })
 export class AppModule {}

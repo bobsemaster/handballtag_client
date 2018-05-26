@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {IonicPageModule} from 'ionic-angular';
+import {AlertController, IonicPageModule} from 'ionic-angular';
 import {VereinAddViewPage} from './verein-add-view';
 import {VereinServiceProvider} from "../../providers/verein-service/verein-service";
 
@@ -11,7 +11,8 @@ import {VereinServiceProvider} from "../../providers/verein-service/verein-servi
     IonicPageModule.forChild(VereinAddViewPage),
   ],
   providers:[
-    VereinServiceProvider
+    VereinServiceProvider,
+    AlertController,
   ]
 })
 export class VereinAddViewPageModule {}

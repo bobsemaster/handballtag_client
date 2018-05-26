@@ -17,7 +17,17 @@
 
 
 <ion-content padding>
-<ion-fab bottom right>
-  <button ion-fab (click)="addVerein()"><ion-icon name="add"></ion-icon></button>
-</ion-fab>
+  <ion-fab bottom right>
+    <button ion-fab (click)="addVerein()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ng-template ngFor let-verein="$implicit" [ngForOf]="vereine">
+    <ion-card>
+      <ion-card-header>{{verein.name}}</ion-card-header>
+      <ion-item>
+        <button ion-button item-end color="danger" clear (click)="deleteVerein(verein.id)">Löschen</button>
+      </ion-item>
+    </ion-card>
+  </ng-template>
 </ion-content>
