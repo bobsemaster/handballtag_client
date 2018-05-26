@@ -20,7 +20,7 @@ export class Verein {
       const allMannschaft:Array<Mannschaft> = json.allMannschaft;
       verein.allMannschaft = [];
       for(const mannschaftJson of allMannschaft){
-        // TODO
+        verein.allMannschaft.push(Mannschaft.fromJSON(mannschaftJson));
       }
     }
     return verein
