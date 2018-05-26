@@ -12,6 +12,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
 import { VereinServiceProvider } from '../providers/verein-service/verein-service';
 import { ApplicationDataServiceProvider } from '../providers/application-data-service/application-data-service';
+import {MannschaftenViewPageModule} from "../pages/mannschaften-view/mannschaften-view.module";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ApplicationDataServiceProvider } from '../providers/application-data-se
     BrowserModule,
     HttpClientModule,
     VereinViewPageModule,
+    MannschaftenViewPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

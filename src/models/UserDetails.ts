@@ -1,7 +1,6 @@
 import {Recht} from "./Recht";
-import {getUserConfigFile} from "@ionic/app-scripts";
 
-export class UserDetails{
+export class UserDetails {
   password?: String;
   username: string;
   authorities: Recht[];
@@ -10,7 +9,10 @@ export class UserDetails{
   credentialsNonExpired: boolean;
   enabled: boolean;
 
-  public static fromJson(json:any):UserDetails{
+  public static fromJson(json: any): UserDetails {
+    if (json == null) {
+      return null;
+    }
     const userDetails = new UserDetails();
     userDetails.password = json.password;
     userDetails.username = json.username;
@@ -23,9 +25,9 @@ export class UserDetails{
     return userDetails;
   }
 
-  public hasRecht(recht:String):boolean{
+  public hasRecht(recht: String): boolean {
     for (let userRecht of this.authorities) {
-      if(recht == userRecht.authority){
+      if (recht == userRecht.authority) {
         return true;
       }
     }

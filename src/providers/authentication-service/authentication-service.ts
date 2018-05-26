@@ -15,7 +15,7 @@ import {serve} from "@ionic/app-scripts";
 */
 @Injectable()
 export class AuthenticationServiceProvider {
-  private server_url = "http://192.168.0.67:8080";
+  private server_url = "/rest";
 
   private formHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 

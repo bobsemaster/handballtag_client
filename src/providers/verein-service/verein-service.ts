@@ -13,7 +13,7 @@ import {Subscription} from "rxjs/Subscription";
 */
 @Injectable()
 export class VereinServiceProvider {
-  private server_url = "http://192.168.0.67:8080";
+  private server_url = "/rest";
 
   constructor(private http: HttpClient) {
     console.log('Hello VereinServiceProvider Provider');
