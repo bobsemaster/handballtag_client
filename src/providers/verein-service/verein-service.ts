@@ -13,21 +13,22 @@ import {Subscription} from "rxjs/Subscription";
 */
 @Injectable()
 export class VereinServiceProvider {
+  private server_url = "http://192.168.0.67:8080";
 
   constructor(private http: HttpClient) {
     console.log('Hello VereinServiceProvider Provider');
   }
 
   public getAllVerein():Observable<any[]>{
-    return this.http.get<any[]>("rest/verein/all")//
+    return this.http.get<any[]>(this.server_url + "/verein/all")//
   }
 
   public createVerein(verein:Verein):Observable<boolean>{
-    return this.http.post("rest/verein/new", verein).map(() => true).catch(() => Observable.of(false));
+    return this.http.post(this.server_url + "/verein/new", verein).map(() => true).catch(() => Observable.of(false));
   }
 
   public deleteVerein(id:number):Subscription{
-    return this.http.delete(`rest/verein/delete/${id}`).subscribe();
+    return this.http.delete(`${this.server_url}/verein/delete/${id}`).subscribe();
   }
 
 }

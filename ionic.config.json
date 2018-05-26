@@ -2,11 +2,13 @@
   "name": "handballtag",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "proxies": [
     {
       "path": "/rest",
-      "proxyUrl": "http://localhost:8080/"
+      "proxyUrl": "http://192.168.0.67:8080/"
     }
   ]
 }

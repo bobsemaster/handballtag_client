@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import "rxjs/add/observable/of";
 import {UserDetails} from "../../models/UserDetails";
+import {serve} from "@ionic/app-scripts";
 
 /*
   Generated class for the AuthenticationServiceProvider provider.
@@ -14,6 +15,7 @@ import {UserDetails} from "../../models/UserDetails";
 */
 @Injectable()
 export class AuthenticationServiceProvider {
+  private server_url = "http://192.168.0.67:8080";
 
   private formHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
@@ -23,13 +25,14 @@ export class AuthenticationServiceProvider {
   }
 
   public getAuthenticatedUser():Observable<Object>{
-    return this.http.get("rest/login");
+    console.log("get auth user!");
+    return this.http.get(this.server_url + "/login");
   }
 
 
   public authenticateUser(username: String, password: String): Observable<any> {
     const body: String = 'username=' + username + '&password=' + password + '&submit=Login';
-
-    return this.http.post('rest/login', body, {headers: this.formHeaders});
+    console.log("loggin in");
+    return this.http.post( this.server_url + '/login', body, {headers: this.formHeaders});
   }
 }

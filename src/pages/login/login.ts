@@ -44,6 +44,9 @@ export class LoginPage {
 
   private navigateToUserStartPage() {
     const authenticatedUser = this.applicationData.authenticatedUser;
+    if(authenticatedUser == null){
+      return;
+    }
     if (authenticatedUser.hasRecht('ROLE_SPIELLEITER')) {
       this.applicationData.ladeVereine().add(() => this.navCtrl.setRoot(VereinViewPage));
 
