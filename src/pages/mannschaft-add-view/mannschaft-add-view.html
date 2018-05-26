@@ -1,0 +1,51 @@
+<!--
+  Generated template for the MannschaftAddViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mannschaft hinzufügen</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="createMannschaft()" #registerForm="ngForm">
+    <ion-item>
+      <ion-label>Mannschaft Name</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mannschaft Verein</ion-label>
+      <ion-select interface="popover" name="verein" [(ngModel)]="vereinId" required>
+        <ng-template ngFor let-verein [ngForOf]="applicationData.vereine">
+          <ion-option value="{{verein.id}}">{{verein.name}}</ion-option>
+        </ng-template>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Jugend</ion-label>
+      <ion-select interface="popover" name="jahrgang" [(ngModel)]="jahrgang" required>
+        <ion-option value="MINIS">Minis</ion-option>
+        <ion-option value="EJUGEND">E-Jugend</ion-option>
+        <ion-option value="DJUGEND">D-Jugend</ion-option>
+        <ion-option value="CJUGEND">C-Jugend</ion-option>
+        <ion-option value="BJUGEND">B-Jugend</ion-option>
+        <ion-option value="AJUGEND">A-Jugend</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>M/W/G</ion-label>
+      <ion-select interface="popover" name="typ" [(ngModel)]="typ" required>
+        <ion-option value="MAENNLICH">Männlich</ion-option>
+        <ion-option value="WEIBLICH">Weiblich</ion-option>
+        <ion-option value="GEMISCHT">Gemischt</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-button type="submit" [disabled]="!registerForm.form.valid" block>Mannschaft erstellen</button>
+  </form>
+</ion-content>

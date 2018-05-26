@@ -13,6 +13,7 @@ import {Subscription} from "rxjs/Subscription";
 */
 @Injectable()
 export class VereinServiceProvider {
+  // Wenn proxy genutzt wird darf der request nur auf /rest gehen nicht http://localhost:8080
   private server_url = "/rest";
 
   constructor(private http: HttpClient) {

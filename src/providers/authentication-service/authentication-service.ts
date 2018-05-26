@@ -15,6 +15,7 @@ import {serve} from "@ionic/app-scripts";
 */
 @Injectable()
 export class AuthenticationServiceProvider {
+  // Wenn proxy genutzt wird darf der request nur auf /rest gehen nicht http://localhost:8080
   private server_url = "/rest";
 
   private formHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});

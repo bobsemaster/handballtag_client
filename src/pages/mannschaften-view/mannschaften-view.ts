@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {MannschaftAddViewPage} from "../mannschaft-add-view/mannschaft-add-view";
 
 /**
  * Generated class for the MannschaftenViewPage page.
@@ -22,4 +23,7 @@ export class MannschaftenViewPage {
     console.log('ionViewDidLoad MannschaftenViewPage');
   }
 
+  public addMannschaft() {
+    this.navCtrl.push(MannschaftAddViewPage)
+  }
 }
