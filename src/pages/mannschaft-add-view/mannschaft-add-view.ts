@@ -5,6 +5,8 @@ import {ApplicationDataServiceProvider} from "../../providers/application-data-s
 import {Verein} from "../../models/Verein";
 import {Mannschaft} from "../../models/Mannschaft";
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
+import {TabelleServiceProvider} from "../../providers/tabelle-service/tabelle-service";
+import {Tabelle} from "../../models/Tabelle";
 
 /**
  * Generated class for the MannschaftAddViewPage page.
@@ -25,7 +27,7 @@ export class MannschaftAddViewPage {
   public name: String;
   public vereinId: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public applicationData: ApplicationDataServiceProvider, private mannschaftService: MannschaftServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public applicationData: ApplicationDataServiceProvider, private mannschaftService: MannschaftServiceProvider, private tabelleService: TabelleServiceProvider) {
 
   }
 
@@ -39,8 +41,20 @@ export class MannschaftAddViewPage {
     mannschaft.jugend = new Jugend();
     mannschaft.jugend.typ = this.typ;
     mannschaft.jugend.jahrgang = this.jahrgang;
+    mannschaft.name = name;
 
+    // Check ob tabelle zur mannschaft schon existert sonst muss diese hier erstellt werden
+    this.tabelleService.getTabelleToJugend(mannschaft.jugend).subscribe(value => {
+      if (value == null) {
+        const tabelle = new Tabelle();
+        tabelle.jugend = mannschaft.jugend;
+        this.tabelleService.createTabelle(tabelle).add(() => this.mannschaftService.createMannschaft(mannschaft));
+      } else {
+        this.mannschaftService.createMannschaft(mannschaft);
+      }
+    });
   }
+
 
   private getVereinByID(id: number): Verein {
     for (let verein of this.applicationData.vereine) {

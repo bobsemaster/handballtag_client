@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
-import { MannschaftAddViewPage } from './mannschaft-add-view';
+import {NgModule} from '@angular/core';
+import {IonicPageModule} from 'ionic-angular';
+import {MannschaftAddViewPage} from './mannschaft-add-view';
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
+import {TabelleServiceProvider} from "../../providers/tabelle-service/tabelle-service";
 
 @NgModule({
   declarations: [
@@ -9,8 +10,10 @@ import {ApplicationDataServiceProvider} from "../../providers/application-data-s
   ],
   imports: [
     IonicPageModule.forChild(MannschaftAddViewPage),
-  ],providers:[
+  ], providers: [
+    TabelleServiceProvider,
     ApplicationDataServiceProvider
   ]
 })
-export class MannschaftAddViewPageModule {}
+export class MannschaftAddViewPageModule {
+}
