@@ -26,8 +26,13 @@
     <ion-card>
       <ion-card-header>{{verein.name}}</ion-card-header>
       <ion-item>
-        <button ion-button item-end color="danger" clear (click)="deleteVerein(verein.id)">Löschen</button>
+        <button ion-button item-end color="danger" clear (click)="deleteVerein(verein)">Löschen</button>
       </ion-item>
+      <ion-list *ngFor="let mannschaft of verein.allMannschaft">
+        <ng-template ngFor let-mannschaft [ngForOf]="verein.allMannschaft">
+          <button ion-item>{{mannschaft.name}}</button>
+        </ng-template>
+      </ion-list>
     </ion-card>
   </ng-template>
 </ion-content>

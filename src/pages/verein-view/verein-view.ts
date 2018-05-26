@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {VereinAddViewPage} from "../verein-add-view/verein-add-view";
 import {VereinServiceProvider} from "../../providers/verein-service/verein-service";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
+import {Verein} from "../../models/Verein";
 
 /**
  * Generated class for the VereinViewPage page.
@@ -20,7 +21,7 @@ export class VereinViewPage {
 
   public vereine = this.applicationData.vereine;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider, private applicationData: ApplicationDataServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider, private applicationData: ApplicationDataServiceProvider, private alert: AlertController) {
     console.log("construcot");
   }
 
@@ -33,7 +34,7 @@ export class VereinViewPage {
     console.log('ionViewDidLoad VereinViewPage');
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.reloadAllVerein();
   }
 
@@ -41,9 +42,19 @@ export class VereinViewPage {
     this.applicationData.ladeVereine().add(() => this.vereine = this.applicationData.vereine);
   }
 
-  deleteVerein(id: number) {
-    console.log("Lösche: " + id);
-    this.vereinService.deleteVerein(id);
-    this.reloadAllVerein();
+  deleteVerein(verein: Verein) {
+    this.alert.create({
+      title: 'Verein Löschen',
+      subTitle: `Willst du den Verein wirklich ${verein.name} löschen?`,
+      buttons: [
+        {text: 'Nein'},
+        {
+          text: 'Ja',
+          handler: () => {
+            this.vereinService.deleteVerein(verein.id).add(() => this.reloadAllVerein());
+          }
+        }
+      ]
+    }).present();
   }
 }

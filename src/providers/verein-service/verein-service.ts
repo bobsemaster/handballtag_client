@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {Verein} from "../../models/Verein";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/mergeMap";
+import {Subscription} from "rxjs/Subscription";
 
 /*
   Generated class for the VereinServiceProvider provider.
@@ -25,8 +26,8 @@ export class VereinServiceProvider {
     return this.http.post("rest/verein/new", verein).map(() => true).catch(() => Observable.of(false));
   }
 
-  public deleteVerein(id:number){
-    this.http.delete(`rest/verein/delete/${id}`).subscribe();
+  public deleteVerein(id:number):Subscription{
+    return this.http.delete(`rest/verein/delete/${id}`).subscribe();
   }
 
 }

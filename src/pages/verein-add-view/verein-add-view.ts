@@ -33,9 +33,12 @@ export class VereinAddViewPage {
       if(success){
         this.navCtrl.pop()
       }else{
+        if(this.vereinName == undefined){
+          this.vereinName = '<name darf nicht leer sein>';
+        }
         this.alert.create({
           title:'Error',
-          subTitle:`Der verein mit dem namen ${this.vereinName} existiert bereits!`,
+          subTitle:`Der verein mit dem namen '${this.vereinName}' existiert bereits!`,
           buttons: ['Ok']
         }).present();
       }
