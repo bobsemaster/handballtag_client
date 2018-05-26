@@ -5,6 +5,8 @@ import {VereinServiceProvider} from "../verein-service/verein-service";
 import {Verein} from "../../models/Verein";
 import {UserDetails} from "../../models/UserDetails";
 import {Subscription} from "rxjs/Subscription";
+import {MannschaftServiceProvider} from "../mannschaft-service/mannschaft-service";
+import {Mannschaft} from "../../models/Mannschaft";
 
 /*
   Generated class for the ApplicationDataServiceProvider provider.
@@ -15,9 +17,10 @@ import {Subscription} from "rxjs/Subscription";
 @Injectable()
 export class ApplicationDataServiceProvider {
   public vereine: Verein[] = null;
+  public mannschaften = [];
   public authenticatedUser: UserDetails = null;
 
-  constructor(private http: HttpClient, private authService: AuthenticationServiceProvider, private vereinService: VereinServiceProvider) {
+  constructor(private http: HttpClient, private authService: AuthenticationServiceProvider, private vereinService: VereinServiceProvider, private mannschaftService:MannschaftServiceProvider) {
   }
 
   public ladeAuthentifiziertenBenutzer():Subscription {
@@ -27,7 +30,12 @@ export class ApplicationDataServiceProvider {
   public ladeVereine():Subscription{
     return this.vereinService.getAllVerein().subscribe(value => {
       this.vereine = value.map(verein => Verein.fromJSON(verein));
-      console.log(this.vereine);
+    });
+  }
+
+  public ladeMannschaften():Subscription{
+    return this.mannschaftService.getAllMannschaften().subscribe(value => {
+      this.mannschaften = value.map(mannschaft => Mannschaft.fromJSON(mannschaft))
     });
   }
 

@@ -23,7 +23,20 @@ export class Mannschaft {
   }
 
   public static fromJSON(json: any) {
+    if (json == null) {
+      return null;
+    }
     const mannschaft = new Mannschaft();
+
+    mannschaft.id = json.id;
+    mannschaft.name = json.name;
+    mannschaft.verein = Verein.fromJSON(json.verein);
+    mannschaft.torverhaeltnis = Pair.fromJson(json.torverhaeltnis);
+    mannschaft.punkteverhaeltnis = Pair.fromJson(json.punkteverhaeltnis);
+    mannschaft.jugend = Jugend.fromJson(json.jugend);
+    mannschaft.hasFoto = json.hasFoto;
+    mannschaft.tabellenPlatz = json.tabellenPlatz;
+    mannschaft.gruppe = json.gruppe;
 
     return mannschaft;
   }

@@ -7,6 +7,7 @@ import {Mannschaft} from "../../models/Mannschaft";
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 import {TabelleServiceProvider} from "../../providers/tabelle-service/tabelle-service";
 import {Tabelle} from "../../models/Tabelle";
+import {Observable} from "rxjs/Observable";
 
 /**
  * Generated class for the MannschaftAddViewPage page.
@@ -41,18 +42,28 @@ export class MannschaftAddViewPage {
     mannschaft.jugend = new Jugend();
     mannschaft.jugend.typ = this.typ;
     mannschaft.jugend.jahrgang = this.jahrgang;
-    mannschaft.name = name;
+    mannschaft.name = this.name;
 
     // Check ob tabelle zur mannschaft schon existert sonst muss diese hier erstellt werden
     this.tabelleService.getTabelleToJugend(mannschaft.jugend).subscribe(value => {
       if (value == null) {
         const tabelle = new Tabelle();
         tabelle.jugend = mannschaft.jugend;
-        this.tabelleService.createTabelle(tabelle).add(() => this.mannschaftService.createMannschaft(mannschaft));
+        this.tabelleService.createTabelle(tabelle).add(() => this.wasCreateSuccessful(this.mannschaftService.createMannschaft(mannschaft)));
       } else {
-        this.mannschaftService.createMannschaft(mannschaft);
+        this.wasCreateSuccessful(this.mannschaftService.createMannschaft(mannschaft));
       }
     });
+  }
+
+  private wasCreateSuccessful(observable:Observable<boolean>){
+    observable.subscribe(success => {
+      if(success){
+        this.navCtrl.pop()
+      } else {
+
+      }
+    })
   }
 
 

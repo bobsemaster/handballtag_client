@@ -22,4 +22,13 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
+
+  <ng-template ngFor let-mannschaft [ngForOf]="mannschaften">
+    <ion-card>
+      <ion-card-header>{{mannschaft.name}} {{mannschaft.jugend.typ}} {{mannschaft.jugend.jahrgang}}</ion-card-header>
+      <ion-item>
+        <button ion-button item-end color="danger" clear (click)="deleteMannschaft(mannschaft)">Löschen</button>
+      </ion-item>
+    </ion-card>
+  </ng-template>
 </ion-content>

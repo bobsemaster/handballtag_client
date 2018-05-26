@@ -4,6 +4,7 @@ import {VereinAddViewPage} from "../verein-add-view/verein-add-view";
 import {VereinServiceProvider} from "../../providers/verein-service/verein-service";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {Verein} from "../../models/Verein";
+import {Mannschaft} from "../../models/Mannschaft";
 
 /**
  * Generated class for the VereinViewPage page.
@@ -19,7 +20,8 @@ import {Verein} from "../../models/Verein";
 })
 export class VereinViewPage {
 
-  public vereine = this.applicationData.vereine;
+  public vereine: Verein[] = this.applicationData.vereine;
+  public mannschaften: Mannschaft[] = this.applicationData.mannschaften;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider, private applicationData: ApplicationDataServiceProvider, private alert: AlertController) {
     console.log("construcot");
@@ -40,12 +42,17 @@ export class VereinViewPage {
 
   private reloadAllVerein() {
     this.applicationData.ladeVereine().add(() => this.vereine = this.applicationData.vereine);
+    this.applicationData.ladeMannschaften().add(() => this.mannschaften = this.applicationData.mannschaften);
+  }
+
+  public getMannschaftenToVerein(verein: Verein): Mannschaft[] {
+    return this.mannschaften.filter(value => value.verein.id == verein.id)
   }
 
   deleteVerein(verein: Verein) {
     this.alert.create({
       title: 'Verein Löschen',
-      subTitle: `Willst du den Verein wirklich ${verein.name} löschen?`,
+      subTitle: `Willst du den Verein wirklich ${verein.name} löschen? Dabei werden auch alle Mannschaften die zum Verein gehören gelöscht!`,
       buttons: [
         {text: 'Nein'},
         {
