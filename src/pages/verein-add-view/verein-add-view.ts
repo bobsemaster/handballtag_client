@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {VereinAddViewPage} from "../verein-add-view/verein-add-view";
 
 /**
- * Generated class for the VereinViewPage page.
+ * Generated class for the VereinAddViewPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,21 +10,16 @@ import {VereinAddViewPage} from "../verein-add-view/verein-add-view";
 
 @IonicPage()
 @Component({
-  selector: 'page-verein-view',
-  templateUrl: 'verein-view.html',
+  selector: 'page-verein-add-view',
+  templateUrl: 'verein-add-view.html',
 })
-export class VereinViewPage {
+export class VereinAddViewPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  public addVerein(){
-    this.navCtrl.push(VereinAddViewPage)
-  }
-
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VereinViewPage');
+    console.log('ionViewDidLoad VereinAddViewPage');
   }
 
 }

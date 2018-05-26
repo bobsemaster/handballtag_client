@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
-import {HomePage} from "../home/home";
 import {VereinViewPage} from "../verein-view/verein-view";
 
 /**
