@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
 import {HomePage} from "../home/home";
+import {VereinViewPage} from "../verein-view/verein-view";
 
 /**
  * Generated class for the LoginPage page.
@@ -29,7 +30,7 @@ export class LoginPage {
     this.auth.authenticateUser(this.loginCredentials.username, this.loginCredentials.password).subscribe(success => {
       //Wenn null zurückkommt ist die authentifizierung erfolgreich sonst kommt ein error Zurück
       if(success == null){
-        this.navCtrl.push(HomePage);
+        this.navCtrl.setRoot(VereinViewPage);
       }
     });
   }
