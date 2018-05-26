@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import "rxjs/add/observable/of";
+import {UserDetails} from "../../models/UserDetails";
 
 /*
   Generated class for the AuthenticationServiceProvider provider.
@@ -21,6 +22,9 @@ export class AuthenticationServiceProvider {
     console.log('Hello AuthenticationServiceProvider Provider');
   }
 
+  public getAuthenticatedUser():Observable<Object>{
+    return this.http.get("rest/login");
+  }
 
 
   public authenticateUser(username: String, password: String): Observable<any> {

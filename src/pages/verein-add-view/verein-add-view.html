@@ -14,5 +14,11 @@
 
 
 <ion-content padding>
-
+  <form (ngSubmit)="createVerein()">
+    <ion-item>
+      <ion-label>Verein Name</ion-label>
+      <ion-input type="text" name="verein" [(ngModel)]="vereinName"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Verein Erstellen</button>
+  </form>
 </ion-content>

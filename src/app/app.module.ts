@@ -10,6 +10,7 @@ import {LoginPage} from "../pages/login/login";
 import {AuthenticationServiceProvider} from '../providers/authentication-service/authentication-service';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
+import { VereinServiceProvider } from '../providers/verein-service/verein-service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpClient,
-    AuthenticationServiceProvider
+    AuthenticationServiceProvider,
+    VereinServiceProvider
   ]
 })
 export class AppModule {}

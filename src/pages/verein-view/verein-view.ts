@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {VereinAddViewPage} from "../verein-add-view/verein-add-view";
+import {VereinServiceProvider} from "../../providers/verein-service/verein-service";
 
 /**
  * Generated class for the VereinViewPage page.
@@ -16,7 +17,9 @@ import {VereinAddViewPage} from "../verein-add-view/verein-add-view";
 })
 export class VereinViewPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService:VereinServiceProvider) {
   }
 
   public addVerein(){
