@@ -71,8 +71,4 @@ export class VereinViewPage {
     this.vereine = this.applicationData.vereine.filter(verein => verein.name.toLowerCase().includes(this.vereinFilter.toLowerCase()));
   }
 
-  cancelFilter($event: any) {
-    this.vereinFilter = "";
-    this.onFilterInput(null);
-  }
 }

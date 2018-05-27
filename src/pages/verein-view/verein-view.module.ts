@@ -3,7 +3,6 @@ import {IonicPageModule} from 'ionic-angular';
 import {VereinViewPage} from './verein-view';
 import {VereinAddViewPageModule} from "../verein-add-view/verein-add-view.module";
 import {VereinServiceProvider} from "../../providers/verein-service/verein-service";
-import {ImportDirectivesModule} from "../../directives/import-directives.module";
 
 @NgModule({
   declarations: [
@@ -11,7 +10,7 @@ import {ImportDirectivesModule} from "../../directives/import-directives.module"
   ],
   imports: [
     IonicPageModule.forChild(VereinViewPage),
-    VereinAddViewPageModule,ImportDirectivesModule
+    VereinAddViewPageModule,
   ],
   entryComponents: [
     VereinViewPage

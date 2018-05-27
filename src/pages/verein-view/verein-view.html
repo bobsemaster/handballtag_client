@@ -11,15 +11,16 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Vereine</ion-title>
+
   </ion-navbar>
+    <ion-searchbar [showCancelButton]="true" [(ngModel)]="vereinFilter" (ngModelChange)="onFilterInput($event)"></ion-searchbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-searchbar [showCancelButton]="true" [(ngModel)]="vereinFilter" (ngModelChange)="onFilterInput($event)"></ion-searchbar>
 
-  <ion-fab *appRequireRight="['ROLE_SPIELLEITER']" bottom right>
+  <ion-fab *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')" bottom right>
     <button ion-fab (click)="addVerein()">
       <ion-icon name="add"></ion-icon>
     </button>
@@ -30,10 +31,10 @@
 
       <ion-list>
         <ng-template ngFor let-mannschaft [ngForOf]="getMannschaftenToVerein(verein)">
-          <button ion-item>{{mannschaft.name}} {{mannschaft.jugend.typ}} {{mannschaft.jugend.jahrgang}}</button>
+          <button ion-item>{{mannschaft.name}} {{mannschaft.jugend.jahrgang}} {{mannschaft.jugend.typ}}</button>
         </ng-template>
       </ion-list>
-      <ion-item *appRequireRight="['ROLE_SPIELLEITER']">
+      <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
         <button ion-button item-end color="danger" clear (click)="deleteVerein(verein)">Löschen</button>
       </ion-item>
     </ion-card>

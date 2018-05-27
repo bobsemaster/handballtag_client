@@ -17,7 +17,7 @@
 
 
 <ion-content padding>
-  <ion-fab *appRequireRight="['ROLE_SPIELLEITER']" bottom right>
+  <ion-fab *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')" bottom right>
     <button ion-fab (click)="addMannschaft()">
       <ion-icon name="add"></ion-icon>
     </button>
@@ -26,7 +26,7 @@
   <ng-template ngFor let-mannschaft [ngForOf]="mannschaften">
     <ion-card>
       <ion-card-header>{{mannschaft.name}} {{mannschaft.jugend.typ}} {{mannschaft.jugend.jahrgang}}</ion-card-header>
-      <ion-item *appRequireRight="['ROLE_SPIELLEITER']">
+      <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
         <button ion-button item-end color="danger" clear (click)="deleteMannschaft(mannschaft)">Löschen</button>
       </ion-item>
     </ion-card>
