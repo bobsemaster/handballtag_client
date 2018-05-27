@@ -17,12 +17,14 @@
 
 
 <ion-content padding>
+  <ion-searchbar [showCancelButton]="true" [(ngModel)]="vereinFilter" (ngModelChange)="onFilterInput($event)"></ion-searchbar>
+
   <ion-fab *appRequireRight="['ROLE_SPIELLEITER']" bottom right>
     <button ion-fab (click)="addVerein()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <ng-template ngFor let-verein="$implicit" [ngForOf]="vereine">
+  <ng-template ngFor let-verein [ngForOf]="vereine">
     <ion-card>
       <ion-card-header style="font-weight: bolder;">{{verein.name}}</ion-card-header>
 
@@ -31,7 +33,7 @@
           <button ion-item>{{mannschaft.name}} {{mannschaft.jugend.typ}} {{mannschaft.jugend.jahrgang}}</button>
         </ng-template>
       </ion-list>
-      <ion-item>
+      <ion-item *appRequireRight="['ROLE_SPIELLEITER']">
         <button ion-button item-end color="danger" clear (click)="deleteVerein(verein)">Löschen</button>
       </ion-item>
     </ion-card>

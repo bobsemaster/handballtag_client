@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {Jugend, JugendEnum, JugendGender} from "../../models/Jugend";
+import {Jugend, JugendEnum, JugendGenderEnum} from "../../models/Jugend";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {Verein} from "../../models/Verein";
 import {Mannschaft} from "../../models/Mannschaft";
@@ -23,7 +23,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class MannschaftAddViewPage {
 
-  public typ: JugendGender;
+  public typ: JugendGenderEnum;
   public jahrgang: JugendEnum;
   public name: String;
   public vereinId: number;

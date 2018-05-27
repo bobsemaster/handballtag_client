@@ -22,6 +22,7 @@ export class VereinViewPage {
 
   public vereine: Verein[] = this.applicationData.vereine;
   public mannschaften: Mannschaft[] = this.applicationData.mannschaften;
+  public vereinFilter: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider, private applicationData: ApplicationDataServiceProvider, private alert: AlertController) {
     console.log("construcot");
@@ -63,5 +64,15 @@ export class VereinViewPage {
         }
       ]
     }).present();
+  }
+
+  onFilterInput($event: any) {
+    console.log("Filtering now " + this.vereinFilter);
+    this.vereine = this.applicationData.vereine.filter(verein => verein.name.toLowerCase().includes(this.vereinFilter.toLowerCase()));
+  }
+
+  cancelFilter($event: any) {
+    this.vereinFilter = "";
+    this.onFilterInput(null);
   }
 }
