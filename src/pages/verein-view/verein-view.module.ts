@@ -3,20 +3,22 @@ import {IonicPageModule} from 'ionic-angular';
 import {VereinViewPage} from './verein-view';
 import {VereinAddViewPageModule} from "../verein-add-view/verein-add-view.module";
 import {VereinServiceProvider} from "../../providers/verein-service/verein-service";
+import {ImportDirectivesModule} from "../../directives/import-directives.module";
 
 @NgModule({
   declarations: [
-    VereinViewPage
+    VereinViewPage,
   ],
   imports: [
     IonicPageModule.forChild(VereinViewPage),
-    VereinAddViewPageModule
+    VereinAddViewPageModule,ImportDirectivesModule
   ],
-  entryComponents:[
+  entryComponents: [
     VereinViewPage
   ],
-  providers:[
+  providers: [
     VereinServiceProvider
   ]
 })
-export class VereinViewPageModule {}
+export class VereinViewPageModule {
+}

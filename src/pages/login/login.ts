@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
 import {VereinViewPage} from "../verein-view/verein-view";
-import {UserDetails} from "../../models/UserDetails";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 
 /**
@@ -29,7 +28,7 @@ export class LoginPage {
   }
 
   private isAlreadyAuthenticated() {
-    this.applicationData.ladeAuthentifiziertenBenutzer().add(()=>this.navigateToUserStartPage());
+    this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navigateToUserStartPage());
     // Lade alle vereine
   }
 
@@ -44,14 +43,16 @@ export class LoginPage {
 
   private navigateToUserStartPage() {
     const authenticatedUser = this.applicationData.authenticatedUser;
-    if(authenticatedUser == null){
+    if (authenticatedUser == null) {
       return;
     }
     if (authenticatedUser.hasRecht('ROLE_SPIELLEITER')) {
       this.applicationData.ladeVereine().add(() => this.navCtrl.setRoot(VereinViewPage));
 
     } else if (authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')) {
-
+      this.applicationData.ladeVereine().add(() => this.navCtrl.setRoot(VereinViewPage));
+    } else {
+      this.applicationData.ladeVereine().add(() => this.navCtrl.setRoot(VereinViewPage));
     }
   }
 }

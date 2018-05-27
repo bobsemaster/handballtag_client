@@ -10,25 +10,23 @@ import {LoginPage} from "../pages/login/login";
 import {AuthenticationServiceProvider} from '../providers/authentication-service/authentication-service';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
-import { VereinServiceProvider } from '../providers/verein-service/verein-service';
-import { ApplicationDataServiceProvider } from '../providers/application-data-service/application-data-service';
+import {VereinServiceProvider} from '../providers/verein-service/verein-service';
+import {ApplicationDataServiceProvider} from '../providers/application-data-service/application-data-service';
 import {MannschaftenViewPageModule} from "../pages/mannschaften-view/mannschaften-view.module";
-import { MannschaftServiceProvider } from '../providers/mannschaft-service/mannschaft-service';
-import { TabelleServiceProvider } from '../providers/tabelle-service/tabelle-service';
-import {RequireRightDirective} from "../directives/require-right/require-right";
+import {MannschaftServiceProvider} from '../providers/mannschaft-service/mannschaft-service';
+import {TabelleServiceProvider} from '../providers/tabelle-service/tabelle-service';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
-    RequireRightDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     VereinViewPageModule,
     MannschaftenViewPageModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,6 +43,9 @@ import {RequireRightDirective} from "../directives/require-right/require-right";
     ApplicationDataServiceProvider,
     MannschaftServiceProvider,
     TabelleServiceProvider,
-  ]
+
+  ],
+
 })
-export class AppModule {}
+export class AppModule {
+}
