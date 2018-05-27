@@ -15,18 +15,21 @@
 
 <ion-content padding>
   <form (ngSubmit)="createMannschaft()" #registerForm="ngForm">
-    <ion-item>
-      <ion-label>Mannschaft Name</ion-label>
-      <ion-input type="text" name="name" [(ngModel)]="name" required></ion-input>
-    </ion-item>
+
     <ion-item>
       <ion-label>Mannschaft Verein</ion-label>
-      <ion-select interface="popover" name="verein" [(ngModel)]="vereinId" required>
+      <ion-select interface="popover" name="verein" [(ngModel)]="vereinId" (ngModelChange)="setStandartName()" required>
         <ng-template ngFor let-verein [ngForOf]="applicationData.vereine">
           <ion-option value="{{verein.id}}">{{verein.name}}</ion-option>
         </ng-template>
       </ion-select>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Mannschaft Name</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="name" required></ion-input>
+    </ion-item>
+
     <ion-item>
       <ion-label>Jugend</ion-label>
       <ion-select interface="popover" name="jahrgang" [(ngModel)]="jahrgang" required>
@@ -38,6 +41,7 @@
         <ion-option value="AJUGEND">A-Jugend</ion-option>
       </ion-select>
     </ion-item>
+
     <ion-item>
       <ion-label>M/W/G</ion-label>
       <ion-select interface="popover" name="typ" [(ngModel)]="typ" required>

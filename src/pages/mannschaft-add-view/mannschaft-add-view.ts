@@ -75,4 +75,8 @@ export class MannschaftAddViewPage {
     }
     return null;
   }
+
+  setStandartName() {
+    this.name = this.getVereinByID(this.vereinId).name
+  }
 }

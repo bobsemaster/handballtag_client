@@ -15,11 +15,13 @@ import { ApplicationDataServiceProvider } from '../providers/application-data-se
 import {MannschaftenViewPageModule} from "../pages/mannschaften-view/mannschaften-view.module";
 import { MannschaftServiceProvider } from '../providers/mannschaft-service/mannschaft-service';
 import { TabelleServiceProvider } from '../providers/tabelle-service/tabelle-service';
+import {RequireRightDirective} from "../directives/require-right/require-right";
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
+    RequireRightDirective
   ],
   imports: [
     BrowserModule,
