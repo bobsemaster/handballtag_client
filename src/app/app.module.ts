@@ -14,7 +14,6 @@ import {VereinServiceProvider} from '../providers/verein-service/verein-service'
 import {ApplicationDataServiceProvider} from '../providers/application-data-service/application-data-service';
 import {MannschaftenViewPageModule} from "../pages/mannschaften-view/mannschaften-view.module";
 import {MannschaftServiceProvider} from '../providers/mannschaft-service/mannschaft-service';
-import {TabelleServiceProvider} from '../providers/tabelle-service/tabelle-service';
 
 @NgModule({
   declarations: [
@@ -42,8 +41,6 @@ import {TabelleServiceProvider} from '../providers/tabelle-service/tabelle-servi
     VereinServiceProvider,
     ApplicationDataServiceProvider,
     MannschaftServiceProvider,
-    TabelleServiceProvider,
-
   ],
 
 })
