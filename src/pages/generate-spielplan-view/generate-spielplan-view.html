@@ -1,0 +1,48 @@
+<!--
+  Generated template for the GenerateSpielplanViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Spielplan generieren</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="generateSpielplan()" #registerForm="ngForm">
+
+    <ion-item>
+      <ion-label>Spieldauer</ion-label>
+      <ion-input type="number" name="spielzeit" [(ngModel)]="spielzeit" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Pause Dauer</ion-label>
+      <ion-input type="number" name="pauseTime" [(ngModel)]="pauseZeit" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Datum</ion-label>
+      <ion-datetime displayFormat="DD.MM.YY" name="datum" [(ngModel)]="turnierBeginnDatum" required></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Turnierbeginn</ion-label>
+      <ion-datetime displayFormat="HH:mm" name="Turnierbeginn" [(ngModel)]="turnierbeginnTime" required></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Gruppe mit sechs Mannschaften</ion-label>
+      <ion-checkbox name="sechsMannschaftenGruppe" [(ngModel)]="sechsMannschaftenGruppe" required></ion-checkbox>
+    </ion-item>
+
+    <button ion-button type="submit" [disabled]="!registerForm.form.valid" block>Mannschaft erstellen</button>
+  </form>
+</ion-content>

@@ -20,6 +20,15 @@ export class Jugend {
       case "GEMISCHT":
         jugend.typ = JugendGenderEnum.GEMISCHT;
         break;
+      case "Männlich":
+        jugend.typ = JugendGenderEnum.MAENNLICH;
+        break;
+      case "Weiblich":
+        jugend.typ = JugendGenderEnum.WEIBLICH;
+        break;
+      case "Gemischt":
+        jugend.typ = JugendGenderEnum.GEMISCHT;
+        break;
       default:
         console.error("Der jugend typ: " + json.typ + " existiert nicht!");
     }
@@ -40,6 +49,24 @@ export class Jugend {
         jugend.jahrgang = JugendEnum.BJUGEND;
         break;
       case "AJUGEND":
+        jugend.jahrgang = JugendEnum.AJUGEND;
+        break;
+      case "Minis":
+        jugend.jahrgang = JugendEnum.MINIS;
+        break;
+      case "E-Jugend":
+        jugend.jahrgang = JugendEnum.EJUGEND;
+        break;
+      case "D-Jugend":
+        jugend.jahrgang = JugendEnum.DJUGEND;
+        break;
+      case "C-Jugend":
+        jugend.jahrgang = JugendEnum.CJUGEND;
+        break;
+      case "B-Jugend":
+        jugend.jahrgang = JugendEnum.BJUGEND;
+        break;
+      case "A-Jugend":
         jugend.jahrgang = JugendEnum.AJUGEND;
         break;
       default:

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 import {SpielServiceProvider} from "../../providers/spiel-service/spiel-service";
+import {GenerateSpielplanViewPage} from "../generate-spielplan-view/generate-spielplan-view";
 
 /**
  * Generated class for the SpielViewPage page.
@@ -26,10 +27,6 @@ export class SpielViewPage {
   }
 
   generateSpielplan() {
-    this.alertController.create({});
-    console.log("test");
-    this.mannschaftService.getAllJugend().subscribe(value => {
-      console.log(value);
-    });
+    this.navCtrl.push(GenerateSpielplanViewPage);
   }
 }
