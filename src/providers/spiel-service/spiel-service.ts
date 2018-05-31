@@ -19,8 +19,8 @@ export class SpielServiceProvider {
     console.log('Hello SpielServiceProvider Provider');
   }
 
-  public getAllSpiel(): Observable<Spiel> {
-    return this.http.get<any[]>(this.server_url + "/spiel/all").map(it => Spiel.fromJson(it))
+  public getAllSpiel(): Observable<Spiel[]> {
+    return this.http.get<any[]>(this.server_url + "/spiel/all").map(it => it.map(spiel => Spiel.fromJson(spiel)));
   }
 
   public generateSpielplanForJugend(spielCreatorInfo: SpielCreatorInfo): Subscription {

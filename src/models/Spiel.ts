@@ -14,12 +14,13 @@ export class Spiel {
   public isHeimmannschaftAnwesend: boolean;
   public isGastMannschaftAnwesend: boolean;
   public spielPlatz: number;
-  public spielTyp: String;
+  public spielTyp: string;
+  public gruppe: number;
 
   constructor() {
   }
 
-  public static fromJson(json: any):Spiel {
+  public static fromJson(json: any): Spiel {
     const spiel = new Spiel();
     spiel.id = json.id;
     spiel.gastMannschaft = Mannschaft.fromJSON(json.gastMannschaft);
@@ -35,6 +36,7 @@ export class Spiel {
     spiel.isSchiedsrichterAnwesend = json.isSchiedsrichterAnwesend;
     spiel.spielPlatz = json.spielPlatz;
     spiel.spielTyp = json.spielTyp;
+    spiel.gruppe = json.gruppe;
 
     return spiel;
   }
@@ -48,3 +50,4 @@ export class Spiel {
     }
   }
 }
+

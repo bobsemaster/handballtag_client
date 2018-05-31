@@ -16,7 +16,13 @@
 
 
 <ion-content padding>
-<ion-buttons>
-  <button ion-button (click)="generateSpielplan()" clear block>Generiere Spielplan</button>
-</ion-buttons>
+
+
+  <ng-template ngFor let-spiel [ngForOf]="allSpiel">
+
+  </ng-template>
+
+  <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+    <button ion-button (click)="generateSpielplan()" clear block>Generiere Spielplan</button>
+  </ion-buttons>
 </ion-content>

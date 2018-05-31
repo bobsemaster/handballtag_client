@@ -76,6 +76,21 @@ export class Jugend {
     return jugend;
   }
 
+  private stringHashCode(string: string): number {
+    let hash = 0, i, chr;
+    if (string.length === 0) return hash;
+    for (i = 0; i < string.length; i++) {
+      chr = string.charCodeAt(i);
+      hash = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+  }
+
+  public hashCode(): number {
+    return this.stringHashCode(this.typ.toString()) + this.stringHashCode(this.jahrgang.toString());
+  }
+
 
   public toJSON(): any {
     const json: any = {};
@@ -130,3 +145,7 @@ export enum JugendEnum {
   BJUGEND = "B-Jugend",
   AJUGEND = "A-Jugend"
 }
+
+
+
+
