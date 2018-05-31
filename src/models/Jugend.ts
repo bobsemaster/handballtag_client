@@ -3,6 +3,10 @@ export class Jugend {
   public typ: JugendGenderEnum;
   public jahrgang: JugendEnum;
 
+  public functionTest(){
+    console.log("test");
+  }
+
   public static fromJson(json: any): Jugend {
     const jugend = new Jugend();
 

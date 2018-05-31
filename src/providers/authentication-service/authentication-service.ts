@@ -25,9 +25,9 @@ export class AuthenticationServiceProvider {
     console.log('Hello AuthenticationServiceProvider Provider');
   }
 
-  public getAuthenticatedUser():Observable<Object>{
+  public getAuthenticatedUser():Observable<UserDetails>{
     console.log("get auth user!");
-    return this.http.get(this.server_url + "/login");
+    return this.http.get(this.server_url + "/login").map(user => UserDetails.fromJson(user));
   }
 
 

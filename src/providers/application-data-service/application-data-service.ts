@@ -24,18 +24,18 @@ export class ApplicationDataServiceProvider {
   }
 
   public ladeAuthentifiziertenBenutzer():Subscription {
-    return this.authService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = UserDetails.fromJson(user));
+    return this.authService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = user);
   }
 
   public ladeVereine():Subscription{
     return this.vereinService.getAllVerein().subscribe(value => {
-      this.vereine = value.map(verein => Verein.fromJSON(verein));
+      this.vereine = value
     });
   }
 
   public ladeMannschaften():Subscription{
     return this.mannschaftService.getAllMannschaften().subscribe(value => {
-      this.mannschaften = value.map(mannschaft => Mannschaft.fromJSON(mannschaft))
+      this.mannschaften = value
     });
   }
 

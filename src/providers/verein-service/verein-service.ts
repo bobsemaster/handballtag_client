@@ -4,6 +4,7 @@ import {Verein} from "../../models/Verein";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/mergeMap";
 import {Subscription} from "rxjs/Subscription";
+import {Mannschaft} from "../../models/Mannschaft";
 
 /*
   Generated class for the VereinServiceProvider provider.
@@ -20,8 +21,8 @@ export class VereinServiceProvider {
     console.log('Hello VereinServiceProvider Provider');
   }
 
-  public getAllVerein(): Observable<any[]> {
-    return this.http.get<any[]>(this.server_url + "/verein/all")//
+  public getAllVerein(): Observable<Verein[]> {
+    return this.http.get<any[]>(this.server_url + "/verein/all").map(allVerein => allVerein.map(verein => Verein.fromJSON(verein)));
   }
 
   public createVerein(verein: Verein): Observable<boolean> {
@@ -32,8 +33,9 @@ export class VereinServiceProvider {
     return this.http.delete(`${this.server_url}/verein/delete/${id}`).subscribe();
   }
 
-  public getAllMannschaftenToVerein(id: number):Observable<any[]> {
+  public getAllMannschaftenToVerein(id: number): Observable<Mannschaft[]> {
     return this.http.get<any[]>(`${this.server_url}/verein/${id}/mannschaften`)
+      .map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
   }
 
 }
