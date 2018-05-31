@@ -33,21 +33,21 @@
     <ion-item>
       <ion-label>Jugend</ion-label>
       <ion-select interface="popover" name="jahrgang" [(ngModel)]="jahrgang" required>
-        <ion-option value="MINIS">Minis</ion-option>
-        <ion-option value="EJUGEND">E-Jugend</ion-option>
-        <ion-option value="DJUGEND">D-Jugend</ion-option>
-        <ion-option value="CJUGEND">C-Jugend</ion-option>
-        <ion-option value="BJUGEND">B-Jugend</ion-option>
-        <ion-option value="AJUGEND">A-Jugend</ion-option>
+        <ion-option [value]="MINIS">Minis</ion-option>
+        <ion-option [value]="EJUGEND">E-Jugend</ion-option>
+        <ion-option [value]="DJUGEND">D-Jugend</ion-option>
+        <ion-option [value]="CJUGEND">C-Jugend</ion-option>
+        <ion-option [value]="BJUGEND">B-Jugend</ion-option>
+        <ion-option [value]="AJUGEND">A-Jugend</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>M/W/G</ion-label>
       <ion-select interface="popover" name="typ" [(ngModel)]="typ" required>
-        <ion-option value="MAENNLICH">Männlich</ion-option>
-        <ion-option value="WEIBLICH">Weiblich</ion-option>
-        <ion-option value="GEMISCHT">Gemischt</ion-option>
+        <ion-option [value]="MAENNLICH">Männlich</ion-option>
+        <ion-option [value]="WEIBLICH">Weiblich</ion-option>
+        <ion-option [value]="GEMISCHT">Gemischt</ion-option>
       </ion-select>
     </ion-item>
     <button ion-button type="submit" [disabled]="!registerForm.form.valid" block>Mannschaft erstellen</button>

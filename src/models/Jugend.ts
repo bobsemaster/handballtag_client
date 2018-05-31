@@ -3,7 +3,7 @@ export class Jugend {
   public typ: JugendGenderEnum;
   public jahrgang: JugendEnum;
 
-  public functionTest(){
+  public functionTest() {
     console.log("test");
   }
 
@@ -75,13 +75,51 @@ export class Jugend {
 
     return jugend;
   }
+
+
+  public toJSON(): any {
+    const json: any = {};
+    switch (this.typ) {
+      case JugendGenderEnum.GEMISCHT:
+        json.typ = "GEMISCHT";
+        break;
+      case JugendGenderEnum.MAENNLICH:
+        json.typ = "MAENNLICH";
+        break;
+      case JugendGenderEnum.WEIBLICH:
+        json.typ = "WEIBLICH";
+        break;
+    }
+    switch (this.jahrgang) {
+      case JugendEnum.AJUGEND:
+        json.jahrgang = "AJUGEND";
+        break;
+      case JugendEnum.BJUGEND:
+        json.jahrgang = "BJUGEND";
+        break;
+      case JugendEnum.CJUGEND:
+        json.jahrgang = "EJUGEND";
+        break;
+      case JugendEnum.DJUGEND:
+        json.jahrgang = "DJUGEND";
+        break;
+      case JugendEnum.EJUGEND:
+        json.jahrgang = "EJUGEND";
+        break;
+      case JugendEnum.MINIS:
+        json.jahrgang = "MINIS";
+        break;
+    }
+    return json;
+  }
 }
 
 
 export enum JugendGenderEnum {
   MAENNLICH = "Männlich",
   WEIBLICH = "Weiblich",
-  GEMISCHT = "Gemischt"
+  GEMISCHT = "Gemischt",
+
 }
 
 export enum JugendEnum {
