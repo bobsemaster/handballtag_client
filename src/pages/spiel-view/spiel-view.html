@@ -10,6 +10,10 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Spiele</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="toggleGroupByJugend()"><ion-icon name="funnel"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -18,8 +22,28 @@
 <ion-content padding>
 
 
-  <ng-template ngFor let-spiel [ngForOf]="allSpiel">
+  <ng-template ngFor let-spielView [ngForOf]="allSpielView">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{spielView.title}}</ion-card-title>
+      </ion-card-header>
 
+      <ion-card-content>
+        <p class="cursive-heading">Nächstes Spiel:</p>
+        <p>{{spielView.nextSpiel.heimMannschaft.name}} : {{spielView.nextSpiel.gastMannschaft.name}}</p>
+
+      </ion-card-content>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-buttons end>
+            <button ion-button clear icon-end>Alle Spiele
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-card>
   </ng-template>
 
   <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
