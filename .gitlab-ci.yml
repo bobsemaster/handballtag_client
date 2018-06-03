@@ -1,0 +1,75 @@
+# Beschreibt wie unsere CI/CD Pipeline mit der Gitlab-CI funktioniert
+#
+# Referenz: https://docs.gitlab.com/ce/ci/yaml/
+
+image: emundo/docker-compose-openjdk-node-gradle:latest
+
+stages:
+    - install
+    - lint
+    - compile
+    - test
+    - analysis
+    - build
+    - deploy
+    - dist
+
+cache:
+    paths:
+        - node_modules
+        - "webpack*.js"
+        - tslint_rules
+
+before_script:
+    - if [ -d 'node_modules' ]; then npm update --quiet ; else npm install --quiet ; fi
+
+lint:
+    stage: lint
+    script:
+        - npm run lint # npm run lint
+
+compile:
+    stage: compile
+    script:
+        -  npm run build --prod --aot --minifyjs --minifycss --optimizejs
+    artifacts:
+        name: "$CI_PROJECT_PATH_SLUG-$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+        when: on_success
+        paths:
+            - dist/htdocs/
+        expire_in: 1 week # Wir brauchen das Aritfakt nur bis zum Ende der Pipeline
+
+docker-container:
+    stage: build
+    only:
+        - master
+    cache:
+        # nur Pullen, wir wollen die gelöschen dev-Dependencies nicht aus dem Cache löschen
+        policy: pull
+    before_script:
+        - if [ -d 'node_modules' ]; then npm update --quiet; else npm install --quiet; fi
+        - npm prune --quiet
+    script:
+        - npm run build --prod --aot --minifyjs --minifycss --optimizejs
+        # Tag with commit tag or latest if not aviable.
+        # Docker-Container bauen (baue immer mit den aktuellsten images)
+        - docker-compose build --pull
+        # Docker Registry Login um das Pushen von Images zu ermöglichen
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+        # Docker-Container in die Registry pushen
+        - docker-compose push
+
+deploy-dev:
+    stage: deploy
+    only:
+        - master
+    when: manual
+    before_script: [] # Überschreibe das Globale before_script.
+    script:
+        - rancher-compose -f docker-compose.rancher.yml -r rancher-compose.yml -p handballtag pull
+        - rancher-compose -f docker-compose.rancher.yml -r rancher-compose.yml -p handballtag up -d --force-upgrade --pull --confirm-upgrade
+    environment:
+        # Das hier ist für die Anzeige in https://gitlab.schreib.tk/tsv-forstenried/client/environments
+        # damit man alle Deploys auf die Umgebung sieht und per Click reployen kann
+        name: dev
+        url: https://handballtag.schreib.io/

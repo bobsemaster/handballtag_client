@@ -1,0 +1,17 @@
+version: '2'
+
+networks:
+  default:
+    external:
+      name: server_spirit2-cluster
+
+services:
+  nginx:
+    image: registry.schreib.io/tsv-forstenried/client/nginx
+    container_name: handballtag-client-nginx
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NGINX_PORT=80
