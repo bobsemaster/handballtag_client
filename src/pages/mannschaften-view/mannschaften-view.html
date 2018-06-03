@@ -17,6 +17,8 @@
 
 
 <ion-content padding>
+  <h1 class="title badge-md-danger">Info</h1>
+  <h2 class="title badge-md-danger">Dieser Menüpunkt wird entfernt und mit Verein zusammengelegt</h2>
   <ion-fab *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')" bottom right>
     <button ion-fab (click)="addMannschaft()">
       <ion-icon name="add"></ion-icon>
