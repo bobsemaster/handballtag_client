@@ -63,7 +63,6 @@ deploy-dev:
     stage: deploy
     only:
         - master
-    when: manual
     before_script: [] # Überschreibe das Globale before_script.
     script:
         - rancher-compose -f docker-compose.rancher.yml -r rancher-compose.yml -p handballtag pull
