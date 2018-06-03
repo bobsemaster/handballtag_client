@@ -6,7 +6,6 @@ import {Verein} from "../../models/Verein";
 import {UserDetails} from "../../models/UserDetails";
 import {Subscription} from "rxjs/Subscription";
 import {MannschaftServiceProvider} from "../mannschaft-service/mannschaft-service";
-import {Mannschaft} from "../../models/Mannschaft";
 
 /*
   Generated class for the ApplicationDataServiceProvider provider.
@@ -14,6 +13,7 @@ import {Mannschaft} from "../../models/Mannschaft";
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
 @Injectable()
 export class ApplicationDataServiceProvider {
   public vereine: Verein[] = null;

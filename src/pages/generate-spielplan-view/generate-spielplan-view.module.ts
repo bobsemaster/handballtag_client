@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
-import { GenerateSpielplanViewPage } from './generate-spielplan-view';
+import {NgModule} from '@angular/core';
+import {IonicPageModule} from 'ionic-angular';
+import {GenerateSpielplanViewPage} from './generate-spielplan-view';
 
 @NgModule({
   declarations: [

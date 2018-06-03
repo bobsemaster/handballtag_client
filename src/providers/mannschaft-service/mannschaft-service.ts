@@ -4,7 +4,7 @@ import {Mannschaft} from "../../models/Mannschaft";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {Jugend} from "../../models/Jugend";
-import {List} from "ionic-angular";
+import {server_url} from "../../models/ServerUrl";
 
 /*
   Generated class for the MannschaftServiceProvider provider.
@@ -14,7 +14,6 @@ import {List} from "ionic-angular";
 */
 @Injectable()
 export class MannschaftServiceProvider {
-  private server_url = "/rest";
 
 
   constructor(private http: HttpClient) {
@@ -22,19 +21,19 @@ export class MannschaftServiceProvider {
   }
 
   public createMannschaft(mannschaft: Mannschaft): Observable<boolean> {
-    return this.http.post(this.server_url + "/mannschaft/new", mannschaft).map(() => true).catch(err => Observable.of(false))
+    return this.http.post(server_url + "/mannschaft/new", mannschaft).map(() => true).catch(err => Observable.of(false))
   }
 
   public getAllMannschaften(): Observable<Mannschaft[]> {
-    return this.http.get<any[]>(this.server_url + "/mannschaft/all").map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
+    return this.http.get<any[]>(server_url + "/mannschaft/all").map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
   }
 
   public deleteMannschaft(id: number): Subscription {
-    return this.http.delete(`${this.server_url}/mannschaft/${id}`).subscribe();
+    return this.http.delete(`${server_url}/mannschaft/${id}`).subscribe();
   }
 
-  public getAllJugend():Observable<Jugend[]>{
-    return this.http.get<any[]>(this.server_url + "/mannschaft/jugend/all").map(allJugend => allJugend.map(jugend => Jugend.fromJson(jugend)));
+  public getAllJugend(): Observable<Jugend[]> {
+    return this.http.get<any[]>(server_url + "/mannschaft/jugend/all").map(allJugend => allJugend.map(jugend => Jugend.fromJson(jugend)));
   }
 
 }

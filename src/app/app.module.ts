@@ -14,7 +14,7 @@ import {VereinServiceProvider} from '../providers/verein-service/verein-service'
 import {ApplicationDataServiceProvider} from '../providers/application-data-service/application-data-service';
 import {MannschaftenViewPageModule} from "../pages/mannschaften-view/mannschaften-view.module";
 import {MannschaftServiceProvider} from '../providers/mannschaft-service/mannschaft-service';
-import { SpielServiceProvider } from '../providers/spiel-service/spiel-service';
+import {SpielServiceProvider} from '../providers/spiel-service/spiel-service';
 import {SpielViewPageModule} from "../pages/spiel-view/spiel-view.module";
 
 @NgModule({

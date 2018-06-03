@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import "rxjs/add/observable/of";
 import {UserDetails} from "../../models/UserDetails";
-import {serve} from "@ionic/app-scripts";
+import {server_url} from "../../models/ServerUrl";
 
 /*
   Generated class for the AuthenticationServiceProvider provider.
@@ -16,24 +16,23 @@ import {serve} from "@ionic/app-scripts";
 @Injectable()
 export class AuthenticationServiceProvider {
   // Wenn proxy genutzt wird darf der request nur auf /rest gehen nicht http://localhost:8080
-  private server_url = "/rest";
 
   private formHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
 
-  constructor(public http:HttpClient) {
+  constructor(public http: HttpClient) {
     console.log('Hello AuthenticationServiceProvider Provider');
   }
 
-  public getAuthenticatedUser():Observable<UserDetails>{
+  public getAuthenticatedUser(): Observable<UserDetails> {
     console.log("get auth user!");
-    return this.http.get(this.server_url + "/login").map(user => UserDetails.fromJson(user));
+    return this.http.get(server_url + "/login").map(user => UserDetails.fromJson(user));
   }
 
 
   public authenticateUser(username: String, password: String): Observable<any> {
     const body: String = 'username=' + username + '&password=' + password + '&submit=Login';
     console.log("loggin in");
-    return this.http.post( this.server_url + '/login', body, {headers: this.formHeaders});
+    return this.http.post(server_url + '/login', body, {headers: this.formHeaders});
   }
 }
