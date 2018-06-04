@@ -113,7 +113,7 @@ export class Jugend {
         json.jahrgang = "BJUGEND";
         break;
       case JugendEnum.CJUGEND:
-        json.jahrgang = "EJUGEND";
+        json.jahrgang = "CJUGEND";
         break;
       case JugendEnum.DJUGEND:
         json.jahrgang = "DJUGEND";

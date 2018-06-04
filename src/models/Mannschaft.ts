@@ -3,15 +3,17 @@ import {Pair} from "./Pair";
 import {Jugend} from "./Jugend";
 
 export class Mannschaft {
-  public id: number;
   public name: String;
   public verein: Verein;
+  public jugend: Jugend;
+
+  // Vorbelegt
+  public id: number;
+  public hasFoto: boolean;
+  public gruppe: number;
   public torverhaeltnis: Pair<number, number>;
   public punkteverhaeltnis: Pair<number, number>;
-  public jugend: Jugend;
-  public hasFoto: boolean;
   public tabellenPlatz: number;
-  public gruppe: number;
 
   constructor() {
     this.id = null;

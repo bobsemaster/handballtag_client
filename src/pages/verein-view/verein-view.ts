@@ -5,6 +5,8 @@ import {VereinServiceProvider} from "../../providers/verein-service/verein-servi
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {Verein} from "../../models/Verein";
 import {Mannschaft} from "../../models/Mannschaft";
+import {Jugend} from "../../models/Jugend";
+import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 
 /**
  * Generated class for the VereinViewPage page.
@@ -24,7 +26,8 @@ export class VereinViewPage {
   public mannschaften: Mannschaft[] = this.applicationData.mannschaften;
   public vereinFilter: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider, private applicationData: ApplicationDataServiceProvider, private alert: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider,
+              private applicationData: ApplicationDataServiceProvider, private alert: AlertController, private mannschaftService: MannschaftServiceProvider) {
     console.log("construcot");
   }
 
@@ -73,5 +76,79 @@ export class VereinViewPage {
 
   alertTODO(todoMannschaftenHinzufügen: string) {
     alert(todoMannschaftenHinzufügen);
+  }
+
+  createMannschaftenForJugenden($event: any, verein: Verein) {
+    const alert = this.alert.create({
+      title: 'Mannschaften erstellen',
+    });
+    // Unschön
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Minis',
+      value: '{"typ":"GEMISCHT","jahrgang":"MINIS"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Männlich E-Jugend',
+      value: '{"typ":"MAENNLICH","jahrgang":"EJUGEND"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Weiblich E-Jugend',
+      value: '{"typ":"WEIBLICH","jahrgang":"EJUGEND"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Männlich D-Jugend',
+      value: '{"typ":"MAENNLICH","jahrgang":"DJUGEND"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Weiblich D-Jugend',
+      value: '{"typ":"WEIBLICH","jahrgang":"DJUGEND"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Männlich C-Jugend',
+      value: '{"typ":"MAENNLICH","jahrgang":"CJUGEND"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Weiblich C-Jugend',
+      value: '{"typ":"WEIBLICH","jahrgang":"CJUGEND"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Männlich B-Jugend',
+      value: '{"typ":"MAENNLICH","jahrgang":"BJUGEND"}'
+    });
+    alert.addInput({
+      type: 'checkbox',
+      label: 'Weiblich B-Jugend',
+      value: '{"typ":"WEIBLICH","jahrgang":"BJUGEND"}'
+    });
+
+    alert.addButton("Abbrechen");
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        this.createMannschaften(data, verein);
+      }
+    });
+    alert.present();
+  }
+
+  private createMannschaften(data: any, verein: Verein) {
+    for (const jugendJson of data) {
+      const jugend: Jugend = Jugend.fromJson(JSON.parse(jugendJson));
+      const mannschaft: Mannschaft = new Mannschaft();
+      mannschaft.jugend = jugend;
+      mannschaft.verein = verein;
+      mannschaft.name = verein.name;
+
+      this.mannschaftService.createMannschaft(mannschaft).subscribe();
+    }
+    this.reloadAllVerein();
   }
 }
