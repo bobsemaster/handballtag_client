@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {Jugend} from "../../models/Jugend";
 import {server_url} from "../../models/ServerUrl";
+import {Spiel} from "../../models/Spiel";
 
 /*
   Generated class for the MannschaftServiceProvider provider.
@@ -26,6 +27,10 @@ export class MannschaftServiceProvider {
 
   public getAllMannschaften(): Observable<Mannschaft[]> {
     return this.http.get<any[]>(server_url + "/mannschaft/all").map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
+  }
+
+  public getAllSpielToMannschaft(id: number):Observable<Spiel[]> {
+    return this.http.get<any[]>(`${server_url}/${id}/spiele`).map(it => it.map(spiel => Spiel.fromJson(spiel)));
   }
 
   public deleteMannschaft(id: number): Subscription {

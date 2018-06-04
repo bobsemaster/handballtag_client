@@ -17,6 +17,10 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doReload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-fab *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')" bottom right>
     <button ion-fab (click)="addMannschaft()">
       <ion-icon name="add"></ion-icon>

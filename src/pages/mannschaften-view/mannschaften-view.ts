@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams, Refresher} from 'ionic-angular';
 import {MannschaftAddViewPage} from "../mannschaft-add-view/mannschaft-add-view";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {Mannschaft} from "../../models/Mannschaft";
@@ -31,12 +31,21 @@ export class MannschaftenViewPage {
     this.reloadAllMannschaft();
   }
 
-  private reloadAllMannschaft() {
-    this.applicationData.ladeMannschaften().add(() => this.mannschaften = this.applicationData.mannschaften);
+  private reloadAllMannschaft(callback: () => void = () => {}) {
+    this.applicationData.ladeMannschaften().add(() => {
+      callback();
+      return this.mannschaften = this.applicationData.mannschaften;
+    });
   }
 
   public addMannschaft() {
     this.navCtrl.push(MannschaftAddViewPage)
+  }
+
+  doReload(refresher: Refresher){
+    this.reloadAllMannschaft(() => {
+      refresher.complete();
+    });
   }
 
   public deleteMannschaft(mannschaft: Mannschaft) {

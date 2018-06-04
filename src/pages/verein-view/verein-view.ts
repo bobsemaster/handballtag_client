@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams, Refresher} from 'ionic-angular';
 import {VereinAddViewPage} from "../verein-add-view/verein-add-view";
 import {VereinServiceProvider} from "../../providers/verein-service/verein-service";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
@@ -44,9 +44,12 @@ export class VereinViewPage {
     this.reloadAllVerein();
   }
 
-  private reloadAllVerein() {
+  private reloadAllVerein(callback: () => void = () => {}) {
     this.applicationData.ladeVereine().add(() => this.vereine = this.applicationData.vereine);
-    this.applicationData.ladeMannschaften().add(() => this.mannschaften = this.applicationData.mannschaften);
+    this.applicationData.ladeMannschaften().add(() => {
+      callback();
+      return this.mannschaften = this.applicationData.mannschaften;
+    });
   }
 
   public getMannschaftenToVerein(verein: Verein): Mannschaft[] {
@@ -74,9 +77,6 @@ export class VereinViewPage {
     this.vereine = this.applicationData.vereine.filter(verein => verein.name.toLowerCase().includes(this.vereinFilter.toLowerCase()));
   }
 
-  alertTODO(todoMannschaftenHinzufügen: string) {
-    alert(todoMannschaftenHinzufügen);
-  }
 
   createMannschaftenForJugenden($event: any, verein: Verein) {
     const alert = this.alert.create({
@@ -150,5 +150,12 @@ export class VereinViewPage {
       this.mannschaftService.createMannschaft(mannschaft).subscribe();
     }
     this.reloadAllVerein();
+  }
+
+  doRefresh(refresher: Refresher) {
+    this.reloadAllVerein(() => {
+      refresher.complete();
+    });
+
   }
 }
