@@ -31,6 +31,7 @@ export class AuthenticationServiceProvider {
 
 
   public authenticateUser(username: String, password: String): Observable<any> {
+    // Vorsicht username und passwort werden nicht escaped d.h. zeichen & und = nicht möglich sonst werden mehr parameter geschickt
     const body: String = 'username=' + username + '&password=' + password + '&submit=Login';
     console.log("loggin in");
     return this.http.post(server_url + '/login', body, {headers: this.formHeaders});

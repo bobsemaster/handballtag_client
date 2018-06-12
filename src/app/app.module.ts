@@ -8,7 +8,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
 import {AuthenticationServiceProvider} from '../providers/authentication-service/authentication-service';
-import {HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
 import {VereinServiceProvider} from '../providers/verein-service/verein-service';
 import {ApplicationDataServiceProvider} from '../providers/application-data-service/application-data-service';
@@ -16,7 +16,9 @@ import {MannschaftenViewPageModule} from "../pages/mannschaften-view/mannschafte
 import {MannschaftServiceProvider} from '../providers/mannschaft-service/mannschaft-service';
 import {SpielServiceProvider} from '../providers/spiel-service/spiel-service';
 import {SpielViewPageModule} from "../pages/spiel-view/spiel-view.module";
-import { HttpInterceptorProvider } from '../providers/http-interceptor/http-interceptor';
+import {HttpInterceptorProvider} from '../providers/http-interceptor/http-interceptor';
+
+import {HTTP} from "@ionic-native/http";
 
 @NgModule({
   declarations: [
@@ -41,14 +43,16 @@ import { HttpInterceptorProvider } from '../providers/http-interceptor/http-inte
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpClient,
+
     AuthenticationServiceProvider,
     VereinServiceProvider,
     ApplicationDataServiceProvider,
     MannschaftServiceProvider,
     SpielServiceProvider,
+    HTTP,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorProvider ,
+      useClass: HttpInterceptorProvider,
       multi: true
     },
   ],
