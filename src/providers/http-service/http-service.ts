@@ -15,7 +15,7 @@ import "rxjs/add/observable/fromPromise";
 */
 @Injectable()
 export class HttpServiceProvider {
-  private isMobile = this.platform.is("mobile");
+  private isMobile = this.platform.is("cordova");
 
   constructor(private httpAngular: HttpClient, private httpNative: HTTP, private platform: Platform) {
     console.log('Hello HttpServiceProvider Provider');
