@@ -16,9 +16,9 @@ import {MannschaftenViewPageModule} from "../pages/mannschaften-view/mannschafte
 import {MannschaftServiceProvider} from '../providers/mannschaft-service/mannschaft-service';
 import {SpielServiceProvider} from '../providers/spiel-service/spiel-service';
 import {SpielViewPageModule} from "../pages/spiel-view/spiel-view.module";
-import {HttpInterceptorProvider} from '../providers/http-interceptor/http-interceptor';
 
 import {HTTP} from "@ionic-native/http";
+import { HttpServiceProvider } from '../providers/http-service/http-service';
 
 @NgModule({
   declarations: [
@@ -50,11 +50,7 @@ import {HTTP} from "@ionic-native/http";
     MannschaftServiceProvider,
     SpielServiceProvider,
     HTTP,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorProvider,
-      multi: true
-    },
+    HttpServiceProvider,
   ],
 
 })

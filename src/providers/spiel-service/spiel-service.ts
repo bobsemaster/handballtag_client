@@ -5,6 +5,7 @@ import {Spiel} from "../../models/Spiel";
 import {SpielCreatorInfo} from "../../models/SpielCreatorInfo";
 import {Subscription} from "rxjs/Subscription";
 import {server_url} from "../../models/ServerUrl";
+import {HttpServiceProvider} from "../http-service/http-service";
 
 /*
   Generated class for the SpielServiceProvider provider.
@@ -15,12 +16,12 @@ import {server_url} from "../../models/ServerUrl";
 @Injectable()
 export class SpielServiceProvider {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpServiceProvider) {
     console.log('Hello SpielServiceProvider Provider');
   }
 
   public getAllSpiel(): Observable<Spiel[]> {
-    return this.http.get<any[]>(server_url + "/spiel/all").map(it => it.map(spiel => Spiel.fromJson(spiel)));
+    return this.http.get(server_url + "/spiel/all").map(it => it.map(spiel => Spiel.fromJson(spiel)));
   }
 
   public generateSpielplanForJugend(spielCreatorInfo: SpielCreatorInfo): Subscription {
