@@ -43,9 +43,9 @@ export class LoginPage {
       })
       .subscribe(success => {
       //Wenn null zurückkommt ist die authentifizierung erfolgreich sonst kommt ein error Zurück
-      if (success == null) {
+      //if (success == null) {
         this.isAlreadyAuthenticated();
-      }
+      //}
     });
   }
 

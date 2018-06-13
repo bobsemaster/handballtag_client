@@ -20,7 +20,8 @@ import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mann
 export class MannschaftenViewPage {
   public mannschaften: Mannschaft[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private applicationData: ApplicationDataServiceProvider, private mannschaftService: MannschaftServiceProvider, private alert: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private applicationData: ApplicationDataServiceProvider,
+              private mannschaftService: MannschaftServiceProvider, private alert: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -31,7 +32,8 @@ export class MannschaftenViewPage {
     this.reloadAllMannschaft();
   }
 
-  private reloadAllMannschaft(callback: () => void = () => {}) {
+  private reloadAllMannschaft(callback: () => void = () => {
+  }) {
     this.applicationData.ladeMannschaften().add(() => {
       callback();
       return this.mannschaften = this.applicationData.mannschaften;
@@ -42,7 +44,7 @@ export class MannschaftenViewPage {
     this.navCtrl.push(MannschaftAddViewPage)
   }
 
-  doReload(refresher: Refresher){
+  doReload(refresher: Refresher) {
     this.reloadAllMannschaft(() => {
       refresher.complete();
     });

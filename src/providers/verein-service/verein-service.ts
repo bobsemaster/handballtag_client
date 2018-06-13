@@ -1,4 +1,3 @@
-import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Verein} from "../../models/Verein";
 import {Observable} from "rxjs/Observable";
@@ -6,6 +5,7 @@ import "rxjs/add/operator/mergeMap";
 import {Subscription} from "rxjs/Subscription";
 import {Mannschaft} from "../../models/Mannschaft";
 import {server_url} from "../../models/ServerUrl";
+import {HttpServiceProvider} from "../http-service/http-service";
 
 /*
   Generated class for the VereinServiceProvider provider.
@@ -17,12 +17,12 @@ import {server_url} from "../../models/ServerUrl";
 export class VereinServiceProvider {
   // Wenn proxy genutzt wird darf der request nur auf /rest gehen nicht http://localhost:8080
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpServiceProvider) {
     console.log('Hello VereinServiceProvider Provider');
   }
 
   public getAllVerein(): Observable<Verein[]> {
-    return this.http.get<any[]>(server_url + "/verein/all").map(allVerein => allVerein.map(verein => Verein.fromJSON(verein)));
+    return this.http.get(server_url + "/verein/all").map(allVerein => allVerein.map(verein => Verein.fromJSON(verein)));
   }
 
   public createVerein(verein: Verein): Observable<boolean> {
@@ -34,7 +34,7 @@ export class VereinServiceProvider {
   }
 
   public getAllMannschaftenToVerein(id: number): Observable<Mannschaft[]> {
-    return this.http.get<any[]>(`${server_url}/verein/${id}/mannschaften`)
+    return this.http.get(`${server_url}/verein/${id}/mannschaften`)
       .map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
   }
 
