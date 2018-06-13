@@ -7,6 +7,7 @@ import {Verein} from "../../models/Verein";
 import {Mannschaft} from "../../models/Mannschaft";
 import {Jugend} from "../../models/Jugend";
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
+import {MannschaftDetailViewPage} from "../mannschaft-detail-view/mannschaft-detail-view";
 
 /**
  * Generated class for the VereinViewPage page.
@@ -158,5 +159,9 @@ export class VereinViewPage {
       refresher.complete();
     });
 
+  }
+
+  showMannschaft(mannschaft) {
+    this.navCtrl.push(MannschaftDetailViewPage, {mannschaft: mannschaft})
   }
 }

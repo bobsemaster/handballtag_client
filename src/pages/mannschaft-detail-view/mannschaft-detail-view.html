@@ -1,0 +1,47 @@
+<!--
+  Generated template for the MannschaftDetailViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>mannschaft-detail-view</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header style="font-weight: bolder;">
+      {{mannschaft.name}} {{mannschaft.jugend.jahrgang}} {{mannschaft.jugend.typ}}
+    </ion-card-header>
+    <ion-item>
+      <p>Tabellenplatz: {{mannschaft.tabellenPlatz}}</p>
+    </ion-item>
+
+    <ion-item>
+      <p>Punkteverhältnis: {{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</p>
+    </ion-item>
+    <ion-item>
+      <p>Torverhältnis: {{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</p>
+    </ion-item>
+    <ion-item>
+      <p>Foto gemacht: <span *ngIf="mannschaft.hasFoto">ja</span><span *ngIf="!mannschaft.hasFoto">nein</span></p>
+    </ion-item>
+
+    <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+      <button *ngIf="!mannschaft.hasFoto" ion-button item-start color="secondary" clear (click)="setFotoGemacht(true)">
+        Foto gemacht
+      </button>
+      <button *ngIf="mannschaft.hasFoto" ion-button item-start color="secondary" clear (click)="setFotoGemacht(false)">
+        Foto nicht gemacht
+      </button>
+      <button *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')"
+              ion-button item-end color="danger" clear (click)="deleteMannschaft(verein)">Löschen
+      </button>
+    </ion-item>
+  </ion-card>
+</ion-content>
