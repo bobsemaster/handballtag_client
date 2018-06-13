@@ -3,10 +3,11 @@ import {RequireRightDirective} from './require-right/require-right';
 import {ApplicationDataServiceProvider} from "../providers/application-data-service/application-data-service";
 
 @NgModule({
-	declarations: [RequireRightDirective],
-	exports: [RequireRightDirective],
+  declarations: [RequireRightDirective],
+  exports: [RequireRightDirective],
   providers: [
     ApplicationDataServiceProvider
   ]
 })
-export class DirectivesModule {}
+export class DirectivesModule {
+}

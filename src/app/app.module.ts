@@ -8,7 +8,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
 import {AuthenticationServiceProvider} from '../providers/authentication-service/authentication-service';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
 import {VereinServiceProvider} from '../providers/verein-service/verein-service';
 import {ApplicationDataServiceProvider} from '../providers/application-data-service/application-data-service';
@@ -18,7 +18,7 @@ import {SpielServiceProvider} from '../providers/spiel-service/spiel-service';
 import {SpielViewPageModule} from "../pages/spiel-view/spiel-view.module";
 
 import {HTTP} from "@ionic-native/http";
-import { HttpServiceProvider } from '../providers/http-service/http-service';
+import {HttpServiceProvider} from '../providers/http-service/http-service';
 
 @NgModule({
   declarations: [

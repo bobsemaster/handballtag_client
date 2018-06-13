@@ -1,4 +1,3 @@
-import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Mannschaft} from "../../models/Mannschaft";
 import {Observable} from "rxjs/Observable";
@@ -30,7 +29,7 @@ export class MannschaftServiceProvider {
     return this.http.get(server_url + "/mannschaft/all").map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
   }
 
-  public getAllSpielToMannschaft(id: number):Observable<Spiel[]> {
+  public getAllSpielToMannschaft(id: number): Observable<Spiel[]> {
     return this.http.get(`${server_url}/${id}/spiele`).map(it => it.map(spiel => Spiel.fromJson(spiel)));
   }
 

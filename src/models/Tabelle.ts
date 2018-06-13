@@ -15,7 +15,7 @@ export class Tabelle {
   }
 
   public static fromJson(json: any): Tabelle {
-    if (json == null){
+    if (json == null) {
       return null;
     }
     const tabelle = new Tabelle();

@@ -43,7 +43,6 @@ export class GenerateSpielplanViewPage {
     spielCreatorInfo.turnierBeginn = `${this.turnierBeginnDatum}T${this.turnierbeginnTime}`;
 
 
-
     const jugendAlert = this.alertController.create({
       title: "Jugend auswählen"
     });
@@ -72,7 +71,7 @@ export class GenerateSpielplanViewPage {
     const jugenden = data.map(jugend => Jugend.fromJson(JSON.parse(jugend)));
     jugenden.forEach(jugend => {
       // Vorsichtshalber objekt kopieren, dass nicht die jugend über referenzen geändert erden kann
-      const info:SpielCreatorInfo = Object.assign({}, spielCreatorInfo);
+      const info: SpielCreatorInfo = Object.assign({}, spielCreatorInfo);
       info.jugend = jugend;
       this.spielService.generateSpielplanForJugend(info);
     });

@@ -13,4 +13,5 @@ import {MannschaftAddViewPageModule} from "../mannschaft-add-view/mannschaft-add
 
   ],
 })
-export class MannschaftenViewPageModule {}
+export class MannschaftenViewPageModule {
+}

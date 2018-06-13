@@ -44,7 +44,8 @@ export class VereinViewPage {
     this.reloadAllVerein();
   }
 
-  private reloadAllVerein(callback: () => void = () => {}) {
+  private reloadAllVerein(callback: () => void = () => {
+  }) {
     this.applicationData.ladeVereine().add(() => this.vereine = this.applicationData.vereine);
     this.applicationData.ladeMannschaften().add(() => {
       callback();

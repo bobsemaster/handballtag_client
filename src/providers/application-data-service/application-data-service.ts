@@ -20,20 +20,20 @@ export class ApplicationDataServiceProvider {
   public mannschaften = [];
   public authenticatedUser: UserDetails = null;
 
-  constructor(private http: HttpClient, private authService: AuthenticationServiceProvider, private vereinService: VereinServiceProvider, private mannschaftService:MannschaftServiceProvider) {
+  constructor(private http: HttpClient, private authService: AuthenticationServiceProvider, private vereinService: VereinServiceProvider, private mannschaftService: MannschaftServiceProvider) {
   }
 
-  public ladeAuthentifiziertenBenutzer():Subscription {
+  public ladeAuthentifiziertenBenutzer(): Subscription {
     return this.authService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = user);
   }
 
-  public ladeVereine():Subscription{
+  public ladeVereine(): Subscription {
     return this.vereinService.getAllVerein().subscribe(value => {
       this.vereine = value
     });
   }
 
-  public ladeMannschaften():Subscription{
+  public ladeMannschaften(): Subscription {
     return this.mannschaftService.getAllMannschaften().subscribe(value => {
       this.mannschaften = value
     });

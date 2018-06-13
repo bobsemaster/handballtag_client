@@ -13,7 +13,8 @@
     <ion-title>Vereine</ion-title>
 
   </ion-navbar>
-    <ion-searchbar [showCancelButton]="true" [(ngModel)]="vereinFilter" (ngModelChange)="onFilterInput($event)"></ion-searchbar>
+  <ion-searchbar [showCancelButton]="true" [(ngModel)]="vereinFilter"
+                 (ngModelChange)="onFilterInput($event)"></ion-searchbar>
 
 </ion-header>
 
@@ -40,7 +41,9 @@
 
 
       <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
-        <button ion-button item-start color="secondary" clear (click)="createMannschaftenForJugenden($event, verein)">Mannschaften Hinzufügen</button>
+        <button ion-button item-start color="secondary" clear (click)="createMannschaftenForJugenden($event, verein)">
+          Mannschaften Hinzufügen
+        </button>
         <button ion-button item-end color="danger" clear (click)="deleteVerein(verein)">Löschen</button>
       </ion-item>
     </ion-card>

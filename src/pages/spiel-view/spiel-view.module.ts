@@ -12,4 +12,5 @@ import {GenerateSpielplanViewPageModule} from "../generate-spielplan-view/genera
     IonicPageModule.forChild(SpielViewPage),
   ],
 })
-export class SpielViewPageModule {}
+export class SpielViewPageModule {
+}

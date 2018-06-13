@@ -10,9 +10,10 @@ import {VereinServiceProvider} from "../../providers/verein-service/verein-servi
   imports: [
     IonicPageModule.forChild(VereinAddViewPage),
   ],
-  providers:[
+  providers: [
     VereinServiceProvider,
     AlertController,
   ]
 })
-export class VereinAddViewPageModule {}
+export class VereinAddViewPageModule {
+}

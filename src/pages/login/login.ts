@@ -19,13 +19,14 @@ export class LoginPage {
 
   public loginCredentials = {username: '', password: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthenticationServiceProvider, private applicationData: ApplicationDataServiceProvider, private alertController:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthenticationServiceProvider, private applicationData: ApplicationDataServiceProvider, private alertController: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
     this.isAlreadyAuthenticated()
   }
+
   private isAlreadyAuthenticated() {
     this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navigateToUserStartPage());
     // Lade alle vereine
@@ -33,7 +34,7 @@ export class LoginPage {
 
   public login(event: any): void {
     this.auth.authenticateUser(this.loginCredentials.username, this.loginCredentials.password)
-      .catch((err:any, caught:any) => {
+      .catch((err: any, caught: any) => {
         this.alertController.create({
           title: 'Login Fehlgeschlagen',
           message: 'Username oder passwort falsch!',
@@ -42,11 +43,11 @@ export class LoginPage {
         return [];
       })
       .subscribe(success => {
-      //Wenn null zurückkommt ist die authentifizierung erfolgreich sonst kommt ein error Zurück
-      //if (success == null) {
+        //Wenn null zurückkommt ist die authentifizierung erfolgreich sonst kommt ein error Zurück
+        //if (success == null) {
         this.isAlreadyAuthenticated();
-      //}
-    });
+        //}
+      });
   }
 
   private navigateToUserStartPage() {

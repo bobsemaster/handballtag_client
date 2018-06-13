@@ -17,28 +17,28 @@ import {ApplicationDataServiceProvider} from "../../providers/application-data-s
   templateUrl: 'verein-add-view.html',
 })
 export class VereinAddViewPage {
-  public vereinName:String;
+  public vereinName: String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService:VereinServiceProvider, private alert:AlertController, private applicationData:ApplicationDataServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider, private alert: AlertController, private applicationData: ApplicationDataServiceProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VereinAddViewPage');
   }
 
-  public createVerein():void {
-    const verein=new Verein(this.vereinName);
+  public createVerein(): void {
+    const verein = new Verein(this.vereinName);
     const success = this.vereinService.createVerein(verein);
     success.subscribe(success => {
-      if(success){
+      if (success) {
         this.navCtrl.pop()
-      }else{
-        if(this.vereinName == undefined){
+      } else {
+        if (this.vereinName == undefined) {
           this.vereinName = '<name darf nicht leer sein>';
         }
         this.alert.create({
-          title:'Error',
-          subTitle:`Der verein mit dem namen '${this.vereinName}' existiert bereits!`,
+          title: 'Error',
+          subTitle: `Der verein mit dem namen '${this.vereinName}' existiert bereits!`,
           buttons: ['Ok']
         }).present();
       }

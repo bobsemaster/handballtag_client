@@ -46,9 +46,9 @@ export class MannschaftAddViewPage {
     this.wasCreateSuccessful(this.mannschaftService.createMannschaft(mannschaft));
   }
 
-  private wasCreateSuccessful(observable:Observable<boolean>){
+  private wasCreateSuccessful(observable: Observable<boolean>) {
     observable.subscribe(success => {
-      if(success){
+      if (success) {
         this.navCtrl.pop()
       } else {
 
