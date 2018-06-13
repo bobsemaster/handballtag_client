@@ -41,4 +41,8 @@ export class MannschaftServiceProvider {
     return this.http.get(server_url + "/mannschaft/jugend/all").map(allJugend => allJugend.map(jugend => Jugend.fromJson(jugend)));
   }
 
+  public setFotoGemacht(hasFoto: boolean, id: number): Observable<any> {
+    return this.http.get(`${server_url}/mannschaft/${id}/${hasFoto}`);
+  }
+
 }
