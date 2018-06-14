@@ -5,6 +5,8 @@ import {SpielServiceProvider} from "../../providers/spiel-service/spiel-service"
 import {GenerateSpielplanViewPage} from "../generate-spielplan-view/generate-spielplan-view";
 import {Spiel} from "../../models/Spiel";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
+import {SpielViewHelper} from "../../models/SpielViewHelper";
+import {SpielDetailViewPage} from "../spiel-detail-view/spiel-detail-view";
 
 /**
  * Generated class for the SpielViewPage page.
@@ -109,11 +111,10 @@ export class SpielViewPage {
       this.allSpielView.push(spielView);
     })
   }
+
+  showDetailView(spielView: SpielViewHelper) {
+    this.navCtrl.push(SpielDetailViewPage, {spielView: spielView});
+
+  }
 }
 
-
-class SpielViewHelper {
-  public allSpiel: Spiel[];
-  public title: string;
-  public nextSpiel: Spiel;
-}
