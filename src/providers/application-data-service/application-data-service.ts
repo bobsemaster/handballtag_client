@@ -19,8 +19,19 @@ export class ApplicationDataServiceProvider {
   public vereine: Verein[] = null;
   public mannschaften = [];
   public authenticatedUser: UserDetails = null;
+  public standartUserLoaded = false;
 
   constructor(private http: HttpClient, private authService: AuthenticationServiceProvider, private vereinService: VereinServiceProvider, private mannschaftService: MannschaftServiceProvider) {
+  }
+
+  public ladeStandartBenutzer(): Subscription {
+    // Standart User authentifizieren
+    // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
+    return this.authService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
+      .subscribe(value => {
+
+        this.ladeAuthentifiziertenBenutzer().add(() => this.standartUserLoaded = true);
+      });
   }
 
   public ladeAuthentifiziertenBenutzer(): Subscription {

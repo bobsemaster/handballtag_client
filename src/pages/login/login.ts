@@ -24,12 +24,10 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    this.isAlreadyAuthenticated()
   }
 
   private isAlreadyAuthenticated() {
     this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navigateToUserStartPage());
-    // Lade alle vereine
   }
 
   public login(event: any): void {
