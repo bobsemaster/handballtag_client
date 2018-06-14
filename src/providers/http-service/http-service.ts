@@ -29,14 +29,14 @@ export class HttpServiceProvider {
    */
   public get(url: string, parameters?: Object, headers?: Object): Observable<any> {
     if (this.isMobile) {
-      return Observable.fromPromise(this.httpNative.get(url, parameters, headers)).map(data => JSON.parse(data.data));
+      return Observable.fromPromise(this.httpNative.get(url, parameters, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.get(url, {headers: this.getAngularHeaders(headers), withCredentials: true})
   }
 
   public post(url: string, body: Object, headers?: Object): Observable<any> {
     if (this.isMobile) {
-      return Observable.fromPromise(this.httpNative.post(url, body, headers)).map(data => JSON.parse(data.data))
+      return Observable.fromPromise(this.httpNative.post(url, body, headers)).map(data => this.tryMapJson(data.data))
     }
 
 
@@ -49,16 +49,24 @@ export class HttpServiceProvider {
 
   public put(url: string, body: Object, headers?: Object): Observable<any> {
     if (this.isMobile) {
-      return Observable.fromPromise(this.httpNative.put(url, body, headers)).map(data => JSON.parse(data.data));
+      return Observable.fromPromise(this.httpNative.put(url, body, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.put(url, body, {headers: this.getAngularHeaders(headers), withCredentials: true})
   }
 
   public delete(url: string, parameters?: Object, headers?: Object): Observable<any> {
     if (this.isMobile) {
-      return Observable.fromPromise(this.httpNative.delete(url, parameters, headers)).map(data => JSON.parse(data.data));
+      return Observable.fromPromise(this.httpNative.delete(url, parameters, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.delete(url, {headers: this.getAngularHeaders(headers), withCredentials: true});
+  }
+
+  private tryMapJson(data: string): any {
+    if (data === "") {
+      return null;
+    } else {
+      return JSON.parse(data);
+    }
   }
 
   private getAngularHeaders(headers: any | undefined): HttpHeaders {
