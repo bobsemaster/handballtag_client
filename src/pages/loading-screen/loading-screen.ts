@@ -24,13 +24,24 @@ export class LoadingScreenPage {
 
   ionViewDidLoad() {
     console.log('Authenticating standart user');
-    // Standart User authentifizieren
-    // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
-    return this.authenticationService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
-      .subscribe(value => {
+    this.checkLogin();
+  }
 
+  private checkLogin() {
+    this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
+
+      // Standart User authentifizieren
+      // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
+      if (this.applicationData.authenticatedUser === null) {
+        this.authenticationService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
+          .subscribe(value => {
+
+            this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
+          });
+      } else {
         this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
-      });
+      }
+    });
   }
 
 }
