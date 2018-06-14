@@ -14,5 +14,28 @@
 
 
 <ion-content padding>
+  <ng-template ngFor let-spiel [ngForOf]="spielView.allSpiel">
+    <ion-card>
+      <ion-card-header>{{spiel.heimMannschaft.name}} : {{spiel.gastMannschaft.name}}</ion-card-header>
+      <ion-card-content>
+        <h3>
+          {{formatDate(spiel.dateTime)}}
+        </h3>
+        <p>Ergebnis: {{spiel.heimTore}}:{{spiel.gastTore}}</p>
+        <p>Platz: {{spiel.spielPlatz}}</p>
 
+
+      </ion-card-content>
+      <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+        <button *ngIf="hasNoErgebnis(spiel) && !isSpielleiter()" ion-button item-start color="secondary" clear
+                (click)="ergebnisEintragen(spiel)">
+          Ergebnis eintragen
+        </button>
+        <button *ngIf="isSpielleiter()" ion-button item-start color="secondary" clear
+                (click)="ergebnisEintragen(spiel)">
+          Ergebnis ändern
+        </button>
+      </ion-item>
+    </ion-card>
+  </ng-template>
 </ion-content>
