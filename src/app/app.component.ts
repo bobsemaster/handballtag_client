@@ -7,6 +7,7 @@ import {LoginPage} from "../pages/login/login";
 import {VereinViewPage} from "../pages/verein-view/verein-view";
 import {MannschaftenViewPage} from "../pages/mannschaften-view/mannschaften-view";
 import {SpielViewPage} from "../pages/spiel-view/spiel-view";
+import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +15,7 @@ import {SpielViewPage} from "../pages/spiel-view/spiel-view";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = LoadingScreenPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -26,6 +27,7 @@ export class MyApp {
       {title: 'Vereine', component: VereinViewPage},
       {title: 'Mannschaften', component: MannschaftenViewPage},
       {title: 'Spiele', component: SpielViewPage},
+      {title: 'Login', component: LoginPage}
     ];
 
   }

@@ -6,7 +6,6 @@ import {MyApp} from './app.component';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import {LoginPage} from "../pages/login/login";
 import {AuthenticationServiceProvider} from '../providers/authentication-service/authentication-service';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {VereinViewPageModule} from "../pages/verein-view/verein-view.module";
@@ -19,24 +18,29 @@ import {SpielViewPageModule} from "../pages/spiel-view/spiel-view.module";
 
 import {HTTP} from "@ionic-native/http";
 import {HttpServiceProvider} from '../providers/http-service/http-service';
+import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
+import {LoginModule} from "../pages/login/login.module";
+import {LoadingScreenPageModule} from "../pages/loading-screen/loading-screen.module";
 
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage,
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     VereinViewPageModule,
     MannschaftenViewPageModule,
+    LoginModule,
+    LoadingScreenPageModule,
     SpielViewPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage,
+    LoadingScreenPage,
   ],
   providers: [
     StatusBar,
