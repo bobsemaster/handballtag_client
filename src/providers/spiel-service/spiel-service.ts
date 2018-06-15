@@ -5,6 +5,7 @@ import {SpielCreatorInfo} from "../../models/SpielCreatorInfo";
 import {Subscription} from "rxjs/Subscription";
 import {server_url} from "../../models/ServerUrl";
 import {HttpServiceProvider} from "../http-service/http-service";
+import {SpielErgebnis} from "../../models/SpielErgebnis";
 
 /*
   Generated class for the SpielServiceProvider provider.
@@ -25,5 +26,13 @@ export class SpielServiceProvider {
 
   public generateSpielplanForJugend(spielCreatorInfo: SpielCreatorInfo): Subscription {
     return this.http.post(server_url + "/spiel/createspielplan", spielCreatorInfo).subscribe();
+  }
+
+  public setSpielErgebnisKampfgericht(ergebnis: SpielErgebnis, id: number) {
+    this.http.post(`${server_url}/spiel/${id}/ergebnis`, ergebnis).subscribe();
+  }
+
+  public setSpielStandSpielleiter(ergebnis: SpielErgebnis, id: number) {
+    this.http.post(`${server_url}/spiel/${id}/spielstand`, ergebnis).subscribe();
   }
 }
