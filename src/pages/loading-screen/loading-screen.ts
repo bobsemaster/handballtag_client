@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
 import {VereinViewPage} from "../verein-view/verein-view";
@@ -19,15 +19,19 @@ import {VereinViewPage} from "../verein-view/verein-view";
 export class LoadingScreenPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private applicationData: ApplicationDataServiceProvider,
-              private authenticationService: AuthenticationServiceProvider) {
+              private authenticationService: AuthenticationServiceProvider, private platform:Platform) {
   }
 
   ionViewDidLoad() {
     console.log('Authenticating standart user');
-    this.checkLogin();
+    if(this.platform.is("ios")){
+      setTimeout(() => this.checkLogin(), 500);
+    }else {
+      this.checkLogin();
+    }
   }
 
-  private checkLogin() {
+  checkLogin() {
     this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
 
       // Standart User authentifizieren
