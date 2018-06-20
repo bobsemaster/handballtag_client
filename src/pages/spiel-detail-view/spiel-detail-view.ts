@@ -31,10 +31,14 @@ export class SpielDetailViewPage {
     console.log('ionViewDidLoad SpielDetailViewPage');
   }
 
-  public formatDate(date: Date) {
+  public getDay(date: Date): string {
+    return this.days[date.getDay()];
+  }
+
+  public formatDate(date: Date): string {
     const hours = date.getHours().toLocaleString(undefined, {minimumIntegerDigits: 2});
     const minutes = date.getMinutes().toLocaleString(undefined, {minimumIntegerDigits: 2});
-    return `${this.days[date.getDay()]} ${hours}:${minutes}`
+    return `${hours}:${minutes}`
   }
 
   hasNoErgebnis(spiel: Spiel): boolean {
@@ -74,18 +78,26 @@ export class SpielDetailViewPage {
         {
           text: 'Ergebnis abschicken',
           handler: data => {
-            this.ergebnisAbschicken(data, spiel.id)
+            this.ergebnisAbschicken(data, spiel)
           }
         }
       ]
     }).present();
   }
 
-  private ergebnisAbschicken(data: any, spielId: number) {
+  private ergebnisAbschicken(data: any, spiel: Spiel) {
+    if (spiel.spielTyp !== "GRUPPENSPIEL" && data.toreGast === data.toreHeim) {
+      this.alertController.create({
+        title: "Fehler",
+        message: "Nur Gruppenspiele können mit einem Unentschieden enden!",
+        buttons: [{text: "Ok"}]
+      }).present();
+      return;
+    }
     if (this.isSpielleiter()) {
-      this.spielService.setSpielStandSpielleiter(data, spielId);
+      this.spielService.setSpielStandSpielleiter(data, spiel.id);
     } else {
-      this.spielService.setSpielErgebnisKampfgericht(data, spielId);
+      this.spielService.setSpielErgebnisKampfgericht(data, spiel.id);
     }
   }
 }

@@ -14,28 +14,62 @@
 
 
 <ion-content padding>
-  <ng-template ngFor let-spiel [ngForOf]="spielView.allSpiel">
-    <ion-card>
-      <ion-card-header>{{spiel.heimMannschaft.name}} : {{spiel.gastMannschaft.name}}</ion-card-header>
-      <ion-card-content>
-        <h3>
-          {{formatDate(spiel.dateTime)}}
-        </h3>
-        <p>Ergebnis: {{spiel.heimTore}}:{{spiel.gastTore}}</p>
-        <p>Platz: {{spiel.spielPlatz}}</p>
+  <!--  Wenn mit karten
+  <ion-card>
+    <ion-card-header>{{spiel.heimMannschaft.name}} : {{spiel.gastMannschaft.name}}</ion-card-header>
+    <ion-card-content>
+      <h3>
+        {{formatDate(spiel.dateTime)}}
+      </h3>
+      <p>Ergebnis: {{spiel.heimTore}}:{{spiel.gastTore}}</p>
+      <p>Platz: {{spiel.spielPlatz}}</p>
 
 
-      </ion-card-content>
-      <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
-        <button *ngIf="hasNoErgebnis(spiel) && !isSpielleiter()" ion-button item-start color="secondary" clear
-                (click)="ergebnisEintragen(spiel)">
-          Ergebnis eintragen
-        </button>
-        <button *ngIf="isSpielleiter()" ion-button item-start color="secondary" clear
-                (click)="ergebnisEintragen(spiel)">
-          Ergebnis ändern
-        </button>
-      </ion-item>
-    </ion-card>
-  </ng-template>
+    </ion-card-content>
+    <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+      <button *ngIf="hasNoErgebnis(spiel) && !isSpielleiter()" ion-button item-start color="secondary" clear
+              (click)="ergebnisEintragen(spiel)">
+        Ergebnis eintragen
+      </button>
+      <button *ngIf="isSpielleiter()" ion-button item-start color="secondary" clear
+              (click)="ergebnisEintragen(spiel)">
+        Ergebnis ändern
+      </button>
+    </ion-item>
+  </ion-card> -->
+  <table class="spiel-table">
+    <thead>
+    <tr>
+      <th>Platz</th>
+      <th>Zeit</th>
+      <th>Heim</th>
+      <th>Gast</th>
+      <th>Erg</th>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+        <ion-icon name="create"></ion-icon>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-template ngFor let-spiel [ngForOf]="spielView.allSpiel">
+      <tr>
+        <td>{{spiel.spielPlatz}}</td>
+        <td>{{formatDate(spiel.dateTime)}}</td>
+        <td>{{spiel.heimMannschaft.name}}</td>
+        <td>{{spiel.gastMannschaft.name}}</td>
+        <td>{{spiel.heimTore}}:{{spiel.gastTore}}</td>
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+          <button *ngIf="hasNoErgebnis(spiel) && !isSpielleiter()" ion-button item-start color="secondary" clear
+                  (click)="ergebnisEintragen(spiel)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button *ngIf="isSpielleiter()" ion-button item-start color="secondary" clear
+                  (click)="ergebnisEintragen(spiel)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    </tbody>
+  </table>
 </ion-content>
