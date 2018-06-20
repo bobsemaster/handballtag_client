@@ -1,3 +1,35 @@
-page-spiel-detail-view {
+$colors: (
+  primary: #488aff,
+  secondary: #32db64,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  dark: #222,
+  even-color: #eeeeee
+);
 
+page-spiel-detail-view {
+  .spiel-table {
+    display: table;
+    width: 100%;
+
+    table {
+      border-collapse: collapse;
+    }
+    th {
+      background-color: color($colors, primary);
+    }
+    td, th {
+      text-align: center;
+      padding: 12px 4px;
+    }
+
+    tr:nth-child(even) {
+      background-color: color($colors, light);
+    }
+    @media only screen and (min-width: 780px) {
+      tr:hover {
+        background-color: darken(color($colors, light), 20%);
+      }
+    }
+  }
 }
