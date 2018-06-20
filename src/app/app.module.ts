@@ -21,6 +21,7 @@ import {HttpServiceProvider} from '../providers/http-service/http-service';
 import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
 import {LoginModule} from "../pages/login/login.module";
 import {LoadingScreenPageModule} from "../pages/loading-screen/loading-screen.module";
+import {AboutPageModule} from "../pages/about/about.module";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {LoadingScreenPageModule} from "../pages/loading-screen/loading-screen.mo
     LoginModule,
     LoadingScreenPageModule,
     SpielViewPageModule,
+    AboutPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
