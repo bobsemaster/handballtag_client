@@ -37,6 +37,9 @@
       </button>
     </ion-item>
   </ion-card> -->
+  <ion-item>
+    <ion-label text-center>Spiele</ion-label>
+  </ion-item>
   <table class="spiel-table">
     <thead>
     <tr>
@@ -68,6 +71,29 @@
             <ion-icon name="create"></ion-icon>
           </button>
         </td>
+      </tr>
+    </ng-template>
+    </tbody>
+  </table>
+  <ion-item>
+    <ion-label text-center>Tabelle</ion-label>
+  </ion-item>
+  <table class="spiel-table">
+    <thead>
+    <tr>
+      <th>Platz</th>
+      <th>Mannschaft</th>
+      <th>Punkte</th>
+      <th>Tore</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-template ngFor let-mannschaft [ngForOf]="allMannschaft">
+      <tr>
+        <td>{{mannschaft.tabellenPlatz}}.</td>
+        <td>{{mannschaft.name}}</td>
+        <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
+        <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
       </tr>
     </ng-template>
     </tbody>
