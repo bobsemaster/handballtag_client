@@ -28,9 +28,13 @@ export class SpielDetailViewPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private applicationData: ApplicationDataServiceProvider,
               private spielService: SpielServiceProvider, private mannschaftService: MannschaftServiceProvider, private alertController: AlertController) {
     this.spielView = navParams.get("spielView");
+    this.refreshMannschaften();
+  }
+
+  private refreshMannschaften() {
     this.mannschaftService.getAllMannschaftToJugend(this.spielView.nextSpiel.heimMannschaft.jugend).subscribe(mannschaften => {
       this.allMannschaftTabelle = mannschaften.filter(value => value.verein.name !== 'placeholder')
-    })
+    });
   }
 
   ionViewDidLoad() {
@@ -101,10 +105,12 @@ export class SpielDetailViewPage {
       return;
     }
     if (this.isSpielleiter()) {
-      this.spielService.setSpielStandSpielleiter(data, spiel.id);
+      this.spielService.setSpielStandSpielleiter(data, spiel.id).add(this.refreshMannschaften());
     } else {
-      this.spielService.setSpielErgebnisKampfgericht(data, spiel.id);
+      this.spielService.setSpielErgebnisKampfgericht(data, spiel.id).add(this.refreshMannschaften);
     }
+    spiel.heimTore = data.toreHeim;
+    spiel.gastTore = data.toreGast;
   }
 
   notKoSpiel(spiel: Spiel): boolean {

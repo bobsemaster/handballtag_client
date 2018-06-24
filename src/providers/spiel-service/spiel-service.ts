@@ -28,11 +28,11 @@ export class SpielServiceProvider {
     return this.http.post(server_url + "/spiel/createspielplan", spielCreatorInfo).subscribe();
   }
 
-  public setSpielErgebnisKampfgericht(ergebnis: SpielErgebnis, id: number) {
-    this.http.post(`${server_url}/spiel/${id}/ergebnis`, ergebnis).subscribe();
+  public setSpielErgebnisKampfgericht(ergebnis: SpielErgebnis, id: number): Subscription {
+    return this.http.post(`${server_url}/spiel/${id}/ergebnis`, ergebnis).subscribe();
   }
 
-  public setSpielStandSpielleiter(ergebnis: SpielErgebnis, id: number) {
-    this.http.post(`${server_url}/spiel/${id}/spielstand`, ergebnis).subscribe();
+  public setSpielStandSpielleiter(ergebnis: SpielErgebnis, id: number): Subscription {
+    return this.http.post(`${server_url}/spiel/${id}/spielstand`, ergebnis).subscribe();
   }
 }
