@@ -4,6 +4,8 @@ import {SpielViewHelper} from "../../models/SpielViewHelper";
 import {Spiel} from "../../models/Spiel";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {SpielServiceProvider} from "../../providers/spiel-service/spiel-service";
+import {Mannschaft} from "../../models/Mannschaft";
+import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 
 /**
  * Generated class for the SpielDetailViewPage page.
@@ -20,11 +22,19 @@ import {SpielServiceProvider} from "../../providers/spiel-service/spiel-service"
 export class SpielDetailViewPage {
 
   public spielView: SpielViewHelper;
+  public allMannschaftTabelle: Mannschaft[];
   private days = ["So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private applicationData: ApplicationDataServiceProvider,
-              private spielService: SpielServiceProvider, private alertController: AlertController) {
+              private spielService: SpielServiceProvider, private mannschaftService: MannschaftServiceProvider, private alertController: AlertController) {
     this.spielView = navParams.get("spielView");
+    this.refreshMannschaften();
+  }
+
+  private refreshMannschaften() {
+    this.mannschaftService.getAllMannschaftToJugend(this.spielView.nextSpiel.heimMannschaft.jugend).subscribe(mannschaften => {
+      this.allMannschaftTabelle = mannschaften.filter(value => value.verein.name !== 'placeholder')
+    });
   }
 
   ionViewDidLoad() {
@@ -95,9 +105,15 @@ export class SpielDetailViewPage {
       return;
     }
     if (this.isSpielleiter()) {
-      this.spielService.setSpielStandSpielleiter(data, spiel.id);
+      this.spielService.setSpielStandSpielleiter(data, spiel.id).add(this.refreshMannschaften());
     } else {
-      this.spielService.setSpielErgebnisKampfgericht(data, spiel.id);
+      this.spielService.setSpielErgebnisKampfgericht(data, spiel.id).add(this.refreshMannschaften);
     }
+    spiel.heimTore = data.toreHeim;
+    spiel.gastTore = data.toreGast;
+  }
+
+  notKoSpiel(spiel: Spiel): boolean {
+    return spiel.gruppe !== "C";
   }
 }

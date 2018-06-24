@@ -45,4 +45,9 @@ export class MannschaftServiceProvider {
     return this.http.get(`${server_url}/mannschaft/${id}/${hasFoto}`);
   }
 
+  public getAllMannschaftToJugend(jugend: Jugend): Observable<Mannschaft[]> {
+    return this.http.post(server_url + '/mannschaft/all/jugend', jugend)
+      .map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
+  }
+
 }
