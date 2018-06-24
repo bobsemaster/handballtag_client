@@ -22,14 +22,14 @@ import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mann
 export class SpielDetailViewPage {
 
   public spielView: SpielViewHelper;
-  public allMannschaft: Mannschaft[];
+  public allMannschaftTabelle: Mannschaft[];
   private days = ["So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private applicationData: ApplicationDataServiceProvider,
               private spielService: SpielServiceProvider, private mannschaftService: MannschaftServiceProvider, private alertController: AlertController) {
     this.spielView = navParams.get("spielView");
     this.mannschaftService.getAllMannschaftToJugend(this.spielView.nextSpiel.heimMannschaft.jugend).subscribe(mannschaften => {
-      this.allMannschaft = mannschaften
+      this.allMannschaftTabelle = mannschaften.filter(value => value.verein.name !== 'placeholder')
     })
   }
 
@@ -105,5 +105,9 @@ export class SpielDetailViewPage {
     } else {
       this.spielService.setSpielErgebnisKampfgericht(data, spiel.id);
     }
+  }
+
+  notKoSpiel(spiel: Spiel): boolean {
+    return spiel.gruppe !== "C";
   }
 }

@@ -44,6 +44,7 @@
     <thead>
     <tr>
       <th>Platz</th>
+      <th>Gr</th>
       <th>Zeit</th>
       <th>Heim</th>
       <th>Gast</th>
@@ -57,6 +58,9 @@
     <ng-template ngFor let-spiel [ngForOf]="spielView.allSpiel">
       <tr>
         <td>{{spiel.spielPlatz}}</td>
+        <td>
+          <span *ngIf="notKoSpiel(spiel)">{{spiel.gruppe}}</span>
+        </td>
         <td>{{formatDate(spiel.dateTime)}}</td>
         <td>{{spiel.heimMannschaft.name}}</td>
         <td>{{spiel.gastMannschaft.name}}</td>
@@ -82,15 +86,17 @@
     <thead>
     <tr>
       <th>Platz</th>
+      <th>Gruppe</th>
       <th>Mannschaft</th>
       <th>Punkte</th>
       <th>Tore</th>
     </tr>
     </thead>
     <tbody>
-    <ng-template ngFor let-mannschaft [ngForOf]="allMannschaft">
+    <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftTabelle">
       <tr>
         <td>{{mannschaft.tabellenPlatz}}.</td>
+        <td>{{mannschaft.gruppe}}.</td>
         <td>{{mannschaft.name}}</td>
         <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
         <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>

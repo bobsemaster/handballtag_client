@@ -21,8 +21,8 @@ export class Tabelle {
     const tabelle = new Tabelle();
     tabelle.jugend = Jugend.fromJson(json.jugend);
     tabelle.id = json.id;
-    if (json.allMannschaft) {
-      for (const mannschaft of json.allMannschaft) {
+    if (json.allMannschaftTabelle) {
+      for (const mannschaft of json.allMannschaftTabelle) {
         tabelle.allMannschaft.push(Mannschaft.fromJSON(mannschaft))
       }
     }

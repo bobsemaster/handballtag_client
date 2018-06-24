@@ -10,7 +10,7 @@ export class Mannschaft {
   // Vorbelegt
   public id: number;
   public hasFoto: boolean;
-  public gruppe: number;
+  public gruppe: string;
   public torverhaeltnis: Pair<number, number>;
   public punkteverhaeltnis: Pair<number, number>;
   public tabellenPlatz: number;
@@ -18,7 +18,7 @@ export class Mannschaft {
   constructor() {
     this.id = null;
     this.hasFoto = false;
-    this.gruppe = 0;
+    this.gruppe = "C";
     this.torverhaeltnis = new Pair<number, number>(0, 0);
     this.punkteverhaeltnis = new Pair<number, number>(0, 0);
     this.tabellenPlatz = 0;

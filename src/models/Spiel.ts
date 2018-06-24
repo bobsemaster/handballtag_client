@@ -15,7 +15,7 @@ export class Spiel {
   public isGastMannschaftAnwesend: boolean;
   public spielPlatz: number;
   public spielTyp: string;
-  public gruppe: number;
+  public gruppe: string;
 
   constructor() {
   }
