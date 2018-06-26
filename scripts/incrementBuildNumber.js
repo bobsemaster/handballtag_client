@@ -9,8 +9,8 @@ var fs = require('fs');
 var xml2js = require('xml2js');
 
 // Read config.xml
-fs.readFile('config.xml', 'utf8', function(err, data) {
-  if(err) {
+fs.readFile('config.xml', 'utf8', function (err, data) {
+  if (err) {
     return console.log(err);
   }
 
@@ -19,7 +19,7 @@ fs.readFile('config.xml', 'utf8', function(err, data) {
 
   // Parse XML to JS Obj
   xml2js.parseString(xml, function (err, result) {
-    if(err) {
+    if (err) {
       return console.log(err);
     }
 
@@ -27,26 +27,26 @@ fs.readFile('config.xml', 'utf8', function(err, data) {
     var obj = result;
 
     // ios-CFBundleVersion doen't exist in config.xml
-    if(typeof obj['widget']['$']['ios-CFBundleVersion'] === 'undefined') {
-      obj['widget']['$']['ios-CFBundleVersion'] = 0;
+    if (typeof obj['widget']['$']['ios-CFBundleVersion'] === 'undefined') {
+      obj['widget']['$']['ios-CFBundleVersion'] = buildDate();
     }
 
     // android-versionCode doen't exist in config.xml
-    if(typeof obj['widget']['$']['android-versionCode'] === 'undefined') {
-      obj['widget']['$']['android-versionCode'] = 0;
+    if (typeof obj['widget']['$']['android-versionCode'] === 'undefined') {
+      obj['widget']['$']['android-versionCode'] = buildDate();
     }
 
     // Increment build numbers (separately for iOS and Android)
-    obj['widget']['$']['ios-CFBundleVersion']++;
-    obj['widget']['$']['android-versionCode']++;
+    obj['widget']['$']['ios-CFBundleVersion'] = buildDate();
+    obj['widget']['$']['android-versionCode'] = buildDate();
 
     // Build XML from JS Obj
     var builder = new xml2js.Builder();
     var xml = builder.buildObject(obj);
 
     // Write config.xml
-    fs.writeFile('config.xml', xml, function(err) {
-      if(err) {
+    fs.writeFile('config.xml', xml, function (err) {
+      if (err) {
         return console.log(err);
       }
 
@@ -54,4 +54,9 @@ fs.readFile('config.xml', 'utf8', function(err, data) {
     });
 
   });
+
+  function buildDate() {
+    const date = new Date();
+    return `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+  }
 });
