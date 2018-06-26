@@ -80,9 +80,9 @@
     </tbody>
   </table>
   <ion-item>
-    <ion-label text-center>Tabelle</ion-label>
+    <ion-label text-center *ngIf="spielView.showTabelle">Tabelle</ion-label>
   </ion-item>
-  <table class="spiel-table">
+  <table class="spiel-table" *ngIf="spielView.showTabelle">
     <thead>
     <tr>
       <th>Platz</th>
