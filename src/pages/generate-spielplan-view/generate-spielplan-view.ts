@@ -69,12 +69,14 @@ export class GenerateSpielplanViewPage {
 
   private submitGenerateSpielplan(data: any[], spielCreatorInfo: SpielCreatorInfo) {
     const jugenden = data.map(jugend => Jugend.fromJson(JSON.parse(jugend)));
+    const allSpielplanInfo = [];
     jugenden.forEach(jugend => {
       // Vorsichtshalber objekt kopieren, dass nicht die jugend über referenzen geändert erden kann
       const info: SpielCreatorInfo = Object.assign({}, spielCreatorInfo);
       info.jugend = jugend;
-      this.spielService.generateSpielplanForJugend(info);
+      allSpielplanInfo.push(info);
     });
+    this.spielService.generateMultipleSpielplan(allSpielplanInfo);
     this.navCtrl.pop();
   }
 }

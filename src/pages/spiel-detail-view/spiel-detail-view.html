@@ -80,23 +80,21 @@
     </tbody>
   </table>
   <ion-item>
-    <ion-label text-center>Tabelle</ion-label>
+    <ion-label text-center *ngIf="spielView.showTabelle">Tabelle <span *ngIf="hasTwoGroups">Gruppe A</span></ion-label>
   </ion-item>
-  <table class="spiel-table">
+  <table class="spiel-table" *ngIf="spielView.showTabelle">
     <thead>
     <tr>
       <th>Platz</th>
-      <th>Gruppe</th>
       <th>Mannschaft</th>
       <th>Punkte</th>
       <th>Tore</th>
     </tr>
     </thead>
     <tbody>
-    <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftTabelle">
+    <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftGruppeA">
       <tr>
         <td>{{mannschaft.tabellenPlatz}}.</td>
-        <td>{{mannschaft.gruppe}}.</td>
         <td>{{mannschaft.name}}</td>
         <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
         <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
@@ -104,4 +102,29 @@
     </ng-template>
     </tbody>
   </table>
+  <ng-container *ngIf="hasTwoGroups">
+    <ion-item>
+      <ion-label text-center *ngIf="spielView.showTabelle">Tabelle Gruppe B</ion-label>
+    </ion-item>
+    <table class="spiel-table" *ngIf="spielView.showTabelle">
+      <thead>
+      <tr>
+        <th>Platz</th>
+        <th>Mannschaft</th>
+        <th>Punkte</th>
+        <th>Tore</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftGruppeB">
+        <tr>
+          <td>{{mannschaft.tabellenPlatz}}.</td>
+          <td>{{mannschaft.name}}</td>
+          <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
+          <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
+        </tr>
+      </ng-template>
+      </tbody>
+    </table>
+  </ng-container>
 </ion-content>
