@@ -10,7 +10,8 @@
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "build-ios": "ionic cordova build --prod --aot --minifyjs --minifycss --optimizejs ios"
+    "build-ios": "node scripts/incrementBuildNumber.js && ionic cordova build --prod --aot --minifyjs --minifycss --optimizejs ios",
+    "build-android":  "node scripts/incrementBuildNumber.js && ionic cordova build --prod --aot --minifyjs --minifycss --optimizejs android"
   },
   "dependencies": {
     "@angular/animations": "5.2.10",
