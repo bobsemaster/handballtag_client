@@ -42,8 +42,8 @@ export class SpielViewPage {
     console.log('ionViewDidLoad SpielViewPage');
   }
 
-  public formatDate(date: Date) {
-    return `${this.days[date.getDay()]} ${date.getHours()}:${date.getMinutes()}`
+  public formatDate(date: Date): string {
+    return `${date.getHours()}:${date.getMinutes()}`
   }
 
   generateSpielplan() {
@@ -85,7 +85,8 @@ export class SpielViewPage {
       const spielView = new SpielViewHelper();
       spielView.title = `${allSpiel[0].heimMannschaft.jugend.typ} ${allSpiel[0].heimMannschaft.jugend.jahrgang}`;
       spielView.allSpiel = allSpiel;
-      spielView.nextSpiel = allSpiel[0];
+      spielView.nextSpiel = this.getNextSpielByTime(allSpiel);
+      spielView.showTabelle = true;
       this.allSpielView.push(spielView);
     })
   }
@@ -105,9 +106,10 @@ export class SpielViewPage {
     this.allSpielView = [];
     platzMannschaften.forEach((allSpiel, key) => {
       const spielView = new SpielViewHelper();
-      spielView.title = `Platz ${key}`;
+      spielView.title = `Spielfeld ${key}`;
       spielView.allSpiel = allSpiel;
-      spielView.nextSpiel = allSpiel[0];
+      spielView.nextSpiel = this.getNextSpielByTime(allSpiel);
+      spielView.showTabelle = false;
       this.allSpielView.push(spielView);
     })
   }
@@ -115,6 +117,19 @@ export class SpielViewPage {
   showDetailView(spielView: SpielViewHelper) {
     this.navCtrl.push(SpielDetailViewPage, {spielView: spielView});
 
+  }
+
+  private getNextSpielByTime(allSpiel: Spiel[]): Spiel {
+    const now = new Date();
+    let nextSpiel = allSpiel[0];
+    allSpiel.forEach(spiel => {
+      const timeDifferenceToNextSpiel = nextSpiel.dateTime.getTime() - now.getTime();
+      const timeDifferenceNew = spiel.dateTime.getTime() - now.getTime();
+      if (timeDifferenceNew > 0 && timeDifferenceNew < timeDifferenceToNextSpiel) {
+        nextSpiel = spiel;
+      }
+    });
+    return nextSpiel;
   }
 }
 

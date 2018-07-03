@@ -25,7 +25,11 @@ export class SpielServiceProvider {
   }
 
   public generateSpielplanForJugend(spielCreatorInfo: SpielCreatorInfo): Subscription {
-    return this.http.post(server_url + "/spiel/createspielplan", spielCreatorInfo).subscribe();
+    return this.http.post(server_url + "/spiel/createspielplan/one", spielCreatorInfo).subscribe();
+  }
+
+  public generateMultipleSpielplan(allSpielcreatorInfo: SpielCreatorInfo[]): Subscription {
+    return this.http.post(server_url + "/spiel/createspielplan/multiple", allSpielcreatorInfo).subscribe()
   }
 
   public setSpielErgebnisKampfgericht(ergebnis: SpielErgebnis, id: number): Subscription {
