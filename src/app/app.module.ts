@@ -22,6 +22,7 @@ import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
 import {LoginModule} from "../pages/login/login.module";
 import {LoadingScreenPageModule} from "../pages/loading-screen/loading-screen.module";
 import {AboutPageModule} from "../pages/about/about.module";
+import {VerkaufServiceProvider} from '../providers/verkauf-service/verkauf-service';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {AboutPageModule} from "../pages/about/about.module";
     SpielServiceProvider,
     HTTP,
     HttpServiceProvider,
+    VerkaufServiceProvider,
   ],
 
 })
