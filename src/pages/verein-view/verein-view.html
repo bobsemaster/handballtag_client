@@ -31,7 +31,7 @@
   </ion-fab>
   <ng-template ngFor let-verein [ngForOf]="vereine">
     <ion-card>
-      <ion-card-header style="font-weight: bolder;">{{verein.name}}</ion-card-header>
+      <ion-card-header>{{verein.name}}</ion-card-header>
 
       <ion-list>
         <ng-template ngFor let-mannschaft [ngForOf]="getMannschaftenToVerein(verein)">

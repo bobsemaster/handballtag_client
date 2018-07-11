@@ -9,6 +9,7 @@ import {MannschaftenViewPage} from "../pages/mannschaften-view/mannschaften-view
 import {SpielViewPage} from "../pages/spiel-view/spiel-view";
 import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
 import {AboutPage} from "../pages/about/about";
+import {VerpflegungPage} from "../pages/verpflegung/verpflegung";
 
 @Component({
   templateUrl: 'app.html'
@@ -28,6 +29,7 @@ export class MyApp {
       {title: 'Vereine', component: VereinViewPage},
       {title: 'Mannschaften', component: MannschaftenViewPage},
       {title: 'Spiele', component: SpielViewPage},
+      {title: 'Verpflegung', component: VerpflegungPage},
       {title: 'Login', component: LoginPage},
       {title: 'Über', component: AboutPage}
     ];
