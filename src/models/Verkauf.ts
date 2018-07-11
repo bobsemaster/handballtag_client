@@ -4,6 +4,10 @@ export class VerkaufArtikel {
   public artikelPreis: number;
   public verkaufsplatz: string;
 
+  constructor() {
+    this.id = null;
+  }
+
   public static fromJson(json: any): VerkaufArtikel {
     const artikel = new VerkaufArtikel();
     artikel.id = json.id;
@@ -17,17 +21,25 @@ export class VerkaufArtikel {
 export class Verkauf {
   public id: number;
   public verkaufArtikel: VerkaufArtikel[];
-  public isLosVerkaufGestartet: boolean;
-  public isPreisvergabeGestartet: boolean;
-  public isGrillAn: boolean;
+  public losverkaufGestartet: boolean;
+  public preisvergabeGestartet: boolean;
+  public grillAn: boolean;
 
+  constructor() {
+    this.id = null;
+    this.verkaufArtikel = [];
+    this.losverkaufGestartet = false;
+    this.preisvergabeGestartet = false;
+    this.grillAn = false;
+  }
 
   public static fromJson(json: any): Verkauf {
     const verkauf = new Verkauf();
     verkauf.id = json.id;
-    verkauf.isGrillAn = json.isGrillAn;
-    verkauf.isLosVerkaufGestartet = json.isLosVerkaufGestartet;
-    verkauf.isPreisvergabeGestartet = json.isPreisvergabeGestartet;
+    verkauf.grillAn = json.grillAn;
+    verkauf.losverkaufGestartet = json.losverkaufGestartet;
+    verkauf.preisvergabeGestartet = json.preisvergabeGestartet;
+    verkauf.verkaufArtikel = [];
 
     if (!json.verkaufArtikel) {
       return verkauf;
@@ -35,5 +47,6 @@ export class Verkauf {
     for (const artikel of json.verkaufArtikel) {
       verkauf.verkaufArtikel.push(VerkaufArtikel.fromJson(artikel))
     }
+    return verkauf;
   }
 }

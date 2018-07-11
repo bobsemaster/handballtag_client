@@ -43,8 +43,12 @@ export class VerkaufServiceProvider {
     return this.http.get(`${server_url}/verkauf/tombola/preisvergabe/${newStatus}`).subscribe();
   }
 
-  public addOrUpdateArtikel(artikel: VerkaufArtikel): Subscription {
-    return this.http.post(server_url + '/verkauf/artikel', artikel).subscribe();
+  public addOrUpdateArtikel(artikel: VerkaufArtikel): Observable<VerkaufArtikel> {
+    return this.http.post(server_url + '/verkauf/artikel', artikel).map(value => VerkaufArtikel.fromJson(value));
+  }
+
+  public deleteArtikel(id: number): Subscription {
+    return this.http.delete(`${server_url}/verkauf/artikel/${id}`).subscribe();
   }
 
 }

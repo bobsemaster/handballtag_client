@@ -23,6 +23,7 @@ import {LoginModule} from "../pages/login/login.module";
 import {LoadingScreenPageModule} from "../pages/loading-screen/loading-screen.module";
 import {AboutPageModule} from "../pages/about/about.module";
 import {VerkaufServiceProvider} from '../providers/verkauf-service/verkauf-service';
+import {VerpflegungPageModule} from "../pages/verpflegung/verpflegung.module";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {VerkaufServiceProvider} from '../providers/verkauf-service/verkauf-servi
     LoginModule,
     LoadingScreenPageModule,
     SpielViewPageModule,
+    VerpflegungPageModule,
     AboutPageModule,
     IonicModule.forRoot(MyApp),
   ],
