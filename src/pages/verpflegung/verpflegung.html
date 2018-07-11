@@ -27,9 +27,6 @@
         Die Preise können am Tombolastand abgeholt werden
       </p>
     </ion-card-content>
-    <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
-      <button ion-button item-end color="secondary" clear>Löschen</button>
-    </ion-item>
   </ion-card>
 
   <ion-card>
@@ -85,8 +82,8 @@
       <span *ngIf="!verkauf.losverkaufGestartet">Losverkauf gestartet</span>
     </button>
     <button ion-button (click)="toggleLosausgabe()" clear>
-      <span *ngIf="verkauf.preisvergabeGestartet">Preisvergabe gestartet</span>
-      <span *ngIf="!verkauf.preisvergabeGestartet">Preisvergabe gestoppt</span>
+      <span *ngIf="verkauf.preisvergabeGestartet">Preisvergabe gestoppt</span>
+      <span *ngIf="!verkauf.preisvergabeGestartet">Preisvergabe gestartet</span>
     </button>
     <button ion-button (click)="toggleGrillAn()" clear>
       <span *ngIf="verkauf.grillAn">Grill aus</span>
