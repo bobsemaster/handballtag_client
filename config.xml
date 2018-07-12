@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="2018712105526" id="io.schreib.handballtag" ios-CFBundleVersion="2018712105526"
-        version="1.0.2" xmlns="http://www.w3.org/ns/widgets">
+        version="1.0.3" xmlns="http://www.w3.org/ns/widgets">
     <name>Handballtag</name>
     <description>App für den Handballtag</description>
     <author email="robert.schreib@gmx.de" href="">Robert Schreib</author>
