@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
 import {VereinViewPage} from "../verein-view/verein-view";
+import Timer = NodeJS.Timer;
 
 /**
  * Generated class for the LoadingScreenPage page.
@@ -17,6 +18,8 @@ import {VereinViewPage} from "../verein-view/verein-view";
   templateUrl: 'loading-screen.html',
 })
 export class LoadingScreenPage {
+  private mobileInterval: Timer;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private applicationData: ApplicationDataServiceProvider,
               private authenticationService: AuthenticationServiceProvider, private platform:Platform) {
@@ -24,28 +27,37 @@ export class LoadingScreenPage {
 
   ionViewDidLoad() {
     console.log('Authenticating standart user');
-    if(this.platform.is("ios")){
+    if (this.platform.is("cordova")) {
       setTimeout(() => this.checkLogin(), 500);
+      this.mobileInterval = setInterval(() => this.checkLogin(), 100);
     }else {
       this.checkLogin();
     }
   }
 
   checkLogin() {
-    this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
+    try {
+      this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
 
-      // Standart User authentifizieren
-      // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
-      if (this.applicationData.authenticatedUser === null) {
-        this.authenticationService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
-          .subscribe(value => {
+        // Standart User authentifizieren
+        // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
+        if (this.applicationData.authenticatedUser === null) {
+          this.authenticationService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
+            .subscribe(value => {
 
-            this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
-          });
-      } else {
-        this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
-      }
-    });
+              this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
+            });
+        } else {
+          this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
+        }
+      });
+    } catch (e) {
+      console.log(e.toLocaleString());
+      console.log("Http library Probably not loaded")
+    }
+    if (this.mobileInterval !== undefined) {
+      clearInterval(this.mobileInterval);
+    }
   }
 
 }

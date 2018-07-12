@@ -35,7 +35,15 @@ export class HttpServiceProvider {
   }
 
   public post(url: string, body: Object, headers?: Object): Observable<any> {
+
     if (this.isMobile) {
+      // Standart daten sind json nur bei login nicht
+      if (headers === undefined) {
+        headers = {
+          'Content-Type': 'application/json'
+        };
+        this.httpNative.setDataSerializer('json');
+      }
       return Observable.fromPromise(this.httpNative.post(url, body, headers)).map(data => this.tryMapJson(data.data))
     }
 
@@ -49,6 +57,12 @@ export class HttpServiceProvider {
 
   public put(url: string, body: Object, headers?: Object): Observable<any> {
     if (this.isMobile) {
+      if (headers === undefined) {
+        headers = {
+          'Content-Type': 'application/json'
+        };
+        this.httpNative.setDataSerializer('json');
+      }
       return Observable.fromPromise(this.httpNative.put(url, body, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.put(url, body, {headers: this.getAngularHeaders(headers), withCredentials: true})
@@ -56,6 +70,12 @@ export class HttpServiceProvider {
 
   public delete(url: string, parameters?: Object, headers?: Object): Observable<any> {
     if (this.isMobile) {
+      if (headers === undefined) {
+        headers = {
+          'Content-Type': 'application/json'
+        };
+        this.httpNative.setDataSerializer('json');
+      }
       return Observable.fromPromise(this.httpNative.delete(url, parameters, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.delete(url, {headers: this.getAngularHeaders(headers), withCredentials: true});
