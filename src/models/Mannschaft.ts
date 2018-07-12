@@ -3,7 +3,7 @@ import {Pair} from "./Pair";
 import {Jugend} from "./Jugend";
 
 export class Mannschaft {
-  public name: String;
+  public name: string;
   public verein: Verein;
   public jugend: Jugend;
 
