@@ -30,7 +30,7 @@ export class MannschaftServiceProvider {
   }
 
   public getAllSpielToMannschaft(id: number): Observable<Spiel[]> {
-    return this.http.get(`${server_url}/${id}/spiele`).map(it => it.map(spiel => Spiel.fromJson(spiel)));
+    return this.http.get(`${server_url}/mannschaft/${id}/spiele`).map(allSpiel => allSpiel.map(spiel => Spiel.fromJson(spiel)));
   }
 
   public deleteMannschaft(id: number): Subscription {

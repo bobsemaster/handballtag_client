@@ -16,3 +16,28 @@
 ion-card-header {
   font-weight: bolder;
 }
+
+.spiel-table {
+  display: table;
+  width: 100%;
+
+  table {
+    border-collapse: collapse;
+  }
+  th {
+    background-color: color($colors, primary);
+  }
+  td, th {
+    text-align: center;
+    padding: 12px 4px;
+  }
+
+  tr:nth-child(even) {
+    background-color: color($colors, light);
+  }
+  @media only screen and (min-width: 780px) {
+    tr:hover {
+      background-color: darken(color($colors, light), 20%);
+    }
+  }
+}
