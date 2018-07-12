@@ -35,8 +35,8 @@
 
       <ion-list>
         <ng-template ngFor let-mannschaft [ngForOf]="getMannschaftenToVerein(verein)">
-          <button ion-item (click)="showMannschaft(mannschaft)">{{mannschaft.name}} {{mannschaft.jugend.jahrgang}}
-            {{mannschaft.jugend.typ}}
+          <button ion-item (click)="showMannschaft(mannschaft)">
+            {{mannschaft.jugend.jahrgang}} {{mannschaft.jugend.typ}} {{printIfZweiteMannschaft(mannschaft)}}
           </button>
         </ng-template>
       </ion-list>

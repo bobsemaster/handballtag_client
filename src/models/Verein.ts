@@ -1,10 +1,10 @@
 export class Verein {
 
   public id: number;
-  public name: String;
+  public name: string;
 
 
-  public constructor(name: String) {
+  public constructor(name: string) {
     this.name = name;
     this.id = null;
   }

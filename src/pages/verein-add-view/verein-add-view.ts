@@ -17,7 +17,7 @@ import {ApplicationDataServiceProvider} from "../../providers/application-data-s
   templateUrl: 'verein-add-view.html',
 })
 export class VereinAddViewPage {
-  public vereinName: String;
+  public vereinName: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private vereinService: VereinServiceProvider, private alert: AlertController, private applicationData: ApplicationDataServiceProvider) {
   }

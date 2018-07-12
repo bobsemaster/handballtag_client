@@ -161,7 +161,13 @@ export class VereinViewPage {
 
   }
 
-  showMannschaft(mannschaft) {
+  showMannschaft(mannschaft: Mannschaft) {
     this.navCtrl.push(MannschaftDetailViewPage, {mannschaft: mannschaft})
+  }
+
+  printIfZweiteMannschaft(mannschaft: Mannschaft): string {
+    if (mannschaft && mannschaft.name && mannschaft.name.indexOf("II") > 0) {
+      return 'II';
+    }
   }
 }
