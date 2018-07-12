@@ -14,74 +14,6 @@
 
 
 <ion-content padding>
-  <!--  Wenn mit karten
-  <ion-card>
-    <ion-card-header>{{spiel.heimMannschaft.name}} : {{spiel.gastMannschaft.name}}</ion-card-header>
-    <ion-card-content>
-      <h3>
-        {{formatDate(spiel.dateTime)}}
-      </h3>
-      <p>Ergebnis: {{spiel.heimTore}}:{{spiel.gastTore}}</p>
-      <p>Platz: {{spiel.spielPlatz}}</p>
-
-
-    </ion-card-content>
-    <ion-item *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
-      <button *ngIf="hasNoErgebnis(spiel) && !isSpielleiter()" ion-button item-start color="secondary" clear
-              (click)="ergebnisEintragen(spiel)">
-        Ergebnis eintragen
-      </button>
-      <button *ngIf="isSpielleiter()" ion-button item-start color="secondary" clear
-              (click)="ergebnisEintragen(spiel)">
-        Ergebnis ändern
-      </button>
-    </ion-item>
-  </ion-card> -->
-  <ion-item>
-    <ion-label text-center>Spiele</ion-label>
-  </ion-item>
-  <table class="spiel-table">
-    <thead>
-    <tr>
-      <th>Platz</th>
-      <th>Gr</th>
-      <th>Zeit</th>
-      <th>Heim</th>
-      <th>Gast</th>
-      <th>Erg</th>
-      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
-        <ion-icon name="create"></ion-icon>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-template ngFor let-spiel [ngForOf]="spielView.allSpiel">
-      <tr>
-        <td>{{spiel.spielPlatz}}</td>
-        <td>
-          <span *ngIf="notKoSpiel(spiel)">{{spiel.gruppe}}</span>
-        </td>
-        <td>{{formatDate(spiel.dateTime)}}</td>
-        <td>{{spiel.heimMannschaft.name}}</td>
-        <td>{{spiel.gastMannschaft.name}}</td>
-        <td>{{spiel.heimTore}}:{{spiel.gastTore}}</td>
-        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
-          <button *ngIf="hasNoErgebnis(spiel) && !isSpielleiter()" ion-button item-start color="secondary" clear
-                  (click)="ergebnisEintragen(spiel)">
-            <ion-icon name="create"></ion-icon>
-          </button>
-          <button *ngIf="isSpielleiter()" ion-button item-start color="secondary" clear
-                  (click)="ergebnisEintragen(spiel)">
-            <ion-icon name="create"></ion-icon>
-          </button>
-        </td>
-      </tr>
-    </ng-template>
-    </tbody>
-  </table>
-  <ion-item>
-    <ion-label text-center *ngIf="spielView.showTabelle">Tabelle <span *ngIf="hasTwoGroups">Gruppe A</span></ion-label>
-  </ion-item>
   <table class="spiel-table" *ngIf="spielView.showTabelle">
     <thead>
     <tr>
@@ -127,4 +59,50 @@
       </tbody>
     </table>
   </ng-container>
+  <ion-item>
+    <ion-label text-center>Spiele</ion-label>
+  </ion-item>
+  <table class="spiel-table">
+    <thead>
+    <tr>
+      <th>Platz</th>
+      <th>Gr</th>
+      <th>Zeit</th>
+      <th>Heim</th>
+      <th>Gast</th>
+      <th>Erg</th>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+        <ion-icon name="create"></ion-icon>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-template ngFor let-spiel [ngForOf]="spielView.allSpiel">
+      <tr>
+        <td>{{spiel.spielPlatz}}</td>
+        <td>
+          <span *ngIf="notKoSpiel(spiel)">{{spiel.gruppe}}</span>
+        </td>
+        <td>{{formatDate(spiel.dateTime)}}</td>
+        <td>{{spiel.heimMannschaft.name}}</td>
+        <td>{{spiel.gastMannschaft.name}}</td>
+        <td>{{spiel.heimTore}}:{{spiel.gastTore}}</td>
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+          <button *ngIf="hasNoErgebnis(spiel) && !isSpielleiter()" ion-button item-start color="secondary" clear
+                  (click)="ergebnisEintragen(spiel)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button *ngIf="isSpielleiter()" ion-button item-start color="secondary" clear
+                  (click)="ergebnisEintragen(spiel)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    </tbody>
+  </table>
+  <ion-item>
+    <ion-label text-center *ngIf="spielView.showTabelle">Tabelle <span *ngIf="hasTwoGroups">Gruppe A</span></ion-label>
+  </ion-item>
+
 </ion-content>
