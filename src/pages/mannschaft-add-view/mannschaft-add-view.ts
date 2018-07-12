@@ -23,7 +23,7 @@ export class MannschaftAddViewPage {
 
   public typ: JugendGenderEnum;
   public jahrgang: JugendEnum;
-  public name: String;
+  public name: string;
   public vereinId: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public applicationData: ApplicationDataServiceProvider, private mannschaftService: MannschaftServiceProvider) {
