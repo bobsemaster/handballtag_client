@@ -24,6 +24,7 @@ import {LoadingScreenPageModule} from "../pages/loading-screen/loading-screen.mo
 import {AboutPageModule} from "../pages/about/about.module";
 import {VerkaufServiceProvider} from '../providers/verkauf-service/verkauf-service';
 import {VerpflegungPageModule} from "../pages/verpflegung/verpflegung.module";
+import {HasFotoPageModule} from "../pages/has-foto/has-foto.module";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {VerpflegungPageModule} from "../pages/verpflegung/verpflegung.module";
     LoadingScreenPageModule,
     SpielViewPageModule,
     VerpflegungPageModule,
+    HasFotoPageModule,
     AboutPageModule,
     IonicModule.forRoot(MyApp),
   ],

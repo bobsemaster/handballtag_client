@@ -9,6 +9,7 @@ import {SpielViewPage} from "../pages/spiel-view/spiel-view";
 import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
 import {AboutPage} from "../pages/about/about";
 import {VerpflegungPage} from "../pages/verpflegung/verpflegung";
+import {HasFotoPage} from "../pages/has-foto/has-foto";
 
 @Component({
   templateUrl: 'app.html'
@@ -27,6 +28,7 @@ export class MyApp {
     this.pages = [
       {title: 'Vereine', component: VereinViewPage},
       {title: 'Spiele', component: SpielViewPage},
+      {title: 'Mannschaftsfoto', component: HasFotoPage},
       {title: 'Verpflegung', component: VerpflegungPage},
       {title: 'Login', component: LoginPage},
       {title: 'Über', component: AboutPage}
