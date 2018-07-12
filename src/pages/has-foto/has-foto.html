@@ -7,12 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>has-foto-page</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mannschaftsfoto</ion-title>
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-card>
+    <ion-card-header>Noch kein Mannschaftsfoto</ion-card-header>
+    <ion-card-content>
+      <p>Für die Urkunden werden von jeder Mannschaft Bilder gemacht. Bitte bis spätestens 11:00 Uhr die Bilder
+        erstellen lassen.
+        Folgenden Mannschaften haben noch kein Foto gemacht:</p>
+      <ion-input type="text" [(ngModel)]="filter" (ngModelChange)="filterMannschaften($event)"
+                 placeholder="Filter"></ion-input>
+      <ion-list *ngFor="let mannschaft of allMannschaftOhneFotoFiltered">
+        <ion-item>{{mannschaft.name}} {{mannschaft.jugend.jahrgang}} {{mannschaft.jugend.typ}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
