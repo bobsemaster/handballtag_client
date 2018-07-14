@@ -10,6 +10,8 @@ import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
 import {AboutPage} from "../pages/about/about";
 import {VerpflegungPage} from "../pages/verpflegung/verpflegung";
 import {HasFotoPage} from "../pages/has-foto/has-foto";
+import {ApplicationDataServiceProvider} from "../providers/application-data-service/application-data-service";
+import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +23,8 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              private applicationData: ApplicationDataServiceProvider, private authentificationService: AuthenticationServiceProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -36,13 +39,39 @@ export class MyApp {
 
   }
 
+  private checkLogin() {
+    this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
+      // Standart User authentifizieren
+      // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
+      if (this.applicationData.authenticatedUser === null) {
+        this.authentificationService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
+          .subscribe(value => {
+
+            this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
+              this.hideSplashScreen();
+              return this.nav.setRoot(VereinViewPage);
+            });
+          });
+      } else {
+        this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
+          this.hideSplashScreen();
+          return this.nav.setRoot(VereinViewPage);
+        });
+      }
+    });
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.checkLogin();
     });
+  }
+
+  private hideSplashScreen() {
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
   }
 
   openPage(page) {

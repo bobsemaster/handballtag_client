@@ -27,18 +27,16 @@ export class LoadingScreenPage {
 
   ionViewDidLoad() {
     console.log('Authenticating standart user');
+    //this.checkLogin();
     if (this.platform.is("cordova")) {
-      setTimeout(() => this.checkLogin(), 500);
-      this.mobileInterval = setInterval(() => this.checkLogin(), 100);
+      //this.mobileInterval = setInterval(() => this.checkLogin(), 100);
     }else {
-      this.checkLogin();
     }
   }
 
   checkLogin() {
     try {
       this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
-
         // Standart User authentifizieren
         // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
         if (this.applicationData.authenticatedUser === null) {
@@ -48,13 +46,18 @@ export class LoadingScreenPage {
               this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
             });
         } else {
-          this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
+          this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
+            return this.navCtrl.setRoot(VereinViewPage);
+          });
         }
       });
+
     } catch (e) {
       console.log(e.toLocaleString());
-      console.log("Http library Probably not loaded")
+      console.log("Http library Probably not loaded");
+      return;
     }
+    console.log("Lib geladen erfolgreich standartuser authentifiziert");
     if (this.mobileInterval !== undefined) {
       clearInterval(this.mobileInterval);
     }
