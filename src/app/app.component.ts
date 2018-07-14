@@ -26,8 +26,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      {title: 'Vereine', component: VereinViewPage},
-      {title: 'Spiele', component: SpielViewPage},
+      {title: 'Mannschaftsspielpläne', component: VereinViewPage},
+      {title: 'Tabellen & Spielpläne', component: SpielViewPage},
       {title: 'Mannschaftsfoto', component: HasFotoPage},
       {title: 'Verpflegung', component: VerpflegungPage},
       {title: 'Login', component: LoginPage},
