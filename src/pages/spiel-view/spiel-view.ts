@@ -43,7 +43,7 @@ export class SpielViewPage {
   }
 
   public formatDate(date: Date): string {
-    return `${date.getHours()}:${date.getMinutes()}`
+    return `${date.getUTCHours()}:${date.getMinutes()}`
   }
 
   generateSpielplan() {

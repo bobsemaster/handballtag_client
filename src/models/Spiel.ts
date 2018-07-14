@@ -29,6 +29,10 @@ export class Spiel {
     spiel.gastTore = json.gastTore;
     spiel.hasHalftime = json.hasHalftime;
     spiel.halftimeDuration = this.numberFromDuration(json.halftimeDuration);
+
+    //Date time auf UTC timezone ändern
+    json.dateTime += "+00:00";
+
     spiel.dateTime = new Date(json.dateTime);
     spiel.isHeimmannschaftAnwesend = json.isHeimmannschaftAnwesend;
     spiel.isGastMannschaftAnwesend = json.isGastMannschaftAnwesend;

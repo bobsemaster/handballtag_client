@@ -58,7 +58,7 @@ export class MannschaftDetailViewPage {
   }
 
   public formatDate(date: Date): string {
-    const hours = date.getHours().toLocaleString(undefined, {minimumIntegerDigits: 2});
+    const hours = date.getUTCHours().toLocaleString(undefined, {minimumIntegerDigits: 2});
     const minutes = date.getMinutes().toLocaleString(undefined, {minimumIntegerDigits: 2});
     return `${hours}:${minutes}`
   }

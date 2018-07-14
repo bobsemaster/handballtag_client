@@ -60,7 +60,7 @@ fs.readFile('config.xml', 'utf8', function (err, data) {
     const year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let hour = date.getHours();
+    let hour = date.getUTCHours();
     let minute = date.getMinutes();
     let second = date.getSeconds();
     if (month < 10) {
