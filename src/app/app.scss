@@ -18,8 +18,7 @@ ion-card-header {
 }
 
 .spiel-table {
-  display: block;
-  overflow-x: auto;
+  display: table;
   width: 100%;
 
   table {
@@ -37,13 +36,18 @@ ion-card-header {
     background-color: color($colors, light);
   }
 
-  @media only screen and (min-width: 580px) {
-    display: table;
-  }
   @media only screen and (min-width: 780px) {
 
     tr:hover {
       background-color: darken(color($colors, light), 20%);
     }
+  }
+}
+
+.spiel-table-block {
+  display: block;
+  overflow-x: auto;
+  @media only screen and (min-width: 508px) {
+    display: table;
   }
 }
