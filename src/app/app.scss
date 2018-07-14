@@ -18,7 +18,8 @@ ion-card-header {
 }
 
 .spiel-table {
-  display: table;
+  display: block;
+  overflow-x: auto;
   width: 100%;
 
   table {
