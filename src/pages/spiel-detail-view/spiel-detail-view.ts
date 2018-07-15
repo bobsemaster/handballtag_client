@@ -124,8 +124,11 @@ export class SpielDetailViewPage {
   private getGruppenMannschaften() {
     if (this.allMannschaftTabelle.filter(value => value.gruppe === "B").length > 0) {
       this.hasTwoGroups = true;
-      this.allMannschaftGruppeA = this.allMannschaftTabelle.filter(value => value.gruppe === "A");
-      this.allMannschaftGruppeB = this.allMannschaftTabelle.filter(value => value.gruppe === "B");
+      this.allMannschaftGruppeA = this.allMannschaftTabelle.filter(value => value.gruppe === "A")
+      // a - b, da bei null gleich und sonst nur geschaut wird ob der wert größer oder kleiner null ist
+        .sort((a, b) => a.spielplanIndex - b.spielplanIndex);
+      this.allMannschaftGruppeB = this.allMannschaftTabelle.filter(value => value.gruppe === "B")
+        .sort((a, b) => a.spielplanIndex - b.spielplanIndex);
     }
   }
 
@@ -133,5 +136,25 @@ export class SpielDetailViewPage {
     mannschaft.gruppe = neueGruppe;
     this.mannschaftService.changeGruppeOfMannschaft(mannschaft, neueGruppe);
     this.getGruppenMannschaften();
+  }
+
+  setIndexUp(mannschaft: Mannschaft, allMannschaft: Mannschaft[]) {
+    const index = allMannschaft.indexOf(mannschaft);
+    if (index === 0) return;
+
+    const newSpielplanIndex = allMannschaft[index - 1].spielplanIndex - 1;
+    mannschaft.spielplanIndex = newSpielplanIndex;
+    allMannschaft.sort((a, b) => a.spielplanIndex - b.spielplanIndex);
+    this.mannschaftService.setMannschaftSpielPlanIndex(mannschaft, newSpielplanIndex);
+  }
+
+  setIndexDown(mannschaft: Mannschaft, allMannschaft: Mannschaft[]) {
+    const index = allMannschaft.indexOf(mannschaft);
+    if (index === allMannschaft.length - 1) return;
+
+    const newSpielplanIndex = allMannschaft[index + 1].spielplanIndex + 1;
+    mannschaft.spielplanIndex = newSpielplanIndex;
+    allMannschaft.sort((a, b) => a.spielplanIndex - b.spielplanIndex);
+    this.mannschaftService.setMannschaftSpielPlanIndex(mannschaft, newSpielplanIndex);
   }
 }

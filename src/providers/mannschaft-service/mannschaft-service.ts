@@ -54,4 +54,8 @@ export class MannschaftServiceProvider {
     return this.http.get(`${server_url}/mannschaft/${mannschaft.id}/gruppe/${neueGruppe}`).subscribe();
   }
 
+  public setMannschaftSpielPlanIndex(mannschaft: Mannschaft, newIndex: number) {
+    return this.http.get(`${server_url}/mannschaft/${mannschaft.id}/spielplan/${newIndex}`).subscribe();
+  }
+
 }

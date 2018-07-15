@@ -14,6 +14,7 @@ export class Mannschaft {
   public torverhaeltnis: Pair<number, number>;
   public punkteverhaeltnis: Pair<number, number>;
   public tabellenPlatz: number;
+  public spielplanIndex: number;
 
   constructor() {
     this.id = null;
@@ -22,6 +23,7 @@ export class Mannschaft {
     this.torverhaeltnis = new Pair<number, number>(0, 0);
     this.punkteverhaeltnis = new Pair<number, number>(0, 0);
     this.tabellenPlatz = 0;
+    this.spielplanIndex = 999;
   }
 
   public static fromJSON(json: any) {
@@ -39,6 +41,7 @@ export class Mannschaft {
     mannschaft.hasFoto = json.hasFoto;
     mannschaft.tabellenPlatz = json.tabellenPlatz;
     mannschaft.gruppe = json.gruppe;
+    mannschaft.spielplanIndex = json.spielplanIndex;
 
     return mannschaft;
   }

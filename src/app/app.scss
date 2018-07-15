@@ -35,13 +35,6 @@ ion-card-header {
   tr:nth-child(even) {
     background-color: color($colors, light);
   }
-
-  @media only screen and (min-width: 780px) {
-
-    tr:hover {
-      background-color: darken(color($colors, light), 20%);
-    }
-  }
 }
 
 .spiel-table-block {

@@ -88,7 +88,7 @@ export class SpielViewPage {
       spielView.nextSpiel = this.getNextSpielByTime(allSpiel);
       spielView.showTabelle = true;
       this.allSpielView.push(spielView);
-    })
+    });
   }
 
 
