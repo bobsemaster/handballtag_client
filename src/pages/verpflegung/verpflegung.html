@@ -30,15 +30,6 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-header>Vereinsheim</ion-card-header>
-    <ion-card-content>
-      <p>Hier erhaltet ihr Getränke und selbstverständlich alle Variationen von Pizzen
-        und Pasta
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
     <ion-card-header>
       Kaffeestation
     </ion-card-header>
@@ -83,6 +74,15 @@
         hinzufügen
       </button>
     </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>Vereinsheim</ion-card-header>
+    <ion-card-content>
+      <p>Hier erhaltet ihr Getränke und selbstverständlich alle Variationen von Pizzen
+        und Pasta
+      </p>
+    </ion-card-content>
   </ion-card>
 
   <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')" align-items-center>
