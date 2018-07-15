@@ -24,6 +24,7 @@
       <th>Mannschaft</th>
       <th>Punkte</th>
       <th>Tore</th>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')"></th>
     </tr>
     </thead>
     <tbody>
@@ -33,6 +34,10 @@
         <td>{{mannschaft.name}}</td>
         <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
         <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+          <button ion-button (click)="changeGroup(mannschaft, 'B')" color="secondary">Zu Gruppe B wechseln
+          </button>
+        </td>
       </tr>
     </ng-template>
     </tbody>
@@ -48,6 +53,7 @@
         <th>Mannschaft</th>
         <th>Punkte</th>
         <th>Tore</th>
+        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
       </tr>
       </thead>
       <tbody>
@@ -57,6 +63,10 @@
           <td>{{mannschaft.name}}</td>
           <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
           <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
+          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+            <button ion-button (click)="changeGroup(mannschaft, 'A')" color="secondary">Zu Gruppe B wechseln
+            </button>
+          </td>
         </tr>
       </ng-template>
       </tbody>

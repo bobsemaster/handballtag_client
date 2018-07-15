@@ -50,4 +50,8 @@ export class MannschaftServiceProvider {
       .map(allMannschaft => allMannschaft.map(mannschaft => Mannschaft.fromJSON(mannschaft)));
   }
 
+  public changeGruppeOfMannschaft(mannschaft: Mannschaft, neueGruppe: string): Subscription {
+    return this.http.get(`${server_url}/mannschaft/${mannschaft.id}/gruppe/${neueGruppe}`).subscribe();
+  }
+
 }

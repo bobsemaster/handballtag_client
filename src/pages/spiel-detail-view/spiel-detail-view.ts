@@ -128,4 +128,10 @@ export class SpielDetailViewPage {
       this.allMannschaftGruppeB = this.allMannschaftTabelle.filter(value => value.gruppe === "B");
     }
   }
+
+  changeGroup(mannschaft: Mannschaft, neueGruppe: string) {
+    mannschaft.gruppe = neueGruppe;
+    this.mannschaftService.changeGruppeOfMannschaft(mannschaft, neueGruppe);
+    this.getGruppenMannschaften();
+  }
 }
