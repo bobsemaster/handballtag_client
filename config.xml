@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="6" id="io.schreib.handballtag" ios-CFBundleVersion="201870714172735" version="1.0.6"
+<widget android-versionCode="7" id="io.schreib.handballtag" ios-CFBundleVersion="201870714172735" version="1.0.7"
         xmlns="http://www.w3.org/ns/widgets">
     <name>Handballtag</name>
     <description>App für den Handballtag</description>

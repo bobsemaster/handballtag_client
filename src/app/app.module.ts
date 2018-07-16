@@ -25,6 +25,7 @@ import {AboutPageModule} from "../pages/about/about.module";
 import {VerkaufServiceProvider} from '../providers/verkauf-service/verkauf-service';
 import {VerpflegungPageModule} from "../pages/verpflegung/verpflegung.module";
 import {HasFotoPageModule} from "../pages/has-foto/has-foto.module";
+import {ModusPageModule} from "../pages/modus/modus.module";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {HasFotoPageModule} from "../pages/has-foto/has-foto.module";
     VerpflegungPageModule,
     HasFotoPageModule,
     AboutPageModule,
+    ModusPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

@@ -12,6 +12,7 @@ import {VerpflegungPage} from "../pages/verpflegung/verpflegung";
 import {HasFotoPage} from "../pages/has-foto/has-foto";
 import {ApplicationDataServiceProvider} from "../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
+import {ModusPage} from "../pages/modus/modus";
 
 @Component({
   templateUrl: 'app.html'
@@ -33,6 +34,7 @@ export class MyApp {
       {title: 'Tabellen & Spielpläne', component: SpielViewPage},
       {title: 'Mannschaftsfoto', component: HasFotoPage},
       {title: 'Verpflegung', component: VerpflegungPage},
+      {title: 'Modus', component: ModusPage},
       {title: 'Login', component: LoginPage},
       {title: 'Über', component: AboutPage}
     ];
