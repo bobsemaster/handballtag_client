@@ -1,12 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, NavController, Platform} from 'ionic-angular';
+import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {LoginPage} from "../pages/login/login";
 import {VereinViewPage} from "../pages/verein-view/verein-view";
 import {SpielViewPage} from "../pages/spiel-view/spiel-view";
-import {LoadingScreenPage} from "../pages/loading-screen/loading-screen";
 import {AboutPage} from "../pages/about/about";
 import {VerpflegungPage} from "../pages/verpflegung/verpflegung";
 import {HasFotoPage} from "../pages/has-foto/has-foto";
@@ -14,7 +13,8 @@ import {ApplicationDataServiceProvider} from "../providers/application-data-serv
 import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
 import {ModusPage} from "../pages/modus/modus";
 import {StartPage} from "../pages/start/start";
-import {StartPageModule} from "../pages/start/start.module";
+import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
+import {LageplanPage} from '../pages/lageplan/lageplan';
 
 @Component({
   templateUrl: 'app.html'
@@ -37,6 +37,7 @@ export class MyApp {
       {title: 'Tabellen & Spielpläne', component: SpielViewPage},
       {title: 'Mannschaftsfoto', component: HasFotoPage},
       {title: 'Verpflegung', component: VerpflegungPage},
+      {title: 'Lageplan', component: LageplanPage},
       {title: 'Modus', component: ModusPage},
       {title: 'Login', component: LoginPage},
       {title: 'Über', component: AboutPage}

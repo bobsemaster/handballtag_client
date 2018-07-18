@@ -28,6 +28,7 @@ import {HasFotoPageModule} from "../pages/has-foto/has-foto.module";
 import {ModusPageModule} from "../pages/modus/modus.module";
 import {StartPageModule} from "../pages/start/start.module";
 import {StartPage} from "../pages/start/start";
+import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {StartPage} from "../pages/start/start";
     AboutPageModule,
     ModusPageModule,
     StartPageModule,
+    LageplanPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
