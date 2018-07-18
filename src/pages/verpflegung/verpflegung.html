@@ -17,17 +17,7 @@
 
 
 <ion-content padding>
-  <ion-card *ngIf="verkauf.preisvergabeGestartet || verkauf.losverkaufGestartet">
-    <ion-card-header>Losverkauf</ion-card-header>
-    <ion-card-content>
-      <p *ngIf="verkauf.losverkaufGestartet">
-        Lose können ab 9:30 für 1€ gekauft werden
-      </p>
-      <p *ngIf="verkauf.preisvergabeGestartet">
-        Die Preise können ab ca. 13:00 am Tombolastand abgeholt werden
-      </p>
-    </ion-card-content>
-  </ion-card>
+
 
   <ion-card>
     <ion-card-header>
@@ -86,14 +76,6 @@
   </ion-card>
 
   <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')" align-items-center>
-    <button ion-button (click)="toggleLosverkauf()" clear>
-      <span *ngIf="verkauf.losverkaufGestartet">Losverkauf gestoppt</span>
-      <span *ngIf="!verkauf.losverkaufGestartet">Losverkauf gestartet</span>
-    </button>
-    <button ion-button (click)="toggleLosausgabe()" clear>
-      <span *ngIf="verkauf.preisvergabeGestartet">Preisvergabe gestoppt</span>
-      <span *ngIf="!verkauf.preisvergabeGestartet">Preisvergabe gestartet</span>
-    </button>
     <button ion-button (click)="toggleGrillAn()" clear>
       <span *ngIf="verkauf.grillAn">Grill aus</span>
       <span *ngIf="!verkauf.grillAn">Grill an</span>

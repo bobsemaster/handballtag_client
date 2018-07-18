@@ -24,16 +24,27 @@
       <p>Spielstationen mit Luftschlange, Fußballtennis, Wasserrutschen und Wurf-Geschwindigkeits-Messanlage
       </p>
       <br>
-      <ng-template *ngIf="verkauf.losverkaufGestartet || verkauf.preisvergabeGestartet">
+      <div *ngIf="verkauf.losverkaufGestartet || verkauf.preisvergabeGestartet">
         <h3 style="font-weight: bold;">Tombola</h3>
         <p>
-          Tombola am Samstag: Loseverkauf ab 9:30 Uhr (Preis je Los 1€),
+          Tombola am Samstag: Loseverkauf ab 9:30 Uhr (Preis je Los 1€)<br>
           Ausgabe der Preise ab ca.: 13:00 Uhr
         </p>
-      </ng-template>
+      </div>
+      <br>
       <h3 style="font-weight: bold;">Sportartikel</h3>
       <p>Auch in diesem Jahr könnt Ihr Euch bei Bedarf wieder mit Bällen, T-Shirts, Trikots usw. bei unserem Sportartikelstand von Klaus Traimer eindecken</p>
 
     </ion-card-content>
+    <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')" align-items-center>
+      <button ion-button (click)="toggleLosverkauf()" clear>
+        <span *ngIf="verkauf.losverkaufGestartet">Losverkauf gestoppt</span>
+        <span *ngIf="!verkauf.losverkaufGestartet">Losverkauf gestartet</span>
+      </button>
+      <button ion-button (click)="toggleLosausgabe()" clear>
+        <span *ngIf="verkauf.preisvergabeGestartet">Preisvergabe gestoppt</span>
+        <span *ngIf="!verkauf.preisvergabeGestartet">Preisvergabe gestartet</span>
+      </button>
+    </ion-buttons>
   </ion-card>
 </ion-content>
