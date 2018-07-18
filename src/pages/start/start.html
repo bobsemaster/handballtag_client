@@ -18,8 +18,11 @@
 
 
 <ion-content>
-  <ion-list >
+  <ion-list>
+    <img src="assets/imgs/schrift_logo.png">
     <ion-list-header text-center>Wilkommen zum 26. Forstenrieder Handballtag 2018<br>Menü</ion-list-header>
-    <button *ngFor="let menuePunkt of pages" ion-item text-center (click)="openPage(menuePunkt.component)">{{menuePunkt.title}}</button>
+    <button *ngFor="let menuePunkt of pages" ion-item text-center (click)="openPage(menuePunkt.component)">
+      {{menuePunkt.title}}
+    </button>
   </ion-list>
 </ion-content>
