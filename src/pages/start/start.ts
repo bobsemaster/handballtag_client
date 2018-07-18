@@ -32,7 +32,7 @@ export class StartPage {
     {title: 'Tabellen & Spielpläne', component: SpielViewPage},
     {title: 'Mannschaftsfoto', component: HasFotoPage},
     {title: 'Verpflegung', component: VerpflegungPage},
-    {title: 'Rahmenprogramm & Sportartikel', component: RahmenprogrammSportartikelPage},
+    {title: 'Rahmenprogramm', component: RahmenprogrammSportartikelPage},
     {title: 'Lageplan', component: LageplanPage},
     {title: 'Modus', component: ModusPage},
     {title: 'Links', component: LinksPage},
