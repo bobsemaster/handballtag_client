@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform} from 'ionic-angular';
+import {Nav, NavController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
@@ -13,6 +13,8 @@ import {HasFotoPage} from "../pages/has-foto/has-foto";
 import {ApplicationDataServiceProvider} from "../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
 import {ModusPage} from "../pages/modus/modus";
+import {StartPage} from "../pages/start/start";
+import {StartPageModule} from "../pages/start/start.module";
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +22,7 @@ import {ModusPage} from "../pages/modus/modus";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoadingScreenPage;
+  rootPage: any = StartPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -30,6 +32,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
+      {title: 'Start', component: StartPage},
       {title: 'Mannschaftsspielpläne', component: VereinViewPage},
       {title: 'Tabellen & Spielpläne', component: SpielViewPage},
       {title: 'Mannschaftsfoto', component: HasFotoPage},
@@ -51,13 +54,11 @@ export class MyApp {
 
             this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
               this.hideSplashScreen();
-              return this.nav.setRoot(VereinViewPage);
             });
           });
       } else {
         this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
           this.hideSplashScreen();
-          return this.nav.setRoot(VereinViewPage);
         });
       }
     });
@@ -67,6 +68,15 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.platform.registerBackButtonAction((event) => {
+        if (this.applicationData.isOnStartpage) {
+          this.platform.exitApp();
+        } else if (!this.applicationData.isOnStartpage && this.nav.canGoBack() === false) {
+          this.nav.setRoot(StartPage)
+        } else {
+          this.nav.pop();
+        }
+      });
       this.checkLogin();
     });
   }

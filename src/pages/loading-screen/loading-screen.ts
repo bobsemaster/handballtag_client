@@ -4,6 +4,7 @@ import {ApplicationDataServiceProvider} from "../../providers/application-data-s
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
 import {VereinViewPage} from "../verein-view/verein-view";
 import Timer = NodeJS.Timer;
+import {StartPage} from "../start/start";
 
 /**
  * Generated class for the LoadingScreenPage page.
@@ -43,11 +44,11 @@ export class LoadingScreenPage {
           this.authenticationService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
             .subscribe(value => {
 
-              this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(VereinViewPage));
+              this.applicationData.ladeAuthentifiziertenBenutzer().add(() => this.navCtrl.setRoot(StartPage));
             });
         } else {
           this.applicationData.ladeAuthentifiziertenBenutzer().add(() => {
-            return this.navCtrl.setRoot(VereinViewPage);
+            return this.navCtrl.setRoot(StartPage);
           });
         }
       });

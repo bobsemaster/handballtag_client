@@ -6,6 +6,7 @@ import {Verein} from "../../models/Verein";
 import {UserDetails} from "../../models/UserDetails";
 import {Subscription} from "rxjs/Subscription";
 import {MannschaftServiceProvider} from "../mannschaft-service/mannschaft-service";
+import {NavController} from "ionic-angular";
 
 /*
   Generated class for the ApplicationDataServiceProvider provider.
@@ -20,8 +21,21 @@ export class ApplicationDataServiceProvider {
   public mannschaften = [];
   public authenticatedUser: UserDetails = null;
   public standartUserLoaded = false;
+  public isOnStartpage = true;
+  public navCtrl: NavController;
 
   constructor(private http: HttpClient, private authService: AuthenticationServiceProvider, private vereinService: VereinServiceProvider, private mannschaftService: MannschaftServiceProvider) {
+
+  }
+
+
+
+  public setNewView(view:any){
+    this.navCtrl.setRoot(view);
+  }
+
+  public popView(){
+    this.navCtrl.pop();
   }
 
   public ladeStandartBenutzer(): Subscription {

@@ -26,6 +26,8 @@ import {VerkaufServiceProvider} from '../providers/verkauf-service/verkauf-servi
 import {VerpflegungPageModule} from "../pages/verpflegung/verpflegung.module";
 import {HasFotoPageModule} from "../pages/has-foto/has-foto.module";
 import {ModusPageModule} from "../pages/modus/modus.module";
+import {StartPageModule} from "../pages/start/start.module";
+import {StartPage} from "../pages/start/start";
 
 @NgModule({
   declarations: [
@@ -44,12 +46,14 @@ import {ModusPageModule} from "../pages/modus/modus.module";
     HasFotoPageModule,
     AboutPageModule,
     ModusPageModule,
+    StartPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     LoadingScreenPage,
+    StartPage
   ],
   providers: [
     StatusBar,
