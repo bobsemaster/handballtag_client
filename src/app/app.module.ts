@@ -29,6 +29,8 @@ import {ModusPageModule} from "../pages/modus/modus.module";
 import {StartPageModule} from "../pages/start/start.module";
 import {StartPage} from "../pages/start/start";
 import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
+import {RahmenprogrammSportartikelPageModule} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel.module";
+import {LinksPageModule} from "../pages/links/links.module";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
     ModusPageModule,
     StartPageModule,
     LageplanPageModule,
+    RahmenprogrammSportartikelPageModule,
+    LinksPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

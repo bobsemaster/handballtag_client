@@ -10,6 +10,8 @@ import {AboutPage} from "../about/about";
 import {Page} from "ionic-angular/navigation/nav-util";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {LageplanPage} from "../lageplan/lageplan";
+import {RahmenprogrammSportartikelPage} from "../rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
+import {LinksPage} from "../links/links";
 
 /**
  * Generated class for the StartPage page.
@@ -30,8 +32,10 @@ export class StartPage {
     {title: 'Tabellen & Spielpläne', component: SpielViewPage},
     {title: 'Mannschaftsfoto', component: HasFotoPage},
     {title: 'Verpflegung', component: VerpflegungPage},
+    {title: 'Rahmenprogramm & Sportartikel', component: RahmenprogrammSportartikelPage},
     {title: 'Lageplan', component: LageplanPage},
     {title: 'Modus', component: ModusPage},
+    {title: 'Links', component: LinksPage},
     {title: 'Login', component: LoginPage},
     {title: 'Über', component: AboutPage}
   ];

@@ -15,6 +15,8 @@ import {ModusPage} from "../pages/modus/modus";
 import {StartPage} from "../pages/start/start";
 import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
 import {LageplanPage} from '../pages/lageplan/lageplan';
+import {RahmenprogrammSportartikelPage} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
+import {LinksPage} from "../pages/links/links";
 
 @Component({
   templateUrl: 'app.html'
@@ -37,8 +39,10 @@ export class MyApp {
       {title: 'Tabellen & Spielpläne', component: SpielViewPage},
       {title: 'Mannschaftsfoto', component: HasFotoPage},
       {title: 'Verpflegung', component: VerpflegungPage},
+      {title: 'Rahmenprogramm & Sportartikel', component: RahmenprogrammSportartikelPage},
       {title: 'Lageplan', component: LageplanPage},
       {title: 'Modus', component: ModusPage},
+      {title: 'Links', component: LinksPage},
       {title: 'Login', component: LoginPage},
       {title: 'Über', component: AboutPage}
     ];
