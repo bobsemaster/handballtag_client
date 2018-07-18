@@ -27,7 +27,7 @@
       <ion-input type="text" [(ngModel)]="filter" (ngModelChange)="filterMannschaften($event)"
                  placeholder="Filter"></ion-input>
       <ion-list *ngFor="let mannschaft of allMannschaftOhneFotoFiltered">
-        <ion-item>{{mannschaft.name}} {{mannschaft.jugend.jahrgang}} {{mannschaft.jugend.typ}}</ion-item>
+        <ion-item>{{mannschaft.name}} {{mannschaft.jugend.jahrgang}} {{getMannschaftTyp(mannschaft)}}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>

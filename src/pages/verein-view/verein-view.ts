@@ -5,7 +5,7 @@ import {VereinServiceProvider} from "../../providers/verein-service/verein-servi
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {Verein} from "../../models/Verein";
 import {Mannschaft} from "../../models/Mannschaft";
-import {Jugend} from "../../models/Jugend";
+import {Jugend, JugendEnum} from "../../models/Jugend";
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 import {MannschaftDetailViewPage} from "../mannschaft-detail-view/mannschaft-detail-view";
 import {StartPage} from "../start/start";
@@ -170,5 +170,12 @@ export class VereinViewPage {
     if (mannschaft && mannschaft.name && mannschaft.name.indexOf("II") > 0) {
       return 'II';
     }
+  }
+
+  getMannschaftTyp(mannschaft: Mannschaft) {
+    if (mannschaft.jugend.jahrgang === JugendEnum.MINIS) {
+      return '';
+    }
+    else return mannschaft.jugend.typ;
   }
 }

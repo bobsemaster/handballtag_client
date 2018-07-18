@@ -7,6 +7,8 @@ import {Spiel} from "../../models/Spiel";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {SpielViewHelper} from "../../models/SpielViewHelper";
 import {SpielDetailViewPage} from "../spiel-detail-view/spiel-detail-view";
+import {JugendEnum} from "../../models/Jugend";
+import {Mannschaft} from "../../models/Mannschaft";
 
 /**
  * Generated class for the SpielViewPage page.
@@ -83,7 +85,7 @@ export class SpielViewPage {
     this.allSpielView = [];
     jugendMannschaften.forEach((allSpiel, key) => {
       const spielView = new SpielViewHelper();
-      spielView.title = `${allSpiel[0].heimMannschaft.jugend.typ} ${allSpiel[0].heimMannschaft.jugend.jahrgang}`;
+      spielView.title = `${this.getMannschaftTyp(allSpiel[0].heimMannschaft)} ${allSpiel[0].heimMannschaft.jugend.jahrgang}`;
       spielView.allSpiel = allSpiel;
       spielView.nextSpiel = this.getNextSpielByTime(allSpiel);
       spielView.showTabelle = true;
@@ -130,6 +132,13 @@ export class SpielViewPage {
       }
     });
     return nextSpiel;
+  }
+
+  getMannschaftTyp(mannschaft: Mannschaft) {
+    if (mannschaft.jugend.jahrgang === JugendEnum.MINIS) {
+      return '';
+    }
+    else return mannschaft.jugend.typ;
   }
 }
 
