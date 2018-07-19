@@ -22,7 +22,6 @@ import {PlatzVerschiebenHelper} from "../../models/PlatzVerschiebenHelper";
 })
 export class SpielDetailViewPage {
 
-
   public spielView: SpielViewHelper;
   public allMannschaftGruppeA: Mannschaft[];
   public allMannschaftGruppeB: Mannschaft[];
