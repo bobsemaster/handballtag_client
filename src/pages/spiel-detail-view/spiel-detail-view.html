@@ -24,8 +24,8 @@
       <th>Mannschaft</th>
       <th>Punkte</th>
       <th>Tore</th>
-      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppe wechseln</th>
-      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppen Index setzen</th>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppe wechseln</th>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppen Index setzen</th>
     </tr>
     </thead>
     <tbody>
@@ -36,11 +36,11 @@
         <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
         <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
 
-        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
           <button ion-button (click)="changeGroup(mannschaft, 'B')" color="primary">Zu Gruppe B wechseln
           </button>
         </td>
-        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
           <button ion-button clear icon-only (click)="setIndexUp(mannschaft, allMannschaftGruppeA)" color="primary">
             <ion-icon name="arrow-dropup"></ion-icon>
           </button>
@@ -63,8 +63,8 @@
         <th>Mannschaft</th>
         <th>Punkte</th>
         <th>Tore</th>
-        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppe wechseln</th>
-        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppen Index setzen</th>
+        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppe wechseln</th>
+        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppen Index setzen</th>
       </tr>
       </thead>
       <tbody>
@@ -75,11 +75,11 @@
           <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
           <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
 
-          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
             <button ion-button (click)="changeGroup(mannschaft, 'A')" color="primary">Zu Gruppe A wechseln
             </button>
           </td>
-          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
             <button ion-button clear icon-only (click)="setIndexUp(mannschaft, allMannschaftGruppeB)" color="primary">
               <ion-icon name="arrow-dropup"></ion-icon>
             </button>
