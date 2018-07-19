@@ -6,6 +6,7 @@ import {ApplicationDataServiceProvider} from "../../providers/application-data-s
 import {SpielServiceProvider} from "../../providers/spiel-service/spiel-service";
 import {Mannschaft} from "../../models/Mannschaft";
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
+import {PlatzVerschiebenHelper} from "../../models/PlatzVerschiebenHelper";
 
 /**
  * Generated class for the SpielDetailViewPage page.
@@ -20,6 +21,7 @@ import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mann
   templateUrl: 'spiel-detail-view.html',
 })
 export class SpielDetailViewPage {
+
 
   public spielView: SpielViewHelper;
   public allMannschaftGruppeA: Mannschaft[];
@@ -156,5 +158,46 @@ export class SpielDetailViewPage {
     mannschaft.spielplanIndex = newSpielplanIndex;
     allMannschaft.sort((a, b) => a.spielplanIndex - b.spielplanIndex);
     this.mannschaftService.setMannschaftSpielPlanIndex(mannschaft, newSpielplanIndex);
+  }
+
+  changeSpielfeld(spiel: Spiel) {
+    this.alertController.create({
+      title: 'Platz ändern',
+      subTitle: `Platz für das spiel ${spiel.heimMannschaft.name}:${spiel.gastMannschaft.name} ändern`,
+      inputs: [
+        {
+          type: 'number',
+          placeholder: 'neuer Platz',
+          name: 'newPlatz'
+        },
+        {
+          type: 'number',
+          placeholder: 'Pausezeit in min',
+          name: 'pauseDuration'
+        }
+      ],
+      buttons: [
+        {text: 'Abbrechen'},
+        {
+          text: 'Ändern',
+          handler: data => this.changeSpielfeldSend(spiel, data)
+        }
+      ]
+    }).present();
+  }
+
+  changeSpielfeldSend(spiel: Spiel, data: any) {
+    const platzVerschiebenHelper = new PlatzVerschiebenHelper();
+    platzVerschiebenHelper.pauseDuration = data.pauseDuration;
+    platzVerschiebenHelper.spielId = spiel.id;
+    const newPlatz = data.newPlatz;
+    if (newPlatz < 1 || newPlatz > 5) {
+      console.log(`Fehler platz ${newPlatz} gibt es nicht`);
+
+      return;
+    }
+    platzVerschiebenHelper.newPlatz = newPlatz;
+
+    this.spielService.platzVerschieben(platzVerschiebenHelper);
   }
 }

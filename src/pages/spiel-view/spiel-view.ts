@@ -174,7 +174,9 @@ export class SpielViewPage {
           handler: data => this.pickJugend(data)
         }
       ]
-    }).present();
+    });
+    durationAlert.present();
+
   }
 
   pickJugend(timeData: any) {

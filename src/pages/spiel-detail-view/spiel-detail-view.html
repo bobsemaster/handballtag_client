@@ -17,6 +17,7 @@
   <ion-item>
     <ion-label text-center *ngIf="spielView.showTabelle">Tabelle <span *ngIf="hasTwoGroups">Gruppe A</span></ion-label>
   </ion-item>
+
   <table class="spiel-table" *ngIf="spielView.showTabelle">
     <thead>
     <tr>
@@ -52,6 +53,7 @@
     </ng-template>
     </tbody>
   </table>
+
   <ng-container *ngIf="hasTwoGroups">
     <ion-item>
       <ion-label text-center *ngIf="spielView.showTabelle">Tabelle Gruppe B</ion-label>
@@ -92,6 +94,7 @@
       </tbody>
     </table>
   </ng-container>
+
   <ion-item>
     <ion-label text-center>Spiele</ion-label>
   </ion-item>
@@ -105,7 +108,8 @@
       <th>Gast</th>
       <th>Erg</th>
       <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
-        <ion-icon name="create"></ion-icon>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+        Platz wechseln
       </th>
     </tr>
     </thead>
@@ -130,8 +134,12 @@
             <ion-icon name="create"></ion-icon>
           </button>
         </td>
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+          <button ion-button clear color="primary" (click)="changeSpielfeld(spiel)">Spielfeld Wechseln</button>
+        </td>
       </tr>
     </ng-template>
     </tbody>
   </table>
+
 </ion-content>
