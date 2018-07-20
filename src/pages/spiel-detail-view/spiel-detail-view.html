@@ -32,7 +32,15 @@
     <tbody>
     <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftGruppeA">
       <tr>
-        <td>{{mannschaft.tabellenPlatz}}.</td>
+        <td>
+          <span
+            *ngIf="!isEditingTabellenplatz">
+            {{mannschaft.tabellenPlatz}}.
+          </span>
+          <span *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER') && isEditingTabellenplatz">
+            <ion-input type="number" [(ngModel)]="mannschaft.tabellenPlatz"></ion-input>
+          </span>
+        </td>
         <td>{{mannschaft.name}}</td>
         <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
         <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
@@ -54,6 +62,14 @@
     </tbody>
   </table>
 
+
+  <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+    <button ion-button (click)="toggleEditTabellenplatz()" clear block>Tabellenplätze bearbeiten</button>
+    <button ion-button (click)="saveTabellenplaetze(allMannschaftGruppeA)" clear block>Tabellenplätze abschicken
+    </button>
+  </ion-buttons>
+
+
   <ng-container *ngIf="hasTwoGroups">
     <ion-item>
       <ion-label text-center *ngIf="spielView.showTabelle">Tabelle Gruppe B</ion-label>
@@ -72,7 +88,15 @@
       <tbody>
       <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftGruppeB">
         <tr>
-          <td>{{mannschaft.tabellenPlatz}}.</td>
+          <td>
+            <span
+              *ngIf="!isEditingTabellenplatz">
+              {{mannschaft.tabellenPlatz}}.
+            </span>
+            <span *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER') && isEditingTabellenplatz">
+              <ion-input type="number" [(ngModel)]="mannschaft.tabellenPlatz"></ion-input>
+            </span>
+          </td>
           <td>{{mannschaft.name}}</td>
           <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
           <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
@@ -93,7 +117,16 @@
       </ng-template>
       </tbody>
     </table>
+
+    <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+      <button ion-button (click)="toggleEditTabellenplatz()" clear block>Tabellenplätze bearbeiten</button>
+      <button ion-button (click)="saveTabellenplaetze(allMannschaftGruppeB)" clear block>Tabellenplätze abschicken
+      </button>
+    </ion-buttons>
   </ng-container>
+  <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+    <button ion-button (click)="reloadKoSpiele()" color="danger" clear block>K.O Spiele aktualisieren</button>
+  </ion-buttons>
 
   <ion-item>
     <ion-label text-center>Spiele</ion-label>

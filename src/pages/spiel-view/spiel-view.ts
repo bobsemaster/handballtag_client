@@ -209,7 +209,7 @@ export class SpielViewPage {
       return;
     }
     const dayTimeString: string = timeData.time;
-    if (!dayTimeString.match(/[012]\d:[0-6]\d/)) {
+    if (!dayTimeString.match(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)) {
       console.log('Wrong time');
       return;
     }

@@ -6,6 +6,7 @@ import {Jugend} from "../../models/Jugend";
 import {server_url} from "../../models/ServerUrl";
 import {Spiel} from "../../models/Spiel";
 import {HttpServiceProvider} from "../http-service/http-service";
+import {Pair} from "../../models/Pair";
 
 /*
   Generated class for the MannschaftServiceProvider provider.
@@ -56,6 +57,14 @@ export class MannschaftServiceProvider {
 
   public setMannschaftSpielPlanIndex(mannschaft: Mannschaft, newIndex: number) {
     return this.http.get(`${server_url}/mannschaft/${mannschaft.id}/spielplan/${newIndex}`).subscribe();
+  }
+
+  public setSpielplanIndex(id: number, index: number): Subscription {
+    return this.http.get(`${server_url}/mannschaft/${id}/spielplan/${index}`).subscribe();
+  }
+
+  public changeTabellenplatz(allMannschaft: Pair<number, number>[]): Subscription {
+    return this.http.post(server_url + '/mannschaft/tabellenplatz/neu', allMannschaft).subscribe();
   }
 
 }

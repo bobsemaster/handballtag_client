@@ -8,7 +8,7 @@ import {HttpServiceProvider} from "../http-service/http-service";
 import {SpielErgebnis} from "../../models/SpielErgebnis";
 import {PauseHelper} from "../../models/PauseHelper";
 import {PlatzVerschiebenHelper} from "../../models/PlatzVerschiebenHelper";
-import {subscriptionLogsToBeFn} from "rxjs/testing/TestScheduler";
+import {Jugend} from "../../models/Jugend";
 
 
 /*
@@ -44,11 +44,15 @@ export class SpielServiceProvider {
     return this.http.post(`${server_url}/spiel/${id}/spielstand`, ergebnis).subscribe();
   }
 
-  public addPause(pauseHelper: PauseHelper):Subscription {
+  public addPause(pauseHelper: PauseHelper): Subscription {
     return this.http.post(server_url + '/spiel/pause', pauseHelper).subscribe();
   }
 
   public platzVerschieben(platzVerschiebenHelper: PlatzVerschiebenHelper): Subscription {
     return this.http.post(server_url + '/spiel/platz/verschieben', platzVerschiebenHelper).subscribe();
+  }
+
+  public reloadKOSpiele(jugend:Jugend): Subscription {
+    return this.http.post(server_url + '/spiel/spielplan/kospiele/reload', jugend).subscribe();
   }
 }

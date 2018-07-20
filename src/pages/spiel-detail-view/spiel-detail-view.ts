@@ -7,6 +7,7 @@ import {SpielServiceProvider} from "../../providers/spiel-service/spiel-service"
 import {Mannschaft} from "../../models/Mannschaft";
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 import {PlatzVerschiebenHelper} from "../../models/PlatzVerschiebenHelper";
+import {Pair} from "../../models/Pair";
 
 /**
  * Generated class for the SpielDetailViewPage page.
@@ -22,6 +23,7 @@ import {PlatzVerschiebenHelper} from "../../models/PlatzVerschiebenHelper";
 })
 export class SpielDetailViewPage {
 
+  public isEditingTabellenplatz = false;
   public spielView: SpielViewHelper;
   public allMannschaftGruppeA: Mannschaft[];
   public allMannschaftGruppeB: Mannschaft[];
@@ -198,5 +200,17 @@ export class SpielDetailViewPage {
     platzVerschiebenHelper.newPlatz = newPlatz;
 
     this.spielService.platzVerschieben(platzVerschiebenHelper);
+  }
+
+  toggleEditTabellenplatz() {
+    this.isEditingTabellenplatz = !this.isEditingTabellenplatz;
+  }
+
+  saveTabellenplaetze(allMannschaft: Mannschaft[]) {
+    this.mannschaftService.changeTabellenplatz(allMannschaft.map(value => new Pair(value.id, value.tabellenPlatz)));
+  }
+
+  reloadKoSpiele() {
+    this.spielService.reloadKOSpiele(this.allMannschaftGruppeA[0].jugend);
   }
 }
