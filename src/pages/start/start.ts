@@ -12,6 +12,7 @@ import {ApplicationDataServiceProvider} from "../../providers/application-data-s
 import {LageplanPage} from "../lageplan/lageplan";
 import {RahmenprogrammSportartikelPage} from "../rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
 import {LinksPage} from "../links/links";
+import {TabellenUebersichtPage} from "../tabellen-uebersicht/tabellen-uebersicht";
 
 /**
  * Generated class for the StartPage page.
@@ -37,7 +38,8 @@ export class StartPage {
     {title: 'Modus', component: ModusPage},
     {title: 'Links', component: LinksPage},
     {title: 'Login', component: LoginPage},
-    {title: 'Über', component: AboutPage}
+    {title: 'Über', component: AboutPage},
+    {title: 'Alle Tabellen', component: TabellenUebersichtPage}
   ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private applicationDataProvider:ApplicationDataServiceProvider) {

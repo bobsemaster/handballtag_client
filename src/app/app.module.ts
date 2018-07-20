@@ -31,6 +31,7 @@ import {StartPage} from "../pages/start/start";
 import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
 import {RahmenprogrammSportartikelPageModule} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel.module";
 import {LinksPageModule} from "../pages/links/links.module";
+import {TabellenUebersichtPageModule} from "../pages/tabellen-uebersicht/tabellen-uebersicht.module";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {LinksPageModule} from "../pages/links/links.module";
     LageplanPageModule,
     RahmenprogrammSportartikelPageModule,
     LinksPageModule,
+    TabellenUebersichtPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
