@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 import {Mannschaft} from "../../models/Mannschaft";
 import {JugendEnum} from "../../models/Jugend";
+import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 
 /**
  * Generated class for the HasFotoPage page.
@@ -17,11 +18,14 @@ import {JugendEnum} from "../../models/Jugend";
   templateUrl: 'has-foto.html',
 })
 export class HasFotoPage {
+
+
   private allMannschaftOhneFoto: Mannschaft[];
   public allMannschaftOhneFotoFiltered: Mannschaft[];
   public filter: string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mannschaftService: MannschaftServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mannschaftService: MannschaftServiceProvider,
+              public applicationData: ApplicationDataServiceProvider, private alertController: AlertController) {
     mannschaftService.getAllMannschaften().subscribe(allMannschaft => {
       this.allMannschaftOhneFoto = allMannschaft.filter(mannschaft => mannschaft.hasFoto === false);
       this.allMannschaftOhneFotoFiltered = this.allMannschaftOhneFoto;
@@ -47,5 +51,29 @@ export class HasFotoPage {
       return '';
     }
     else return mannschaft.jugend.typ;
+  }
+
+  fotoGemacht(mannschaft: Mannschaft) {
+    this.alertController.create({
+      title: 'Foto gemacht',
+      subTitle: `Hat die ${mannschaft.jugend.typ} ${mannschaft.jugend.jahrgang} ${mannschaft.name} wirklich ein Mannschaftsfoto gemacht?`,
+      buttons: [
+        {
+          text: 'Nein',
+        },
+        {
+          text: 'Ja',
+          handler: () => this.setFotoGemacht(mannschaft)
+        }
+      ]
+    }).present();
+  }
+
+  private setFotoGemacht(mannschaft: Mannschaft) {
+    mannschaft.hasFoto = true;
+    this.filter = '';
+    this.allMannschaftOhneFoto = this.allMannschaftOhneFoto.filter(value => value.hasFoto === false);
+    this.allMannschaftOhneFotoFiltered = this.allMannschaftOhneFoto;
+    this.mannschaftService.setFotoGemacht(true, mannschaft.id).subscribe();
   }
 }
