@@ -129,9 +129,9 @@ export class SpielDetailViewPage {
       this.hasTwoGroups = true;
       this.allMannschaftGruppeA = this.allMannschaftTabelle.filter(value => value.gruppe === "A")
       // a - b, da bei null gleich und sonst nur geschaut wird ob der wert größer oder kleiner null ist
-        .sort((a, b) => a.spielplanIndex - b.spielplanIndex);
+        .sort((a, b) => a.tabellenPlatz - b.tabellenPlatz);
       this.allMannschaftGruppeB = this.allMannschaftTabelle.filter(value => value.gruppe === "B")
-        .sort((a, b) => a.spielplanIndex - b.spielplanIndex);
+        .sort((a, b) => a.tabellenPlatz - b.tabellenPlatz);
     }
   }
 
