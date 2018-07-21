@@ -24,8 +24,14 @@ export class TabellenUebersichtPage {
   }
 
   ionViewWillLoad() {
+    this.refreshMannschaften();
+    setInterval(() => this.refreshMannschaften(), 1000*60*5);
+  }
+
+  private refreshMannschaften() {
     this.mannschaftService.getAllMannschaften().subscribe(allMannschaft => {
       this.allMannschaft = allMannschaft;
+      this.allMannschaftJugenden = [];
       this.fillMannschaftMap()
     });
   }

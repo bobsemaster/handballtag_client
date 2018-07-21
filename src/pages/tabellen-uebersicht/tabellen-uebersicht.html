@@ -19,7 +19,7 @@
 <ion-content padding>
   <div style="display: flex;">
     <div style="padding: 10px;" text-center>
-      <h2>Minis</h2>
+      <h2>Männlich C-Jugend</h2>
       <table class="spiel-table">
         <tbody>
         <tr>
@@ -27,7 +27,7 @@
           <th>Gruppe</th>
           <th>Mannschaft</th>
         </tr>
-        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Minis')">
+        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Männlich C-Jugend')">
           <td>{{mannschaft.tabellenPlatz}}</td>
           <td>{{mannschaft.gruppe}}</td>
           <td>{{mannschaft.name}}</td>
@@ -37,7 +37,7 @@
     </div>
 
     <div style="padding: 10px;" text-center>
-      <h2>Männlich E-Jugend</h2>
+      <h2>Weiblich C-Jugend</h2>
       <table class="spiel-table">
         <tbody>
         <tr>
@@ -45,7 +45,7 @@
           <th>Gruppe</th>
           <th>Mannschaft</th>
         </tr>
-        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Männlich E-Jugend')">
+        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Weiblich C-Jugend')">
           <td>{{mannschaft.tabellenPlatz}}</td>
           <td>{{mannschaft.gruppe}}</td>
           <td>{{mannschaft.name}}</td>
@@ -55,7 +55,7 @@
     </div>
 
     <div style="padding: 10px;" text-center>
-      <h2>Weiblich E-Jugend</h2>
+      <h2>Männlich B-Jugend</h2>
       <table class="spiel-table">
         <tbody>
         <tr>
@@ -63,7 +63,7 @@
           <th>Gruppe</th>
           <th>Mannschaft</th>
         </tr>
-        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Weiblich E-Jugend')">
+        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Männlich B-Jugend')">
           <td>{{mannschaft.tabellenPlatz}}</td>
           <td>{{mannschaft.gruppe}}</td>
           <td>{{mannschaft.name}}</td>
@@ -73,7 +73,7 @@
     </div>
 
     <div style="padding: 10px;" text-center>
-      <h2>Männlich D-Jugend</h2>
+      <h2>Weiblich B-Jugend</h2>
       <table class="spiel-table">
         <tbody>
         <tr>
@@ -81,7 +81,7 @@
           <th>Gruppe</th>
           <th>Mannschaft</th>
         </tr>
-        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Männlich D-Jugend')">
+        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Weiblich B-Jugend')">
           <td>{{mannschaft.tabellenPlatz}}</td>
           <td>{{mannschaft.gruppe}}</td>
           <td>{{mannschaft.name}}</td>
@@ -90,22 +90,5 @@
       </table>
     </div>
 
-    <div style="padding: 10px;" text-center>
-      <h2>Weiblich D-Jugend</h2>
-      <table class="spiel-table">
-        <tbody>
-        <tr>
-          <th>Tabellenplatz</th>
-          <th>Gruppe</th>
-          <th>Mannschaft</th>
-        </tr>
-        <tr *ngFor="let mannschaft of getMannschaftenByIndex('Weiblich D-Jugend')">
-          <td>{{mannschaft.tabellenPlatz}}</td>
-          <td>{{mannschaft.gruppe}}</td>
-          <td>{{mannschaft.name}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </ion-content>
