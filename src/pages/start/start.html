@@ -1,0 +1,28 @@
+<!--
+  Generated template for the StartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Start</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <img id="header-img" src="assets/imgs/schrift_logo.png" >
+    <ion-list-header text-center>Wilkommen zum 26. Forstenrieder Handballtag 2018<br>Menü</ion-list-header>
+    <button *ngFor="let menuePunkt of pages" ion-item text-center (click)="openPage(menuePunkt.component)">
+      {{menuePunkt.title}}
+    </button>
+  </ion-list>
+</ion-content>

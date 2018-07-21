@@ -26,6 +26,12 @@ import {VerkaufServiceProvider} from '../providers/verkauf-service/verkauf-servi
 import {VerpflegungPageModule} from "../pages/verpflegung/verpflegung.module";
 import {HasFotoPageModule} from "../pages/has-foto/has-foto.module";
 import {ModusPageModule} from "../pages/modus/modus.module";
+import {StartPageModule} from "../pages/start/start.module";
+import {StartPage} from "../pages/start/start";
+import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
+import {RahmenprogrammSportartikelPageModule} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel.module";
+import {LinksPageModule} from "../pages/links/links.module";
+import {TabellenUebersichtPageModule} from "../pages/tabellen-uebersicht/tabellen-uebersicht.module";
 
 @NgModule({
   declarations: [
@@ -44,12 +50,18 @@ import {ModusPageModule} from "../pages/modus/modus.module";
     HasFotoPageModule,
     AboutPageModule,
     ModusPageModule,
+    StartPageModule,
+    LageplanPageModule,
+    RahmenprogrammSportartikelPageModule,
+    LinksPageModule,
+    TabellenUebersichtPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     LoadingScreenPage,
+    StartPage
   ],
   providers: [
     StatusBar,

@@ -7,6 +7,9 @@ import {Spiel} from "../../models/Spiel";
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {SpielViewHelper} from "../../models/SpielViewHelper";
 import {SpielDetailViewPage} from "../spiel-detail-view/spiel-detail-view";
+import {Jugend, JugendEnum} from "../../models/Jugend";
+import {Mannschaft} from "../../models/Mannschaft";
+import {PauseHelper} from "../../models/PauseHelper";
 
 /**
  * Generated class for the SpielViewPage page.
@@ -23,6 +26,7 @@ import {SpielDetailViewPage} from "../spiel-detail-view/spiel-detail-view";
 export class SpielViewPage {
   public allSpiel: Spiel[];
   public allSpielView: SpielViewHelper[];
+  public allJugend: Jugend[];
 
   //Wenn true gruppiere spiele nach jugend sonst nach platz
   public groupJugend: boolean = true;
@@ -32,6 +36,9 @@ export class SpielViewPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertController: AlertController,
               private mannschaftService: MannschaftServiceProvider, private spielService: SpielServiceProvider,
               private applicationData: ApplicationDataServiceProvider) {
+    if (applicationData.authenticatedUser.hasRecht("ROLE_SPIELLEITER")) {
+      this.mannschaftService.getAllJugend().subscribe(allJugend => this.allJugend = allJugend)
+    }
   }
 
   ionViewWillEnter() {
@@ -83,7 +90,7 @@ export class SpielViewPage {
     this.allSpielView = [];
     jugendMannschaften.forEach((allSpiel, key) => {
       const spielView = new SpielViewHelper();
-      spielView.title = `${allSpiel[0].heimMannschaft.jugend.typ} ${allSpiel[0].heimMannschaft.jugend.jahrgang}`;
+      spielView.title = `${this.getMannschaftTyp(allSpiel[0].heimMannschaft)} ${allSpiel[0].heimMannschaft.jugend.jahrgang}`;
       spielView.allSpiel = allSpiel;
       spielView.nextSpiel = this.getNextSpielByTime(allSpiel);
       spielView.showTabelle = true;
@@ -130,6 +137,91 @@ export class SpielViewPage {
       }
     });
     return nextSpiel;
+  }
+
+  getMannschaftTyp(mannschaft: Mannschaft) {
+    if (mannschaft.jugend.jahrgang === JugendEnum.MINIS) {
+      return '';
+    }
+    else return mannschaft.jugend.typ;
+  }
+
+  addPause() {
+    const durationAlert = this.alertController.create({
+      title: "Pause einfügen",
+      subTitle: " Wähle die aus wann die Pause beginnt, wie lange sie sein soll und Welche jugenden diese Pause haben sollen.",
+      inputs: [
+        {
+          type: 'text',
+          placeholder: '21. oder 22.',
+          name: 'dayOfMonth'
+        },
+        {
+          type: 'text',
+          placeholder: 'hh:mm',
+          name: 'time'
+        },
+        {
+          type: 'number',
+          placeholder: 'Länge in min',
+          name: 'pauseDuration'
+        }
+      ],
+      buttons: [
+        {text: 'Abbrechen'},
+        {
+          text: 'Jugend wählen',
+          handler: data => this.pickJugend(data)
+        }
+      ]
+    });
+    durationAlert.present();
+
+  }
+
+  pickJugend(timeData: any) {
+    const jugendAlert = this.alertController.create({
+      title: "Jugend auswählen"
+    });
+
+
+    this.allJugend.forEach(jugend => {
+      jugendAlert.addInput({
+        type: 'checkbox',
+        label: `${jugend.jahrgang} ${jugend.typ}`,
+        value: JSON.stringify(jugend)
+      });
+    });
+    jugendAlert.addButton("Abbrechen");
+    jugendAlert.addButton({
+      text: "Abschicken",
+      handler: data => {
+        this.pauseAbschicken(timeData, data)
+      }
+    });
+    jugendAlert.present();
+  }
+
+  private pauseAbschicken(timeData: any, data: any) {
+    const jugenden = data.map(jugend => Jugend.fromJson(JSON.parse(jugend)));
+    if (timeData.dayOfMonth !== '21' && timeData.dayOfMonth !== '22') {
+      console.log('Wrong date');
+      return;
+    }
+    const dayTimeString: string = timeData.time;
+    if (!dayTimeString.match(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)) {
+      console.log('Wrong time');
+      return;
+    }
+
+    const hourOfDay = `2018-07-${timeData.dayOfMonth}T${dayTimeString}:00.000`;
+    const pauseHelper = new PauseHelper();
+    pauseHelper.allJugend = jugenden;
+    pauseHelper.pauseDuration = timeData.pauseDuration;
+    pauseHelper.pauseStartTime = hourOfDay;
+
+    this.spielService.addPause(pauseHelper);
+
   }
 }
 

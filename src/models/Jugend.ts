@@ -87,6 +87,13 @@ export class Jugend {
     return hash;
   }
 
+  public toString(): string {
+    if(this.jahrgang === JugendEnum.MINIS){
+      return 'Minis'
+    }
+    return `${this.typ} ${this.jahrgang}`;
+  }
+
   public hashCode(): number {
     return this.stringHashCode(this.typ.toString()) + this.stringHashCode(this.jahrgang.toString());
   }

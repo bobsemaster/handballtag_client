@@ -37,6 +37,26 @@ ion-card-header {
   }
 }
 
+.spiel-table {
+  display: inline-flex;
+  width: 100%;
+
+  table {
+    border-collapse: collapse;
+  }
+  th {
+    background-color: color($colors, primary);
+  }
+  td, th {
+    text-align: center;
+    padding: 12px 4px;
+  }
+
+  tr:nth-child(even) {
+    background-color: color($colors, light);
+  }
+}
+
 .spiel-table-block {
   display: block;
   overflow-x: auto;

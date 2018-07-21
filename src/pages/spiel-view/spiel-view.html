@@ -51,5 +51,6 @@
 
   <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
     <button ion-button (click)="generateSpielplan()" clear block>Generiere Spielplan</button>
+    <button ion-button (click)="addPause()" clear block>Pause/Verzögerung einfügen</button>
   </ion-buttons>
 </ion-content>

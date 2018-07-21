@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 import {Mannschaft} from "../../models/Mannschaft";
+import {JugendEnum} from "../../models/Jugend";
 
 /**
  * Generated class for the HasFotoPage page.
@@ -39,5 +40,12 @@ export class HasFotoPage {
     const mannschaftString = `${mannschaft.name} ${mannschaft.jugend.jahrgang} ${mannschaft.jugend.typ}`.toLowerCase();
     return mannschaftString.includes(this.filter.toLowerCase());
 
+  }
+
+  getMannschaftTyp(mannschaft: Mannschaft) {
+    if (mannschaft.jugend.jahrgang === JugendEnum.MINIS) {
+      return '';
+    }
+    else return mannschaft.jugend.typ;
   }
 }

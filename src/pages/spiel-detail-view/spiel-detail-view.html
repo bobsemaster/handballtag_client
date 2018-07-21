@@ -17,6 +17,7 @@
   <ion-item>
     <ion-label text-center *ngIf="spielView.showTabelle">Tabelle <span *ngIf="hasTwoGroups">Gruppe A</span></ion-label>
   </ion-item>
+
   <table class="spiel-table" *ngIf="spielView.showTabelle">
     <thead>
     <tr>
@@ -24,23 +25,31 @@
       <th>Mannschaft</th>
       <th>Punkte</th>
       <th>Tore</th>
-      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppe wechseln</th>
-      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppen Index setzen</th>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppe wechseln</th>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppen Index setzen</th>
     </tr>
     </thead>
     <tbody>
     <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftGruppeA">
       <tr>
-        <td>{{mannschaft.tabellenPlatz}}.</td>
+        <td>
+          <span
+            *ngIf="!isEditingTabellenplatz">
+            {{mannschaft.tabellenPlatz}}.
+          </span>
+          <span *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER') && isEditingTabellenplatz">
+            <ion-input type="number" [(ngModel)]="mannschaft.tabellenPlatz"></ion-input>
+          </span>
+        </td>
         <td>{{mannschaft.name}}</td>
         <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
         <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
 
-        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
           <button ion-button (click)="changeGroup(mannschaft, 'B')" color="primary">Zu Gruppe B wechseln
           </button>
         </td>
-        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
           <button ion-button clear icon-only (click)="setIndexUp(mannschaft, allMannschaftGruppeA)" color="primary">
             <ion-icon name="arrow-dropup"></ion-icon>
           </button>
@@ -52,6 +61,15 @@
     </ng-template>
     </tbody>
   </table>
+
+
+  <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+    <button ion-button (click)="toggleEditTabellenplatz()" clear block>Tabellenplätze bearbeiten</button>
+    <button ion-button (click)="saveTabellenplaetze(allMannschaftGruppeA)" clear block>Tabellenplätze abschicken
+    </button>
+  </ion-buttons>
+
+
   <ng-container *ngIf="hasTwoGroups">
     <ion-item>
       <ion-label text-center *ngIf="spielView.showTabelle">Tabelle Gruppe B</ion-label>
@@ -63,23 +81,31 @@
         <th>Mannschaft</th>
         <th>Punkte</th>
         <th>Tore</th>
-        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppe wechseln</th>
-        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">Gruppen Index setzen</th>
+        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppe wechseln</th>
+        <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">Gruppen Index setzen</th>
       </tr>
       </thead>
       <tbody>
       <ng-template ngFor let-mannschaft [ngForOf]="allMannschaftGruppeB">
         <tr>
-          <td>{{mannschaft.tabellenPlatz}}.</td>
+          <td>
+            <span
+              *ngIf="!isEditingTabellenplatz">
+              {{mannschaft.tabellenPlatz}}.
+            </span>
+            <span *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER') && isEditingTabellenplatz">
+              <ion-input type="number" [(ngModel)]="mannschaft.tabellenPlatz"></ion-input>
+            </span>
+          </td>
           <td>{{mannschaft.name}}</td>
           <td>{{mannschaft.punkteverhaeltnis.first}}:{{mannschaft.punkteverhaeltnis.second}}</td>
           <td>{{mannschaft.torverhaeltnis.first}}:{{mannschaft.torverhaeltnis.second}}</td>
 
-          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
             <button ion-button (click)="changeGroup(mannschaft, 'A')" color="primary">Zu Gruppe A wechseln
             </button>
           </td>
-          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
+          <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
             <button ion-button clear icon-only (click)="setIndexUp(mannschaft, allMannschaftGruppeB)" color="primary">
               <ion-icon name="arrow-dropup"></ion-icon>
             </button>
@@ -91,7 +117,17 @@
       </ng-template>
       </tbody>
     </table>
+
+    <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+      <button ion-button (click)="toggleEditTabellenplatz()" clear block>Tabellenplätze bearbeiten</button>
+      <button ion-button (click)="saveTabellenplaetze(allMannschaftGruppeB)" clear block>Tabellenplätze abschicken
+      </button>
+    </ion-buttons>
   </ng-container>
+  <ion-buttons *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+    <button ion-button (click)="reloadKoSpiele()" color="danger" clear block>K.O Spiele aktualisieren</button>
+  </ion-buttons>
+
   <ion-item>
     <ion-label text-center>Spiele</ion-label>
   </ion-item>
@@ -105,7 +141,8 @@
       <th>Gast</th>
       <th>Erg</th>
       <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_KAMPFGERICHT')">
-        <ion-icon name="create"></ion-icon>
+      <th *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+        Platz wechseln
       </th>
     </tr>
     </thead>
@@ -130,8 +167,12 @@
             <ion-icon name="create"></ion-icon>
           </button>
         </td>
+        <td *ngIf="applicationData.authenticatedUser.hasRecht('ROLE_SPIELLEITER')">
+          <button ion-button clear color="primary" (click)="changeSpielfeld(spiel)">Spielfeld Wechseln</button>
+        </td>
       </tr>
     </ng-template>
     </tbody>
   </table>
+
 </ion-content>

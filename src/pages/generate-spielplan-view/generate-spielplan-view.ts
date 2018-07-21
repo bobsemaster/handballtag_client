@@ -27,8 +27,8 @@ export class GenerateSpielplanViewPage {
   private allJugend: Jugend[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertController: AlertController,
-              private mannschaftSercvice: MannschaftServiceProvider, private spielService: SpielServiceProvider) {
-    this.mannschaftSercvice.getAllJugend().subscribe(allJugend => this.allJugend = allJugend)
+              private mannschaftService: MannschaftServiceProvider, private spielService: SpielServiceProvider) {
+    this.mannschaftService.getAllJugend().subscribe(allJugend => this.allJugend = allJugend)
   }
 
   ionViewDidLoad() {

@@ -45,4 +45,5 @@ export class Mannschaft {
 
     return mannschaft;
   }
+
 }
