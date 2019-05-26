@@ -54,12 +54,10 @@ deploy-kube:
     - ensure_namespace
     - create_docker_secret
     - helm upgrade --install --wait
-      --set application.url=$DEPLOY_URL
       --set application.environment=master
-      --set server.image.tag=$CI_COMMIT_TAG
-      --set pgAdmin.password=$PG_ADMIN_PASSWORD
-      --set postgres.password=$POSTGRES_PASSWORD
-      --values values-server.yaml --namespace $NAMESPACE $RELEASE_NAME helm/server
+      --set application.url=$DEPLOY_URL
+      --set client.image.tag=$CI_COMMIT_TAG
+      --values values-client.yaml --namespace $NAMESPACE $RELEASE_NAME helm/client
   environment:
     name: kube
     url: https://handballtag.$AUTO_DEVOPS_DOMAIN
