@@ -16,6 +16,7 @@ stages:
 
 cache:
     paths:
+        - /home/emundo/.npm
         - node_modules
         - "webpack*.js"
         - tslint_rules
@@ -24,11 +25,13 @@ before_script:
     - if [ -d 'node_modules' ]; then npm update --quiet ; else npm install --quiet ; fi
 
 lint:
+    image: node:alpine
     stage: lint-and-compile
     script:
         - npm run lint # npm run lint
 
 compile:
+    image: node:alpine
     stage: lint-and-compile
     script:
         -  npm run build
