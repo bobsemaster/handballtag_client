@@ -22,13 +22,13 @@ before_script:
     - npm ci
 
 lint:
-    image: node:alpine
+    image: node
     stage: lint-and-compile
     script:
         - npm run lint # npm run lint
 
 compile:
-    image: node:alpine
+    image: node
     stage: lint-and-compile
     script:
         -  npm run build
