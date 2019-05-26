@@ -9,9 +9,9 @@ include:
 
 stages:
     - lint-and-compile
+    - build
     - review
     - cleanup
-    - build
     - deploy
     - dist
 
