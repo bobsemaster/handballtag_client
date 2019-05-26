@@ -6,7 +6,7 @@ image: emundo/docker-compose-openjdk-node-gradle:latest
 
 stages:
     - install
-    - lint
+    - lint-and-compile
     - compile
     - test
     - analysis
@@ -24,12 +24,12 @@ before_script:
     - if [ -d 'node_modules' ]; then npm update --quiet ; else npm install --quiet ; fi
 
 lint:
-    stage: lint
+    stage: lint-and-compile
     script:
         - npm run lint # npm run lint
 
 compile:
-    stage: compile
+    stage: lint-and-compile
     script:
         -  npm run build
     artifacts:
@@ -41,8 +41,11 @@ compile:
 
 docker-container:
     stage: build
-    only:
-        - master
+    services:
+      - docker:dind
+      variables:
+        DOCKER_DRIVER: overlay
+        DOCKER_HOST: tcp://localhost:2375
     cache:
         # nur Pullen, wir wollen die gelöschen dev-Dependencies nicht aus dem Cache löschen
         policy: pull
@@ -58,17 +61,3 @@ docker-container:
         - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
         # Docker-Container in die Registry pushen
         - docker-compose push
-
-deploy-dev:
-    stage: deploy
-    only:
-        - master
-    before_script: [] # Überschreibe das Globale before_script.
-    script:
-        - rancher-compose -f docker-compose.rancher.yml -r rancher-compose.yml -p handballtag pull
-        - rancher-compose -f docker-compose.rancher.yml -r rancher-compose.yml -p handballtag up -d --force-upgrade --pull --confirm-upgrade
-    environment:
-        # Das hier ist für die Anzeige in https://gitlab.schreib.tk/tsv-forstenried/client/environments
-        # damit man alle Deploys auf die Umgebung sieht und per Click reployen kann
-        name: dev
-        url: https://handballtag.schreib.io/
