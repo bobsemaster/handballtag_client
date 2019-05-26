@@ -43,9 +43,9 @@ docker-container:
     stage: build
     services:
       - docker:dind
-      variables:
-        DOCKER_DRIVER: overlay
-        DOCKER_HOST: tcp://localhost:2375
+    variables:
+      DOCKER_DRIVER: overlay
+      DOCKER_HOST: tcp://localhost:2375
     cache:
         # nur Pullen, wir wollen die gelöschen dev-Dependencies nicht aus dem Cache löschen
         policy: pull
