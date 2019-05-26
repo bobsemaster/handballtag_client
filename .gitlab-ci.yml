@@ -5,7 +5,7 @@
 image: emundo/docker-compose-openjdk-node-gradle:latest
 
 include:
-  file: gitlab-ci/kube-deploy.gitlab-ci.yaml
+  local: gitlab-ci/kube-deploy.gitlab-ci.yaml
 
 stages:
     - lint-and-compile
