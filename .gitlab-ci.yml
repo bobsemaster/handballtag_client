@@ -17,12 +17,9 @@ stages:
 cache:
     paths:
         - /home/emundo/.npm
-        - node_modules
-        - "webpack*.js"
-        - tslint_rules
 
 before_script:
-    - if [ -d 'node_modules' ]; then npm update --quiet ; else npm install --quiet ; fi
+    - npm ci
 
 lint:
     image: node:alpine
@@ -52,9 +49,6 @@ docker-container:
     cache:
         # nur Pullen, wir wollen die gelöschen dev-Dependencies nicht aus dem Cache löschen
         policy: pull
-    before_script:
-        - if [ -d 'node_modules' ]; then npm update --quiet; else npm install --quiet; fi
-        - npm prune --quiet
     script:
         - npm run build --prod --aot --minifyjs --minifycss --optimizejs
         # Tag with commit tag or latest if not aviable.
