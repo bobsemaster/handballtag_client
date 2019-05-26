@@ -4,7 +4,7 @@ version: '2'
 
 services:
   nginx:
-    image: registry.schreib.io/tsv-forstenried/client/nginx
+    image: registry.schreib.io/tsv-forstenried/handballtag/client/client
     container_name: handballtag-client-nginx
     build: .
     ports:
