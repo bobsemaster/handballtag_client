@@ -8,8 +8,7 @@ include:
   local: gitlab-ci/kube-deploy.gitlab-ci.yaml
 
 stages:
-    - lint-and-compile
-    - build
+    - lint-and-build
     - review
     - cleanup
     - deploy
@@ -24,24 +23,12 @@ before_script:
 
 lint:
     image: node
-    stage: lint-and-compile
+    stage: lint-and-build
     script:
         - npm run lint # npm run lint
 
-compile:
-    image: node
-    stage: lint-and-compile
-    script:
-        -  npm run build
-    artifacts:
-        name: "$CI_PROJECT_PATH_SLUG-$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-        when: on_success
-        paths:
-            - dist/htdocs/
-        expire_in: 1 week # Wir brauchen das Aritfakt nur bis zum Ende der Pipeline
-
 docker-container:
-    stage: build
+    stage: lint-and-build
     services:
       - docker:dind
     variables:
