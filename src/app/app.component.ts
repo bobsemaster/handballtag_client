@@ -2,7 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-
+import * as firebase from 'firebase/app'
+import 'firebase/messaging'
 import {LoginPage} from "../pages/login/login";
 import {VereinViewPage} from "../pages/verein-view/verein-view";
 import {SpielViewPage} from "../pages/spiel-view/spiel-view";
@@ -13,7 +14,6 @@ import {ApplicationDataServiceProvider} from "../providers/application-data-serv
 import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
 import {ModusPage} from "../pages/modus/modus";
 import {StartPage} from "../pages/start/start";
-import {LageplanPageModule} from "../pages/lageplan/lageplan.module";
 import {LageplanPage} from '../pages/lageplan/lageplan';
 import {RahmenprogrammSportartikelPage} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
 import {LinksPage} from "../pages/links/links";
@@ -35,6 +35,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Start', component: StartPage},
+      {title: 'News', component: StartPage},
       {title: 'Mannschaftsspielpläne', component: VereinViewPage},
       {title: 'Tabellen & Spielpläne', component: SpielViewPage},
       {title: 'Mannschaftsfoto', component: HasFotoPage},
@@ -83,6 +84,7 @@ export class MyApp {
         }
       });
       this.checkLogin();
+      this.initializeFirebase()
     });
   }
 
@@ -95,5 +97,34 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  private initializeFirebase() {
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBCwhWd9u8Kn4vLjm-Vifpof6rtS2xPluY",
+      authDomain: "kubernetes-241709.firebaseapp.com",
+      databaseURL: "https://kubernetes-241709.firebaseio.com",
+      projectId: "kubernetes-241709",
+      storageBucket: "kubernetes-241709.appspot.com",
+      messagingSenderId: "776794448809",
+      appId: "1:776794448809:web:1b2f40c40999a9f7"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+    messaging.onMessage(value => {
+      console.log(value);
+    });
+
+    Notification.requestPermission().then(function(permission) {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        // TODO(developer): Retrieve an Instance ID token for use with FCM.
+        // ...
+      } else {
+        console.log('Unable to get permission to notify.');
+      }
+    });
   }
 }
