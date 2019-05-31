@@ -51,7 +51,7 @@ docker-container:
         # nur Pullen, wir wollen die gelöschen dev-Dependencies nicht aus dem Cache löschen
         policy: pull
     script:
-        - npm run build --prod --aot --minifyjs --minifycss --optimizejs
+        - npm run build --prod #--aot --minifyjs --minifycss --optimizejs
         # Tag with commit tag or latest if not aviable.
         - "[[ -z $CI_COMMIT_TAG ]] && CI_COMMIT_TAG=$CI_COMMIT_REF_SLUG"
         - "[[ $CI_COMMIT_REF_NAME -eq 'master' ]] && CI_COMMIT_TAG=latest"
