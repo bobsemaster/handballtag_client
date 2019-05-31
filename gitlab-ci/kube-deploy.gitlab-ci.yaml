@@ -38,8 +38,6 @@ deploy-kube:
   cache: # Wir brauchen hier kein Cache, dieser Job führt nur Skripte aus
     key: "none"
     policy: pull
-  only:
-    - tags
   before_script:
     - *auto_devops
   variables:
