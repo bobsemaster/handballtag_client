@@ -33,7 +33,7 @@ export class PushServiceProvider {
   public registerClient(token: String) {
     if (window.localStorage.getItem("fcmRegistered") !== "true") {
       window.localStorage.setItem("fcmRegistered", "true");
-      this.http.post(`${server_url}/pushmessage/${token}`, {}).subscribe(value => console.log());
+      this.http.post(`${server_url}/pushmessage/register`, {token: token, targetTopic: "DEFAULT"}).subscribe(value => console.log());
       console.log("registered client");
     } else {
       console.log("Already registered");
