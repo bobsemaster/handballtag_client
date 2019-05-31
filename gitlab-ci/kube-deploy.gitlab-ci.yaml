@@ -38,6 +38,8 @@ deploy-kube:
   cache: # Wir brauchen hier kein Cache, dieser Job führt nur Skripte aus
     key: "none"
     policy: pull
+  only:
+    - tags
   before_script:
     - *auto_devops
   variables:
@@ -94,7 +96,6 @@ review:
     name: review/$CI_COMMIT_REF_NAME
     url: http://$CI_COMMIT_REF_SLUG.handballtag.$AUTO_DEVOPS_DOMAIN
     on_stop: stop_review
-  when: manual
   except:
     refs:
       - master
