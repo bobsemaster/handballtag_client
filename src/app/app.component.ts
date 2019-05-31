@@ -85,7 +85,14 @@ export class MyApp {
         }
       });
       this.checkLogin();
-      this.initializeFirebase()
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then((registration) => {
+            this.initializeFirebase(registration);
+            return console.log('service worker installed');
+          })
+          .catch(err => console.error('Error', err));
+      }
     });
   }
 
@@ -100,7 +107,7 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  private initializeFirebase() {
+  private initializeFirebase(registration: ServiceWorkerRegistration) {
     // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBCwhWd9u8Kn4vLjm-Vifpof6rtS2xPluY",
@@ -111,10 +118,13 @@ export class MyApp {
       messagingSenderId: "776794448809",
       appId: "1:776794448809:web:1b2f40c40999a9f7"
     };
+
+
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const messaging = firebase.messaging();
     messaging.usePublicVapidKey("BFaFCZqct4osMzhj4nh_5zs_FtPIWTJtzkkegyWQSO_W92QBVEsSpuQQbEIBfNwJxcyDDELHz2gC-wfiI-QK6I8");
+    messaging.useServiceWorker(registration);
 
     messaging.onTokenRefresh(function() {
       messaging.getToken().then(function(refreshedToken) {
