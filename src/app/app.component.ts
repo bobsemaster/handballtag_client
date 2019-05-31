@@ -17,6 +17,7 @@ import {StartPage} from "../pages/start/start";
 import {LageplanPage} from '../pages/lageplan/lageplan';
 import {RahmenprogrammSportartikelPage} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
 import {LinksPage} from "../pages/links/links";
+import {PushServiceProvider} from "../providers/push-service/push-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +30,8 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              private applicationData: ApplicationDataServiceProvider, private authentificationService: AuthenticationServiceProvider) {
+              private applicationData: ApplicationDataServiceProvider, private authentificationService: AuthenticationServiceProvider,
+              private pushMessageProvider: PushServiceProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -145,6 +147,7 @@ export class MyApp {
     }).catch(function(err) {
       console.log('An error occurred while retrieving token. ', err);
     });
+    this.pushMessageProvider.initialize();
   }
 
 }

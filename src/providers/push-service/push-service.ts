@@ -18,6 +18,9 @@ import {registerLocaleData} from "@angular/common";
 export class PushServiceProvider {
 
   constructor(public http: HttpServiceProvider) {
+  }
+
+  public initialize() {
     console.log("Initializing Push service");
     const messaging = firebase.messaging();
 
