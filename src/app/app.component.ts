@@ -17,7 +17,6 @@ import {StartPage} from "../pages/start/start";
 import {LageplanPage} from '../pages/lageplan/lageplan';
 import {RahmenprogrammSportartikelPage} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
 import {LinksPage} from "../pages/links/links";
-import Messaging = firebase.messaging.Messaging;
 
 @Component({
   templateUrl: 'app.html'
@@ -134,9 +133,6 @@ export class MyApp {
       });
     });
 
-    messaging.onMessage(payload => {
-      console.log('Message received. ', payload);
-    });
 
     messaging.getToken().then(function(currentToken) {
       if (currentToken) {
