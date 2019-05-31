@@ -116,6 +116,8 @@ export class MyApp {
     messaging.onMessage(value => {
       console.log(value);
     });
+    messaging.usePublicVapidKey("BFaFCZqct4osMzhj4nh_5zs_FtPIWTJtzkkegyWQSO_W92QBVEsSpuQQbEIBfNwJxcyDDELHz2gC-wfiI-QK6I8");
+
 
     Notification.requestPermission().then(function(permission) {
       if (permission === 'granted') {
