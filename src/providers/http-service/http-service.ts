@@ -32,6 +32,7 @@ export class HttpServiceProvider {
       if (!headers) {
         headers = {};
       }
+      this.appendAuthHeader(headers);
       return Observable.fromPromise(this.httpNative.get(url, parameters, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.get(url, {headers: this.getAngularHeaders(headers), withCredentials: true})

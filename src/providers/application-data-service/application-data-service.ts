@@ -23,6 +23,7 @@ export class ApplicationDataServiceProvider {
   public standartUserLoaded = false;
   public isOnStartpage = true;
   public navCtrl: NavController;
+  public serviceWorkerRegistration:any;
 
   constructor(private http: HttpClient, private authService: AuthenticationServiceProvider, private vereinService: VereinServiceProvider, private mannschaftService: MannschaftServiceProvider) {
 

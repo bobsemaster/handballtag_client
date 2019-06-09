@@ -2,14 +2,11 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import * as firebaseBrowser from 'firebase/app'
 import 'firebase/messaging'
 import {ApplicationDataServiceProvider} from "../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
 import {StartPage} from "../pages/start/start";
-import {PushServiceProvider} from "../providers/push-service/push-service";
 import {appMenuPages} from "./pages";
-import {FirebaseMessaging} from "@ionic-native/firebase-messaging";
 
 @Component({
   templateUrl: 'app.html'
@@ -24,8 +21,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              private applicationData: ApplicationDataServiceProvider, private authentificationService: AuthenticationServiceProvider,
-              private pushMessageProvider: PushServiceProvider, private firebaseMessaging:FirebaseMessaging) {
+              private applicationData: ApplicationDataServiceProvider, private authentificationService: AuthenticationServiceProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -70,12 +66,10 @@ export class MyApp {
       if ('serviceWorker' in navigator && !this.isMobile) {
         navigator.serviceWorker.register('service-worker.js')
           .then((registration) => {
-            this.initializeFirebase(registration);
+            this.applicationData.serviceWorkerRegistration = registration;
             return console.log('service worker installed');
           })
           .catch(err => console.error('Error', err));
-      } else if (this.isMobile) {
-        this.initializePushService();
       }
     });
   }
@@ -91,51 +85,4 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  private initializeFirebase(registration: ServiceWorkerRegistration) {
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBCwhWd9u8Kn4vLjm-Vifpof6rtS2xPluY",
-      authDomain: "kubernetes-241709.firebaseapp.com",
-      databaseURL: "https://kubernetes-241709.firebaseio.com",
-      projectId: "kubernetes-241709",
-      storageBucket: "kubernetes-241709.appspot.com",
-      messagingSenderId: "776794448809",
-      appId: "1:776794448809:web:1b2f40c40999a9f7"
-    };
-
-
-    // Initialize Firebase
-    firebaseBrowser.initializeApp(firebaseConfig);
-    const messaging = firebaseBrowser.messaging();
-    messaging.usePublicVapidKey("BFaFCZqct4osMzhj4nh_5zs_FtPIWTJtzkkegyWQSO_W92QBVEsSpuQQbEIBfNwJxcyDDELHz2gC-wfiI-QK6I8");
-    messaging.useServiceWorker(registration);
-
-    messaging.onTokenRefresh(function() {
-      messaging.getToken().then(function(refreshedToken) {
-        console.log('Token refreshed.');
-      }).catch(function(err) {
-        console.log('Unable to retrieve refreshed token ', err);
-      });
-    });
-
-
-    messaging.getToken().then(function(currentToken) {
-      if (currentToken) {
-        console.log("Has token: ", currentToken);
-      } else {
-        // Show permission request.
-        console.log('No Instance ID token available. Request permission to generate one.');
-        // Show permission UI.
-      }
-    }).catch(function(err) {
-      console.log('An error occurred while retrieving token. ', err);
-    });
-    this.pushMessageProvider.initialize();
-  }
-
-  private initializePushService() {
-    this.firebaseMessaging.requestPermission().then(function() {
-      console.log("Permission for notifications granted");
-    });
-  }
 }

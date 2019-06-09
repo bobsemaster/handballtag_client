@@ -34,11 +34,11 @@ import {LinksPageModule} from "../pages/links/links.module";
 import {TabellenUebersichtPageModule} from "../pages/tabellen-uebersicht/tabellen-uebersicht.module";
 import {PushServiceProvider} from '../providers/push-service/push-service';
 import {PushMessagePageModule} from "../pages/push-message/push-message.module";
+import {FirebaseMessaging} from "@ionic-native/firebase-messaging";
 
 @NgModule({
   declarations: [
     MyApp,
-
   ],
   imports: [
     BrowserModule,
@@ -81,6 +81,7 @@ import {PushMessagePageModule} from "../pages/push-message/push-message.module";
     HttpServiceProvider,
     VerkaufServiceProvider,
     PushServiceProvider,
+    FirebaseMessaging,
   ],
 
 })
