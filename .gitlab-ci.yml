@@ -39,7 +39,7 @@ docker-container:
         policy: pull
     script:
         - npm run build --prod #--aot --minifyjs --minifycss --optimizejs
-        - "cp src/firebase-messaging-sw.js www"
+        - "cp src/firebaseBrowser-messaging-sw.js www"
         # Tag with commit tag or latest if not aviable.
         - "[[ -z $CI_COMMIT_TAG ]] && CI_COMMIT_TAG=$CI_COMMIT_REF_SLUG"
         - "[[ $CI_COMMIT_REF_NAME -eq 'master' ]] && CI_COMMIT_TAG=latest"

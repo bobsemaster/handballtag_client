@@ -2,18 +2,21 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import * as firebase from 'firebase/app'
+import * as firebaseBrowser from 'firebase/app'
 import 'firebase/messaging'
 import {ApplicationDataServiceProvider} from "../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
 import {StartPage} from "../pages/start/start";
 import {PushServiceProvider} from "../providers/push-service/push-service";
 import {appMenuPages} from "./pages";
+import {FirebaseMessaging} from "@ionic-native/firebase-messaging";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  private isMobile = this.platform.is("cordova");
+
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = StartPage;
@@ -22,7 +25,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private applicationData: ApplicationDataServiceProvider, private authentificationService: AuthenticationServiceProvider,
-              private pushMessageProvider: PushServiceProvider) {
+              private pushMessageProvider: PushServiceProvider, private firebaseMessaging:FirebaseMessaging) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -64,13 +67,15 @@ export class MyApp {
         }
       });
       this.checkLogin();
-      if ('serviceWorker' in navigator) {
+      if ('serviceWorker' in navigator && !this.isMobile) {
         navigator.serviceWorker.register('service-worker.js')
           .then((registration) => {
             this.initializeFirebase(registration);
             return console.log('service worker installed');
           })
           .catch(err => console.error('Error', err));
+      } else if (this.isMobile) {
+        this.initializePushService();
       }
     });
   }
@@ -100,8 +105,8 @@ export class MyApp {
 
 
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const messaging = firebase.messaging();
+    firebaseBrowser.initializeApp(firebaseConfig);
+    const messaging = firebaseBrowser.messaging();
     messaging.usePublicVapidKey("BFaFCZqct4osMzhj4nh_5zs_FtPIWTJtzkkegyWQSO_W92QBVEsSpuQQbEIBfNwJxcyDDELHz2gC-wfiI-QK6I8");
     messaging.useServiceWorker(registration);
 
@@ -128,4 +133,9 @@ export class MyApp {
     this.pushMessageProvider.initialize();
   }
 
+  private initializePushService() {
+    this.firebaseMessaging.requestPermission().then(function() {
+      console.log("Permission for notifications granted");
+    });
+  }
 }

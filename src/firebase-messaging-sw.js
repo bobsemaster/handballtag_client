@@ -16,13 +16,13 @@ const messaging = firebase.messaging();
 
  // Initialize the Firebase app in the service worker by passing in the
  // messagingSenderId.
- firebase.initializeApp({
+ firebaseBrowser.initializeApp({
    'messagingSenderId': 'YOUR-SENDER-ID'
  });
 
  // Retrieve an instance of Firebase Messaging so that it can handle background
  // messages.
- const messaging = firebase.messaging();
+ const messaging = firebaseBrowser.messaging();
  // [END initialize_firebase_in_sw]
  **/
 
@@ -32,12 +32,12 @@ const messaging = firebase.messaging();
 // implement this optional method.
 // [START background_handler]
 messaging.setBackgroundMessageHandler(function(payload) {
-    console.log('[firebase-messaging-sw.js] Received background message ', payload);
+    console.log('[firebaseBrowser-messaging-sw.js] Received background message ', payload);
     // Customize notification here
     const notificationTitle = 'Background Message Title';
     const notificationOptions = {
         body: 'Background Message body.',
-        icon: '/firebase-logo.png'
+        icon: '/firebaseBrowser-logo.png'
     };
 
     return self.registration.showNotification(notificationTitle,
