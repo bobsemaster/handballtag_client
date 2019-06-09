@@ -2,9 +2,8 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {ApplicationDataServiceProvider} from "../../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../../providers/authentication-service/authentication-service";
-import {VereinViewPage} from "../verein-view/verein-view";
-import Timer = NodeJS.Timer;
 import {StartPage} from "../start/start";
+import Timer = NodeJS.Timer;
 
 /**
  * Generated class for the LoadingScreenPage page.

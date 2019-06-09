@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
-import { RahmenprogrammSportartikelPage } from './rahmenprogramm-sportartikel';
+import {NgModule} from '@angular/core';
+import {IonicPageModule} from 'ionic-angular';
+import {RahmenprogrammSportartikelPage} from './rahmenprogramm-sportartikel';
 
 @NgModule({
   declarations: [

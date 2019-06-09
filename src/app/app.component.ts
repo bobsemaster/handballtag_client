@@ -18,6 +18,7 @@ import {LageplanPage} from '../pages/lageplan/lageplan';
 import {RahmenprogrammSportartikelPage} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
 import {LinksPage} from "../pages/links/links";
 import {PushServiceProvider} from "../providers/push-service/push-service";
+import {PushMessagePage} from "../pages/push-message/push-message";
 
 @Component({
   templateUrl: 'app.html'
@@ -37,7 +38,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Start', component: StartPage},
-      {title: 'News', component: StartPage},
+      {title: 'News', component: PushMessagePage},
       {title: 'Mannschaftsspielpläne', component: VereinViewPage},
       {title: 'Tabellen & Spielpläne', component: SpielViewPage},
       {title: 'Mannschaftsfoto', component: HasFotoPage},

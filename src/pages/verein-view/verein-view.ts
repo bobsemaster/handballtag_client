@@ -8,7 +8,6 @@ import {Mannschaft} from "../../models/Mannschaft";
 import {Jugend, JugendEnum} from "../../models/Jugend";
 import {MannschaftServiceProvider} from "../../providers/mannschaft-service/mannschaft-service";
 import {MannschaftDetailViewPage} from "../mannschaft-detail-view/mannschaft-detail-view";
-import {StartPage} from "../start/start";
 
 /**
  * Generated class for the VereinViewPage page.

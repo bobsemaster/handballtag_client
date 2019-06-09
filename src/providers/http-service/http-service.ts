@@ -34,6 +34,13 @@ export class HttpServiceProvider {
     return this.httpAngular.get(url, {headers: this.getAngularHeaders(headers), withCredentials: true})
   }
 
+  public  getTyped<T>(url: string, parameters?: Object, headers?: Object): Observable<T> {
+    if (this.isMobile) {
+      return Observable.fromPromise(this.httpNative.get(url, parameters, headers)).map(data => this.tryMapJson(data.data));
+    }
+    return this.httpAngular.get<T>(url, {headers: this.getAngularHeaders(headers), withCredentials: true})
+  }
+
   public post(url: string, body: Object, headers?: Object): Observable<any> {
 
     if (this.isMobile) {

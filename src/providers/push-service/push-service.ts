@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpServiceProvider} from "../http-service/http-service";
 import {Message} from "../../models/Message";
 import {server_url} from "../../models/ServerUrl";
 import * as firebase from "firebase/app";
 import 'firebase/messaging'
-import {registerLocaleData} from "@angular/common";
+import {Observable} from "rxjs";
 
 
 /*
@@ -45,8 +44,16 @@ export class PushServiceProvider {
     } else {
       console.log("Already registered");
     }
-
   }
+
+  public sendPushMessage(pushMessage:Message):Observable<void> {
+    return this.http.post(`${server_url}/pushmessage`, pushMessage);
+  }
+
+  public getAllPushMessage(): Observable<Message> {
+    return this.http.getTyped<Message>(`${server_url}/pushmessage`);
+  }
+
   public showNotificationBrowser(payload: any) {
     console.log('[firebase-messaging-sw.js] Received message ', payload);
     if (!this.notificationPermissionGranted) {

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {SpielViewPage} from "../spiel-view/spiel-view";
 import {ModusPage} from "../modus/modus";
