@@ -29,6 +29,9 @@ export class HttpServiceProvider {
    */
   public get(url: string, parameters?: Object, headers?: Object): Observable<any> {
     if (this.isMobile) {
+      if (!headers) {
+        headers = {};
+      }
       return Observable.fromPromise(this.httpNative.get(url, parameters, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.get(url, {headers: this.getAngularHeaders(headers), withCredentials: true})
@@ -36,6 +39,10 @@ export class HttpServiceProvider {
 
   public  getTyped<T>(url: string, parameters?: Object, headers?: Object): Observable<T> {
     if (this.isMobile) {
+      if (!headers) {
+        headers = {};
+      }
+      this.appendAuthHeader(headers);
       return Observable.fromPromise(this.httpNative.get(url, parameters, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.get<T>(url, {headers: this.getAngularHeaders(headers), withCredentials: true})
@@ -51,6 +58,7 @@ export class HttpServiceProvider {
         };
         this.httpNative.setDataSerializer('json');
       }
+      this.appendAuthHeader(headers);
       return Observable.fromPromise(this.httpNative.post(url, body, headers)).map(data => this.tryMapJson(data.data))
     }
 
@@ -70,6 +78,7 @@ export class HttpServiceProvider {
         };
         this.httpNative.setDataSerializer('json');
       }
+      this.appendAuthHeader(headers);
       return Observable.fromPromise(this.httpNative.put(url, body, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.put(url, body, {headers: this.getAngularHeaders(headers), withCredentials: true})
@@ -83,6 +92,7 @@ export class HttpServiceProvider {
         };
         this.httpNative.setDataSerializer('json');
       }
+      this.appendAuthHeader(headers);
       return Observable.fromPromise(this.httpNative.delete(url, parameters, headers)).map(data => this.tryMapJson(data.data));
     }
     return this.httpAngular.delete(url, {headers: this.getAngularHeaders(headers), withCredentials: true});
@@ -96,8 +106,18 @@ export class HttpServiceProvider {
     }
   }
 
+  private appendAuthHeader(headers: any) {
+    if (localStorage.getItem("authenticatedUser")) {
+      headers['Authorization'] = `Basic ${btoa(localStorage.getItem("authenticatedUser"))}`;
+    }
+  }
+
   private getAngularHeaders(headers: any | undefined): HttpHeaders {
-    return new HttpHeaders(headers);
+    const httpHeaders = new HttpHeaders(headers);
+    if (localStorage.getItem("authenticatedUser")) {
+      httpHeaders.append('Authorization', `Basic ${btoa(localStorage.getItem("authenticatedUser"))}`);
+    }
+    return httpHeaders
   }
 
   private urlencodeJson(object: Object): any {

@@ -38,7 +38,7 @@ export class ApplicationDataServiceProvider {
     this.navCtrl.pop();
   }
 
-  public ladeStandartBenutzer(): Subscription {
+/*  public ladeStandartBenutzer(): Subscription {
     // Standart User authentifizieren
     // Passwort in klartext weil der uer nur benutzt wird damit nur der client zugrif auf den server hat
     return this.authService.authenticateUser("benutzer", "GeheimesBenutzerPasswortDasKeinerRausfindenWird")
@@ -46,7 +46,7 @@ export class ApplicationDataServiceProvider {
 
         this.ladeAuthentifiziertenBenutzer().add(() => this.standartUserLoaded = true);
       });
-  }
+  }*/
 
   public ladeAuthentifiziertenBenutzer(): Subscription {
     return this.authService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = user);

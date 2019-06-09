@@ -4,21 +4,11 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
-import {LoginPage} from "../pages/login/login";
-import {VereinViewPage} from "../pages/verein-view/verein-view";
-import {SpielViewPage} from "../pages/spiel-view/spiel-view";
-import {AboutPage} from "../pages/about/about";
-import {VerpflegungPage} from "../pages/verpflegung/verpflegung";
-import {HasFotoPage} from "../pages/has-foto/has-foto";
 import {ApplicationDataServiceProvider} from "../providers/application-data-service/application-data-service";
 import {AuthenticationServiceProvider} from "../providers/authentication-service/authentication-service";
-import {ModusPage} from "../pages/modus/modus";
 import {StartPage} from "../pages/start/start";
-import {LageplanPage} from '../pages/lageplan/lageplan';
-import {RahmenprogrammSportartikelPage} from "../pages/rahmenprogramm-sportartikel/rahmenprogramm-sportartikel";
-import {LinksPage} from "../pages/links/links";
 import {PushServiceProvider} from "../providers/push-service/push-service";
-import {PushMessagePage} from "../pages/push-message/push-message";
+import {appMenuPages} from "./pages";
 
 @Component({
   templateUrl: 'app.html'
@@ -36,20 +26,7 @@ export class MyApp {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      {title: 'Start', component: StartPage},
-      {title: 'News', component: PushMessagePage},
-      {title: 'Mannschaftsspielpläne', component: VereinViewPage},
-      {title: 'Tabellen & Spielpläne', component: SpielViewPage},
-      {title: 'Mannschaftsfoto', component: HasFotoPage},
-      {title: 'Verpflegung', component: VerpflegungPage},
-      {title: 'Rahmenprogramm', component: RahmenprogrammSportartikelPage},
-      {title: 'Lageplan', component: LageplanPage},
-      {title: 'Modus', component: ModusPage},
-      {title: 'Links', component: LinksPage},
-      {title: 'Login', component: LoginPage},
-      {title: 'Über', component: AboutPage}
-    ];
+    this.pages = appMenuPages;
 
   }
 

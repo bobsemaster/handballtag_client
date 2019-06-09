@@ -28,8 +28,9 @@ export class AuthenticationServiceProvider {
   }
 
 
-  public authenticateUser(username: String, password: String): Observable<any> {
+  public authenticateUser(username: String, password: String) {
     // Vorsicht username und passwort werden nicht escaped d.h. zeichen & und = nicht möglich sonst werden mehr parameter geschickt
+    window.localStorage.setItem("authenticatedUser", `${username}:${password}`);
     const body: Object = {username: username, password: password, submit: 'Login'};
     console.log("loggin in");
     return this.http.post(server_url + '/login', body, {'Content-Type': 'application/x-www-form-urlencoded'})

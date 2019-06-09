@@ -33,6 +33,7 @@ export class LoginPage {
   public login(event: any): void {
     this.auth.authenticateUser(this.loginCredentials.username, this.loginCredentials.password)
       .catch((err: any, caught: any) => {
+        window.localStorage.setItem('authenticatedUser','benutzer:GeheimesBenutzerPasswortDasKeinerRausfindenWird');
         this.alertController.create({
           title: 'Login Fehlgeschlagen',
           message: 'Username oder passwort falsch!',

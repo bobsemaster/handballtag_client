@@ -50,8 +50,8 @@ export class PushServiceProvider {
     return this.http.post(`${server_url}/pushmessage`, pushMessage);
   }
 
-  public getAllPushMessage(): Observable<Message> {
-    return this.http.getTyped<Message>(`${server_url}/pushmessage`);
+  public getAllPushMessage(): Observable<Message[]> {
+    return this.http.getTyped<Message[]>(`${server_url}/pushmessage`);
   }
 
   public showNotificationBrowser(payload: any) {

@@ -33,6 +33,7 @@ import {RahmenprogrammSportartikelPageModule} from "../pages/rahmenprogramm-spor
 import {LinksPageModule} from "../pages/links/links.module";
 import {TabellenUebersichtPageModule} from "../pages/tabellen-uebersicht/tabellen-uebersicht.module";
 import {PushServiceProvider} from '../providers/push-service/push-service';
+import {PushMessagePageModule} from "../pages/push-message/push-message.module";
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {PushServiceProvider} from '../providers/push-service/push-service';
     RahmenprogrammSportartikelPageModule,
     LinksPageModule,
     TabellenUebersichtPageModule,
+    PushMessagePageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
