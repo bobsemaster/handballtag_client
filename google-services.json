@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "776794448809",
+    "firebase_url": "https://kubernetes-241709.firebaseio.com",
+    "project_id": "kubernetes-241709",
+    "storage_bucket": "kubernetes-241709.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776794448809:android:eae7305dc8efb72c",
+        "android_client_info": {
+          "package_name": "io.schreib.handballtag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776794448809-ps9keho9fapn4i7mmqm1cehl02htcfrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6u4xgO1JhuLe1y7p7kc9P1N2r95GabMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776794448809-ps9keho9fapn4i7mmqm1cehl02htcfrl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
